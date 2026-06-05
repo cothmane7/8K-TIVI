@@ -1,0 +1,20 @@
+{
+  "name": "istream4k",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ISTREAM4k streaming landing site",
+  "scripts": {
+    "dev": "vite",
+    "channels": "node scripts/build-channels.mjs",
+    "prebuild": "node scripts/build-channels.mjs",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ISTREAM4k — Checkout</title>
+<meta name="page-name" content="Checkout" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+<style>
+  body{background:var(--dark);color:var(--white);font-family:var(--hand);margin:0}
+  a{color:inherit}
+  /* top bar */
+  .co-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+    padding:16px 40px;background:rgba(12,12,18,.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--white-4)}
+  .co-nav .logo{font-family:var(--hand);font-weight:700;font-size:22px;letter-spacing:.04em;
+    color:var(--white);text-decoration:none}
+  .co-nav .logo b{background:var(--yellow);color:var(--ink);padding:2px 8px}
+  .co-nav .right{margin-left:auto;display:flex;align-items:center;gap:18px}
+  .co-back{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--white-2);text-decoration:none}
+  .co-back:hover{color:var(--cyan)}
+  /* layout */
+  .co-wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px}
+  /* stepper */
+  .co-steps{display:flex;align-items:center;gap:14px;justify-content:center;margin:6px 0 40px}
+  .co-step{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--white-3)}
+  .co-step .num{width:30px;height:30px;display:grid;place-items:center;border:1.5px solid var(--white-4);
+    border-radius:99px;font-weight:700;color:var(--white-3)}
+  .co-step.done{color:var(--cyan)} .co-step.done .num{border-color:var(--cyan);color:var(--cyan)}
+  .co-step.done .num::after{content:"✓"}
+  .co-step.done .num{font-size:0}
+  .co-step.done .num::after{font-size:14px}
+  .co-step.active{color:var(--white)} .co-step.active .num{border-color:var(--yellow);background:var(--yellow);color:var(--ink)}
+  .co-stepbar{width:54px;height:2px;background:var(--white-4)}
+  .co-stepbar.done{background:var(--cyan)}
+  /* grid */
+  .co-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:26px;align-items:start}
+  .co-card{position:relative;border:2px solid var(--white-4);background:rgba(255,255,255,.02);padding:28px 26px}
+  .co-card .mod{color:var(--white-2);margin-bottom:18px}
+  h1.co-h{font-family:var(--hand);font-weight:700;font-size:30px;letter-spacing:-.01em;margin:0 0 4px}
+  .co-sub{color:var(--white-2);font-size:14px;margin:0 0 24px}
+  /* form */
+  .co-field{margin-bottom:18px}
+  .co-field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--white-2);margin-bottom:7px}
+  .co-field input{width:100%;box-sizing:border-box;background:rgba(0,0,0,.35);border:1.5px solid var(--white-4);
+    color:var(--white);font-family:var(--hand);font-size:15px;padding:13px 14px;border-radius:0;
+    outline:none;transition:border-color .15s ease}
+  .co-field input:focus{border-color:var(--cyan)}
+  .co-field .opt{color:var(--white-3);text-transform:none;letter-spacing:0;font-family:var(--hand);font-size:11px}
+  /* payment methods */
+  .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  .pay{position:relative;text-align:left;cursor:pointer;background:rgba(0,0,0,.3);
+    border:1.5px solid var(--white-4);padding:16px 16px;display:flex;flex-direction:column;gap:4px;
+    transition:border-color .15s ease,background .15s ease;color:var(--white)}
+  .pay:hover{border-color:var(--white-3)}
+  .pay.on{border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 10%,transparent)}
+  .pay .pm-name{font-family:var(--hand);font-weight:700;font-size:15px}
+  .pay .pm-desc{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--white-3)}
+  .pay .pm-check{position:absolute;top:12px;right:12px;width:16px;height:16px;border:1.5px solid var(--white-4);
+    border-radius:99px}
+  .pay.on .pm-check{border-color:var(--cyan);background:var(--cyan)}
+  /* order summary */
+  .co-summary{border:1.5px solid var(--white-4);background:rgba(0,0,0,.25);padding:18px 18px;margin:26px 0 18px}
+  .co-summary .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:5px 0;color:var(--white-2)}
+  .co-summary .row b{color:var(--white);font-weight:600}
+  .co-summary .total{border-top:1px solid var(--white-4);margin-top:8px;padding-top:12px;font-size:18px}
+  .co-summary .total b{color:var(--cyan);font-size:22px}
+  .co-err{color:var(--magenta);font-family:var(--mono);font-size:12px;min-height:16px;margin-bottom:8px}
+  .co-confirm{width:100%;justify-content:center;background:var(--cyan);color:var(--dark)}
+  .co-fine{color:var(--white-3);font-size:12px;text-align:center;margin-top:14px;font-family:var(--mono);letter-spacing:.04em}
+  /* plan panel */
+  .plan-name{font-family:var(--hand);font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.01em}
+  .plan-detail{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--white-2);margin-top:6px}
+  .plan-price{font-family:var(--hand);font-weight:700;font-size:46px;letter-spacing:-.02em;margin-top:18px;color:var(--cyan)}
+  .plan-price small{font-size:13px;color:var(--white-3);letter-spacing:.08em;font-weight:500}
+  .plan-feat{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:9px}
+  .plan-feat li{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:var(--white-2)}
+  .plan-feat li::before{content:"\2713";color:var(--cyan);font-size:12px;margin-top:2px}
+  .co-foot{text-align:center;color:var(--white-3);font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    padding:30px 20px;border-top:1px solid var(--white-4)}
+  @media (max-width:820px){
+    .co-grid{grid-template-columns:1fr}
+    .co-plan-side{order:-1}
+    .co-nav{padding:14px 22px}
+    .co-wrap{padding:28px 18px 60px}
+  }
+  @media (max-width:480px){ .pay-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav class="co-nav">
+  <a href="/" class="logo">i·<b>STREAM</b>4k</a>
+  <div class="right">
+    <a href="/#pricing" class="co-back">← Plans</a>
+    <div class="lang-switch" data-lang-switch aria-label="Language"></div>
+  </div>
+</nav>
+
+<main class="co-wrap">
+  <!-- Stepper -->
+  <div class="co-steps">
+    <div class="co-step done"><span class="num">1</span> Plan</div>
+    <div class="co-stepbar done"></div>
+    <div class="co-step active"><span class="num">2</span> Order</div>
+  </div>
+
+  <div class="co-grid">
+    <!-- Left: order form -->
+    <form class="co-card" id="co-form" novalidate>
+      <div class="mod"><b>02</b> — Your details <span class="bar"></span><span class="ts">almost there</span></div>
+      <h1 class="co-h">Complete your order</h1>
+      <p class="co-sub">Enter your contact details and choose how you'd like to pay. We'll confirm everything over WhatsApp.</p>
+
+      <div class="co-field">
+        <label for="co-email">Email address</label>
+        <input id="co-email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      </div>
+      <div class="co-field">
+        <label for="co-wa">WhatsApp number <span class="opt">— optional</span></label>
+        <input id="co-wa" type="tel" autocomplete="tel" placeholder="+1 555 123 4567" />
+      </div>
+
+      <div class="co-field">
+        <label>Payment method</label>
+        <div class="pay-grid" id="pay-grid">
+          <button type="button" class="pay" data-pay="paypal" data-label="PayPal">
+            <span class="pm-check"></span><span class="pm-name">PayPal</span><span class="pm-desc">PayPal balance · +€5 fee</span>
+          </button>
+          <button type="button" class="pay" data-pay="card" data-label="Credit / Debit card">
+            <span class="pm-check"></span><span class="pm-name">Credit / Debit card</span><span class="pm-desc">Visa · Mastercard · +€5 fee</span>
+          </button>
+          <button type="button" class="pay" data-pay="bank" data-label="Bank transfer">
+            <span class="pm-check"></span><span class="pm-name">Bank transfer</span><span class="pm-desc">Direct bank / SEPA transfer</span>
+          </button>
+          <button type="button" class="pay" data-pay="crypto" data-label="Cryptocurrency">
+            <span class="pm-check"></span><span class="pm-name">Cryptocurrency</span><span class="pm-desc">BTC · ETH · USDT</span>
+          </button>
+          <button type="button" class="pay" data-pay="gift" data-label="Gift card">
+            <span class="pm-check"></span><span class="pm-name">Gift card</span><span class="pm-desc">Redeem a gift card code</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="co-summary" id="co-summary">
+        <div class="row"><span>Plan</span><b id="sum-plan">—</b></div>
+        <div class="row"><span>Subtotal</span><b id="sum-subtotal">—</b></div>
+        <div class="row"><span>Payment</span><b id="sum-pay">Not selected</b></div>
+        <div class="row" id="sum-fee-row" style="display:none"><span>Payment fee</span><b id="sum-fee">—</b></div>
+        <div class="row total"><span>Total</span><b id="sum-total">—</b></div>
+      </div>
+
+      <div class="co-err" id="co-err"></div>
+      <button type="submit" class="cpb co-confirm" id="co-confirm">Confirm order</button>
+      <div class="co-fine">No charge is taken here — we finalise payment with you on WhatsApp.</div>
+    </form>
+
+    <!-- Right: selected plan -->
+    <aside class="co-card co-plan-side">
+      <div class="mod"><b>01</b> — Your plan <span class="bar"></span><span class="ts">selected</span></div>
+      <div class="plan-name" id="co-plan-name">—</div>
+      <div class="plan-detail" id="co-plan-detail">—</div>
+      <div class="plan-price" id="co-plan-price">—</div>
+      <ul class="plan-feat" id="co-plan-feat"></ul>
+    </aside>
+  </div>
+</main>
+
+<div class="co-foot">© 2026 ISTREAM4K · Secure order — finalised on WhatsApp</div>
+
+<script>
+  (function(){
+    var C = window.__CONTENT__ || {};
+    var plans = C.plans || {}, resellers = C.resellers || {};
+    var params = new URLSearchParams(location.search);
+    var type = params.get('type') === 'reseller' ? 'reseller' : 'plan';
+    function fmt(n){ return (Math.round(n * 100) / 100).toString(); }
+
+    var order = {};
+    if (type === 'reseller') {
+      var pkgs = resellers.packages || [];
+      var i = Math.max(0, Math.min(pkgs.length - 1, +params.get('pkg') || 0));
+      var p = pkgs[i] || {};
+      var per = +p.perCredit || 0, credits = +p.credits || 0;
+      var total = Math.round(credits * per * 100) / 100;
+      order = {
+        type: 'reseller', name: (p.name || 'Reseller') + ' package',
+        detail: credits + ' credits · €' + per.toFixed(2) + ' / credit',
+        amount: total, priceText: '€' + total, billText: credits + ' credits',
+        billing: credits + ' credits (one-off)', features: p.features || []
+      };
+    } else {
+      var months = +params.get('months') || 12;
+      var devices = +params.get('devices') || 1;
+      var row = (plans.prices || []).find(function(r){ return +r.devices === devices; }) || {};
+      var total = +row['m' + months] || 0;
+      var monthly = months ? total / months : 0;
+      var dur = (plans.durations || []).find(function(d){ return +d.months === months; }) || {};
+      order = {
+        type: 'plan', months: months, devices: devices,
+        name: months + ' Months',
+        detail: devices + (devices > 1 ? ' devices' : ' device') + (dur.free ? ' · ' + dur.free : ''),
+        amount: total, priceText: '€' + fmt(monthly), priceUnit: ' / mo',
+        billing: '€' + fmt(total) + ' ' + (dur.period || ('for ' + months + ' months')),
+        billText: dur.period || ('billed for ' + months + ' months'),
+        features: plans.features || []
+      };
+    }
+
+    function set(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt; }
+    set('co-plan-name', order.name);
+    set('co-plan-detail', order.detail);
+    var priceEl = document.getElementById('co-plan-price');
+    priceEl.innerHTML = order.priceText + (order.priceUnit ? '<small>' + order.priceUnit + '</small>' : '');
+    var ul = document.getElementById('co-plan-feat');
+    (order.features || []).forEach(function(f){ var li = document.createElement('li'); li.textContent = f; ul.appendChild(li); });
+
+    set('sum-plan', order.name + ' — ' + order.detail);
+    set('sum-subtotal', '€' + fmt(order.amount));
+
+    // payment selection + fee (€5 for PayPal / card, included in the total)
+    var FEE = 5;
+    var selected = '';
+    function feeFor(p){ return (p === 'paypal' || p === 'card') ? FEE : 0; }
+    function refreshTotal(){
+      var fee = feeFor(selected);
+      var feeRow = document.getElementById('sum-fee-row');
+      if (fee > 0) { feeRow.style.display = ''; set('sum-fee', '€' + fmt(fee)); }
+      else { feeRow.style.display = 'none'; }
+      set('sum-total', '€' + fmt(order.amount + fee));
+    }
+    refreshTotal();
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-pay]'));
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){
+        buttons.forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        selected = b.getAttribute('data-pay');
+        set('sum-pay', b.getAttribute('data-label'));
+        document.getElementById('co-err').textContent = '';
+        refreshTotal();
+      });
+    });
+
+    document.getElementById('co-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      var err = document.getElementById('co-err');
+      var email = document.getElementById('co-email').value.trim();
+      var wa = document.getElementById('co-wa').value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Please enter a valid email address.'; return; }
+      if (!selected) { err.textContent = 'Please choose a payment method.'; return; }
+      var btn = document.querySelector('[data-pay].on');
+      var fee = feeFor(selected);
+      var lang = 'en';
+      try { lang = localStorage.getItem('lang') || 'en'; } catch (eL) {}
+      var full = {
+        ref: 'IST-' + (Date.now().toString(36).toUpperCase().slice(-6)),
+        name: order.name, detail: order.detail, billing: order.billing || order.billText,
+        subtotal: order.amount, fee: fee, amount: order.amount + fee, features: order.features || [],
+        email: email, whatsapp: wa, pay: selected, payLabel: btn ? btn.getAttribute('data-label') : selected,
+        lang: lang
+      };
+      try { sessionStorage.setItem('istream_order', JSON.stringify(full)); } catch (e2) {}
+
+      // Email the order (business alert + customer confirmation), then continue to
+      // the thank-you page regardless of email success so the customer is never blocked.
+      var confirmBtn = document.getElementById('co-confirm');
+      if (confirmBtn) { confirmBtn.disabled = true; confirmBtn.textContent = 'Placing order…'; }
+      var navigated = false;
+      function go(){ if (navigated) return; navigated = true; location.href = '/thankyou.html'; }
+      setTimeout(go, 4500);
+      fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(full)
+      }).catch(function(){}).finally(go);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+/* ISTREAM4k — responsive refinements for mobile + tablet.
+   Loaded after the page styles so it can override the base layout.
+   Breakpoints align with the existing design: 1100px (tablet) and 680/600px (phone). */
+
+/* ── Overflow + media guards ─────────────────────────────────────────── */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, video, svg { max-width: 100%; }
+.h { overflow-wrap: break-word; }
+
+/* Hide the description paragraph in the Sports + Movies poster-strip overlays (all sizes) */
+.film-header .sub { display: none; }
+
+/* ── Mobile navigation (hamburger + slide-down menu) ─────────────────── */
+.nav-toggle { display: none; }
+
+@media (max-width: 1100px) {
+  /* Hamburger button (hidden on desktop) */
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 34px;
+    padding: 8px 7px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: inherit;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform .22s ease, opacity .2s ease;
+  }
+  .nav.open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav.open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav .cpb { margin-left: auto; }
+
+  /* The links row becomes a dropdown panel under the bar (carries the switcher) */
+  .nav .links {
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 2px;
+    background: var(--dark, #0c0c12);
+    color: #f8f8fa;
+    padding: 8px 22px 16px;
+    border-top: 1px solid rgba(248, 248, 250, .12);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, .45);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height .26s ease, opacity .2s ease, padding .26s ease;
+  }
+  .nav.open .links { max-height: 86vh; opacity: 1; overflow: auto; pointer-events: auto; }
+
+  .nav .links a,
+  .nav.scrolled .links a {
+    color: #f8f8fa;
+    width: 100%;
+    padding: 12px 2px;
+    font-size: 14px;
+    letter-spacing: .14em;
+  }
+  .nav .links a::after { display: none; }
+
+  /* Language switcher expands inline inside the menu (no floating popup to clip) */
+  .nav .links .lang-switch {
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(248, 248, 250, .1);
+  }
+  .nav .links .lang-btn,
+  .nav.scrolled .links .lang-btn { color: #f8f8fa; }
+  .nav .links .lang-menu {
+    position: static;
+    display: none;
+    min-width: 0;
+    margin: 6px 0 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    animation: none;
+  }
+  .nav .links .lang-switch.open .lang-menu { display: flex; }
+  .nav .links .lang-menu li { color: #f8f8fa; padding: 10px 4px; }
+}
+
+@media (max-width: 600px) {
+  .nav .cpb { display: none; }
+  .nav-toggle { margin-left: auto; }
+}
+
+/* ── Section refinements ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .stat-row { flex-wrap: wrap; }
+}
+@media (max-width: 680px) {
+  .stat-row { gap: 18px 28px; }
+  .footer-links { gap: 14px 18px; }
+  /* Hero: drop content to the bottom so the CTAs + tags sit just above the brand slider */
+  .hero-content { justify-content: flex-end; }
+  .hero-inner { padding-bottom: 26px; }
+  /* Shift the cropped video framing toward the right of the footage */
+  .hero-img { object-position: 45% center; }
+  /* Outline buttons go full-width on mobile (.row > * { width:100% }); stretch the
+     inner fill so the "border" layer stays a thin outline instead of a big frame. */
+  .cpb.outline > span { flex: 1; }
+}
+@media (max-width: 400px) {
+  .h.xxl { font-size: 40px; }
+  .h.xl { font-size: 30px; }
+}
+
+/* ── Poster strips on small screens ──────────────────────────────────────
+   The diagonal parallelogram slices render unevenly with few slices: the
+   straight-edged first/last slices look ~64px wider than the slanted middle
+   ones, and the slant makes posters look cropped. On tablet/phone we switch to
+   clean EQUAL rectangular slices, each fully filled by its poster. Desktop
+   keeps the diagonal look. nth-child covers both movies + sports strips. */
+@media (max-width: 1100px) {
+  /* Even diagonal slices: ALL slices share the same parallelogram clip, width and
+     -64px overlap, so they are identical. The first/last overhangs fall outside the
+     strip and get clipped (overflow:hidden) -> clean vertical strip edges, even
+     slices, posters fully filled. Coverage requires B = (100% + 64*(N+1)) / N. */
+  .film-slice {
+    flex: 0 0 calc((100% + 320px) / 4) !important;   /* N = 4 */
+    margin-left: -64px !important;
+    clip-path: polygon(64px 0, 100% 0, calc(100% - 64px) 100%, 0 100%) !important;
+    filter: none !important;
+  }
+  .film-track .film-slice:nth-child(5) { display: none; }     /* 4 slices */
+}
+@media (max-width: 680px) {
+  .film-slice { flex: 0 0 calc((100% + 192px) / 2) !important; }  /* N = 2 */
+  .film-track .film-slice:nth-child(n + 3) { display: none; }     /* 2 slices */
+}
+
+/* ── Section 6 "Every device": one-per-view auto-looping carousel on mobile.
+   crossfade slider: the 3 device mockups are stacked in the same spot; JS fades
+   through them one at a time and loops. No horizontal layout -> can't crop. */
+@media (max-width: 680px) {
+  #devices .row {
+    position: relative;
+    display: block;
+    height: 340px;
+    margin-top: 18px;
+    padding: 0;
+    overflow: hidden;
+  }
+  #devices .row > * {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    flex: none !important;
+    display: flex;
+    justify-content: center;   /* centre the device */
+    align-items: center;
+    opacity: 0;
+    transition: opacity .45s ease;
+    pointer-events: none;
+  }
+  #devices .row > *.is-active { opacity: 1; pointer-events: auto; }
+  #devices .dev { max-width: 82%; }
+  #devices .dev.phone { width: 150px; }
+  #devices .dev.tv { width: min(330px, 72vw); }
+  #devices .dev.tab { width: 195px; }
+}

@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "question": "Do you offer a refund?",
+      "answer": "Yes! We offer a 100% money-back guarantee. If you are not satisfied with our service (which rarely happens), we will issue a full refund within 48 hours. Simply contact us through email, WhatsApp, or live chat to request your refund."
+    },
+    {
+      "question": "How long before I can use my subscription?",
+      "answer": "As soon as your payment is completed, we instantly deliver your subscription details along with a comprehensive installation guide for all devices. You'll also receive immediate access to customer support via email and WhatsApp to help you get started right away."
+    },
+    {
+      "question": "How can I find a specific channel?",
+      "answer": "Our streaming service features an intuitive channel organization system designed for effortless navigation. You can find your desired channel in under 15 seconds using the built-in search function, category filters, or favorites list—making it incredibly easy to access your preferred content."
+    },
+    {
+      "question": "Can I use my subscription on multiple devices?",
+      "answer": "Absolutely! We offer flexible multi-device plans to suit your needs. You can select a subscription that supports 1, 2, 3, 4, or up to 5 simultaneous connections—allowing you to use your account across all your chosen devices at the same time. Perfect for families or multiple viewing locations."
+    },
+    {
+      "question": "How do I install my streaming subscription?",
+      "answer": "After completing your payment, we'll send you a comprehensive installation email containing your access credentials and step-by-step setup instructions for all major platforms—including Smart TVs, Android Boxes, PC/Mac, smartphones, Apple TV, tablets, iPads, MAG boxes, Firesticks, and more. Our detailed guides make installation quick and easy on any device."
+    },
+    {
+      "question": "Can I remove specific countries or channels?",
+      "answer": "Yes! You can fully customize your channel lineup to match your preferences. Simply contact our support team via email or WhatsApp and provide your subscription username along with the specific countries or channels you'd like removed. We'll personalize your service so you only see the content that matters to you."
+    },
+    {
+      "question": "Is it compatible with my device?",
+      "answer": "Our streaming service is compatible with virtually all devices! You can enjoy seamless streaming on Smart TVs (Samsung, Sony, LG, and more), all Android devices (set-top boxes, smartphones, tablets), Apple TV, iPhone, Fire Stick, and many other platforms. If you have any compatibility questions after your purchase, our support team is ready to provide comprehensive assistance and ensure your device works perfectly."
+    },
+    {
+      "question": "Will my subscription auto-renew?",
+      "answer": "No, we do not automatically charge your account. However, we will proactively contact you via email before your subscription expires to offer you the opportunity to renew and continue enjoying uninterrupted access to our premium streaming service. You maintain complete control over your subscription renewal."
+    }
+  ]
+}

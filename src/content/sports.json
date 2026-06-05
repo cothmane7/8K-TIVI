@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "image": "/assets/sports/worldcup.jpg",  "title": "WORLD CUP 2026" },
+    { "image": "/assets/sports/ucl.jpg",        "title": "UEFA CHAMPIONS LEAGUE" },
+    { "image": "/assets/sports/nba.jpg",        "title": "NBA" },
+    { "image": "/assets/sports/f1.jpg",         "title": "FORMULA 1" },
+    { "image": "/assets/sports/superbowl.jpg",  "title": "SUPER BOWL" },
+    { "image": "/assets/sports/ufc.jpg",        "title": "UFC" },
+    { "image": "/assets/sports/wimbledon.jpg",  "title": "WIMBLEDON" },
+    { "image": "/assets/sports/mlb.jpg",        "title": "MLB WORLD SERIES" },
+    { "image": "/assets/sports/nhl.jpg",        "title": "NHL" },
+    { "image": "/assets/sports/ipl.jpg",        "title": "IPL CRICKET" }
+  ]
+}

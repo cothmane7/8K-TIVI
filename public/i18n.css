@@ -1,0 +1,129 @@
+/* ISTREAM4k — language switcher + Arabic RTL */
+
+/* ── Language <select> in the footer ─────────────────────────────────── */
+/* Custom language dropdown — matches the site's dark/mono aesthetic.
+   Trigger is the minimal "EN ▾"; the menu is a branded dark panel. */
+.lang-switch { position: relative; display: inline-flex; }
+
+.lang-btn {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: inherit;          /* footer: match the surrounding link text exactly */
+  letter-spacing: inherit;
+  text-transform: uppercase;
+}
+.lang-btn .lang-caret { font-size: .8em; opacity: .6; transition: transform .18s ease; }
+.lang-switch.open .lang-btn .lang-caret { transform: rotate(180deg); }
+
+/* Nav: render like the other mono nav labels + cyan underline on hover/open */
+.nav .lang-btn {
+  position: relative;
+  font-family: var(--mono, ui-monospace, monospace);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .12em;
+  padding: 6px 2px;
+}
+.nav .lang-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--cyan, #00e5ff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .15s ease;
+}
+.nav .lang-btn:hover::after,
+.nav .lang-switch.open .lang-btn::after { transform: scaleX(1); }
+
+/* Footer: vertically center the switcher with the link row + match link hover */
+.footer-links { align-items: center; }
+.footer-links .lang-switch { align-self: center; }
+.footer-links .lang-btn:hover { color: var(--cyan, #00e5ff); }
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 9px);
+  right: 0;
+  min-width: 156px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--dark, #0c0c12);
+  border: 1.5px solid rgba(248, 248, 250, .15);
+  border-radius: 12px;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .5);
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 9999;
+}
+.lang-switch.open .lang-menu { display: flex; animation: lang-pop .14s ease; }
+.lang-switch.up .lang-menu { top: auto; bottom: calc(100% + 9px); }
+@keyframes lang-pop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+.lang-menu li {
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: 12px;
+  letter-spacing: .03em;
+  color: var(--white, #f8f8fa);
+  padding: 9px 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  transition: background .12s ease, color .12s ease;
+}
+.lang-menu li .code { margin-left: auto; font-size: 10px; opacity: .45; letter-spacing: .1em; }
+.lang-menu li:hover { background: color-mix(in srgb, var(--cyan, #00e5ff) 14%, transparent); color: var(--cyan, #00e5ff); }
+.lang-menu li.active { color: var(--cyan, #00e5ff); }
+.lang-menu li.active .code { opacity: .85; }
+
+[dir="rtl"] .lang-menu { right: auto; left: 0; }
+
+/* ── Arabic right-to-left ─────────────────────────────────────────────
+   Best-effort mirroring for a layout built mostly with physical properties.
+   Numbers, prices, brand marks and the logo stay left-to-right.            */
+[dir="rtl"] { direction: rtl; }
+
+[dir="rtl"] .logo,
+[dir="rtl"] .amt,
+[dir="rtl"] .price .billed,
+[dir="rtl"] .pdot,
+[dir="rtl"] .lang-select { direction: ltr; }
+
+/* Text blocks: right-align what was left-aligned; keep centered sections centered */
+[dir="rtl"] .sub,
+[dir="rtl"] .mod,
+[dir="rtl"] .price .name,
+[dir="rtl"] .price .label,
+[dir="rtl"] .feat-head,
+[dir="rtl"] h1:not(.center),
+[dir="rtl"] h2:not(.center),
+[dir="rtl"] h3:not(.center),
+[dir="rtl"] p:not(.center) { text-align: right; }
+
+[dir="rtl"] .center,
+[dir="rtl"] .center * { text-align: center; }
+
+/* Checklist bullets sit on the right */
+[dir="rtl"] .price ul li { flex-direction: row-reverse; }
+
+/* FAQ accordion: question right-aligned, +/- marker on the left edge */
+[dir="rtl"] .faq details summary { text-align: right; }
+[dir="rtl"] .faq details summary::after { right: auto; left: 26px; }
+[dir="rtl"] .faq details .answer { text-align: right; }
+
+/* Module labels: the little bar flips to the other side */
+[dir="rtl"] .mod .bar { transform: scaleX(-1); }

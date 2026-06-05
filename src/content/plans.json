@@ -1,0 +1,72 @@
+{
+  "features": [
+    "30,000+ Live Channels",
+    "175,000+ Movies & Series",
+    "HD I FHD I 4K Quality",
+    "Anti-Freeze Technology",
+    "Fast and Stable Servers",
+    "PPV / EPG Available",
+    "Advanced Parental Control",
+    "Worldwide Access (No IP Lock)",
+    "Instant activation"
+  ],
+  "durations": [
+    {
+      "months": 3,
+      "free": "",
+      "period": "billed quarterly"
+    },
+    {
+      "months": 6,
+      "free": "",
+      "period": "billed every 6 mo"
+    },
+    {
+      "months": 12,
+      "free": "1 month free",
+      "period": "billed yearly"
+    },
+    {
+      "months": 24,
+      "free": "2 months free",
+      "period": "billed every 24 mo"
+    }
+  ],
+  "prices": [
+    {
+      "devices": 1,
+      "m3": 35.99,
+      "m6": 49.99,
+      "m12": 79.99,
+      "m24": 119.99
+    },
+    {
+      "devices": 2,
+      "m3": 69.99,
+      "m6": 89.99,
+      "m12": 149.99,
+      "m24": 229.99
+    },
+    {
+      "devices": 3,
+      "m3": 94.99,
+      "m6": 129.99,
+      "m12": 229.99,
+      "m24": 299.99
+    },
+    {
+      "devices": 4,
+      "m3": 129.99,
+      "m6": 169.99,
+      "m12": 289.99,
+      "m24": 399.99
+    },
+    {
+      "devices": 5,
+      "m3": 159.99,
+      "m6": 199.99,
+      "m12": 349.99,
+      "m24": 509.99
+    }
+  ]
+}

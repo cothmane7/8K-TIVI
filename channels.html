@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ISTREAM4k — Channels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css" />
+<style>
+  .nav{position:fixed}
+  .nav .links a.active::after{transform:scaleX(1)}
+  .subhero{position:relative;padding:150px 80px 70px;background:linear-gradient(180deg,rgba(8,8,12,.74),rgba(8,8,12,.88)),url('/assets/hero.png') center/cover no-repeat,var(--dark);color:var(--white);
+    overflow:hidden;border-bottom:2px solid var(--ink)}
+  .subhero::before{content:"";position:absolute;inset:0;z-index:0;opacity:.5;
+    background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--cyan) 42%,transparent),transparent 55%),
+      radial-gradient(ellipse at 15% 92%,color-mix(in srgb,var(--magenta) 34%,transparent),transparent 55%)}
+  .subhero > *{position:relative;z-index:1}
+  .subhero .mod{color:var(--white-2)} .subhero .mod b{color:var(--cyan)}
+  .subhero .mod .bar{background:var(--white-3)} .subhero .mod .ts{color:var(--white-3)}
+  .subhero h1{color:var(--white);max-width:16ch}
+  .subhero p{color:var(--white-2);max-width:560px;margin-top:18px;font-size:16px}
+  /* big stat row */
+  .stat-row{display:flex;flex-wrap:wrap;gap:40px;margin-top:34px}
+  .stat .v{font-family:var(--hand);font-weight:700;font-size:46px;line-height:1;letter-spacing:-.02em;color:var(--white)}
+  .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-top:8px}
+  @media (max-width:1100px){.subhero{padding:130px 40px 56px}}
+  @media (max-width:680px){.subhero{padding:112px 22px 44px}.stat .v{font-size:36px}}
+
+  /* category card */
+  .cat{position:relative;padding:26px 24px;border:2px solid var(--ink);background:rgba(0,0,0,.025);
+    transition:background .15s ease,transform .15s ease;cursor:default}
+  .cat:hover{background:rgba(0,0,0,.06);transform:translate(-1px,-1px)}
+  .cat .ico{font-size:22px;line-height:1}
+  .cat .ct{font-family:var(--hand);font-weight:700;font-size:30px;letter-spacing:-.01em;margin-top:16px;line-height:1}
+  .cat h3{font-family:var(--hand);font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+    font-size:15px;margin:6px 0 0;color:var(--ink-2)}
+
+  /* coverage chips (reuse platform language) */
+  .chip-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:920px;margin:0 auto}
+  .chip{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--ink);padding:10px 15px;
+    font-family:var(--hand);font-weight:600;font-size:13px;letter-spacing:.02em;text-transform:uppercase;
+    background:rgba(0,0,0,.02);transition:background .15s ease,transform .15s ease}
+  .chip:hover{background:rgba(0,0,0,.07);transform:translateY(-2px)}
+  .chip .d{width:7px;height:7px;background:var(--ink);transform:rotate(45deg);flex-shrink:0}
+
+  /* quality badges */
+  .qual-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:30px}
+  .qbadge{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.12em;color:var(--white);
+    border:1.5px solid var(--cyan);padding:10px 16px;background:rgba(0,0,0,.25)}
+
+  /* ───────── channel directory ───────── */
+  .dir-search{position:relative;max-width:560px;margin:30px 0 0}
+  .dir-search input{width:100%;box-sizing:border-box;font-family:var(--mono);font-size:15px;letter-spacing:.02em;
+    padding:15px 18px 15px 46px;border:2px solid var(--ink);background:var(--white);color:var(--ink);outline:none}
+  .dir-search input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px color-mix(in srgb,var(--cyan) 30%,transparent)}
+  .dir-search-ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--ink-2);pointer-events:none}
+  .dir-status{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-top:22px}
+
+  /* flag rendering: SVG flags (flag-icons) sized like a small card; diamond for generic regions */
+  .dir-flag.fi{width:38px;height:28px;line-height:28px;background-size:cover;border:1px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+  .dir-sym{display:inline-block;font-size:26px;line-height:28px;color:var(--cyan)}
+
+  .dir-grid{gap:14px}
+  .dir-cc{display:block;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}
+  .dir-cc .dir-flag{display:inline-block}
+  .dir-cc .ct{margin-top:14px}
+  .dir-cc h3{margin-top:4px}
+
+  .dir-detail{margin-top:34px}
+  .dir-back{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:9px 14px;cursor:pointer}
+  .dir-back:hover{background:var(--ink);color:var(--white)}
+  .dir-ctitle{font-family:var(--hand);font-weight:700;font-size:34px;margin:22px 0 6px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .dir-ctitle .dir-flag.fi{width:46px;height:34px;line-height:34px}
+  .dir-ctitle .dir-sym{font-size:32px;line-height:34px}
+  .dir-ccount{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase}
+  .dir-genres{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .dir-gen{border:2px solid var(--ink);background:rgba(0,0,0,.02)}
+  .dir-gen>summary{list-style:none;cursor:pointer;padding:14px 18px;font-family:var(--hand);font-weight:700;
+    text-transform:uppercase;letter-spacing:.03em;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+  .dir-gen>summary::-webkit-details-marker{display:none}
+  .dir-gen>summary b{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--cyan);letter-spacing:.08em}
+  .dir-gen[open]>summary{border-bottom:1.5px solid var(--ink)}
+  .dir-chans{display:flex;flex-wrap:wrap;gap:8px;padding:16px 18px}
+  .ch{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ink);padding:8px 12px;
+    font-family:var(--hand);font-weight:600;font-size:12.5px;background:var(--white);line-height:1.25}
+  .ch .ch-d{width:6px;height:6px;background:var(--cyan);transform:rotate(45deg);flex-shrink:0}
+  .ch-q{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;color:var(--white);
+    background:var(--ink);padding:2px 5px;margin-left:2px}
+  .ch-c{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:var(--ink-2);margin-left:4px;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px}
+  .ch-c .dir-flag.fi{width:15px;height:11px;border:0;box-shadow:none}
+  .ch-c .dir-sym{font-size:11px;line-height:1}
+  .dir-results{margin-top:30px}
+  .dir-rcount,.dir-empty{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-2);
+    text-transform:uppercase;margin-bottom:14px}
+  @media (max-width:680px){.dir-ctitle{font-size:26px}.ch{font-size:11.5px}}
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <a href="/" class="logo">i·<b>STREAM</b>4k</a>
+  <div class="links">
+    <a href="/#sports">Sports</a>
+    <a href="/#movies">Movies</a>
+    <a href="/#pricing">Plans</a>
+    <a href="resellers.html">Resellers</a>
+    <a href="channels.html" class="active">Channels</a>
+    <a href="support.html">Support</a>
+    <div class="lang-switch" data-lang-switch aria-label="Language"></div>
+  </div>
+  <a href="#" data-wa data-wa-text="Hi! I'd like to start my free trial of ISTREAM4k." class="cpb">Start free trial</a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ───────── SUBHERO ───────── -->
+<header class="subhero">
+  <div class="mod"><b>—</b> The lineup <span class="bar"></span><span class="ts">always growing</span></div>
+  <h1 class="h xxl mt-3" style="margin-top:18px">Everything worth<br>watching. One signal.</h1>
+  <p>Live TV, sports, films, and series from every corner of the world — in up to 4K HDR, with zero buffering and no IP lock. Here's what's inside ISTREAM4k.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="v">30,000+</div><div class="l">Live channels</div></div>
+    <div class="stat"><div class="v">175,000+</div><div class="l">Movies &amp; series</div></div>
+    <div class="stat"><div class="v">70+</div><div class="l">Countries covered</div></div>
+    <div class="stat"><div class="v">4K HDR</div><div class="l">Max quality</div></div>
+  </div>
+</header>
+
+<!-- ───────── DIRECTORY ───────── -->
+<section class="pg yellow">
+  <div class="mod"><b>01</b> — Browse the lineup <span class="bar"></span><span class="ts">live catalog</span></div>
+  <h2 class="h xl mt-3">Find any channel, from any country.</h2>
+
+  <div class="dir-search">
+    <span class="dir-search-ico">⌕</span>
+    <input id="chSearch" type="search" placeholder="Search channels — e.g. Sky Sports, beIN, HBO…" autocomplete="off" spellcheck="false" />
+  </div>
+
+  <div id="dirStatus" class="dir-status">Loading the catalog…</div>
+  <div id="dirCountries" class="grid g4 mt-5 dir-grid" hidden></div>
+  <div id="dirDetail" class="dir-detail" hidden></div>
+  <div id="dirResults" class="dir-results" hidden></div>
+</section>
+
+<script>
+(function(){
+  var grid    = document.getElementById('dirCountries');
+  var detail  = document.getElementById('dirDetail');
+  var results = document.getElementById('dirResults');
+  var status  = document.getElementById('dirStatus');
+  var search  = document.getElementById('chSearch');
+  if (!grid) return;
+  var DATA = null, FLAT = null;
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function badges(q){ return (q && q.length) ? '<span class="ch-q">'+q.join(' · ')+'</span>' : ''; }
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  // SVG flag for a country code, or a diamond symbol for generic regions
+  function flag(cc){ return cc ? '<span class="fi fi-'+cc+' dir-flag"></span>'
+                               : '<span class="dir-flag dir-sym">◆</span>'; }
+
+  fetch('/channels.json').then(function(r){ return r.json(); }).then(function(d){
+    DATA = d; status.hidden = true; renderCountries();
+  }).catch(function(){ status.textContent = 'Could not load the channel list. Please refresh.'; });
+
+  function renderCountries(){
+    detail.hidden = true; results.hidden = true; grid.hidden = false;
+    grid.innerHTML = DATA.countries.map(function(c, i){
+      return '<button class="cat dir-cc brk" type="button" data-ci="'+i+'">'+
+        '<i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>'+
+        flag(c.cc)+
+        '<div class="ct">'+fmt(c.total)+'</div>'+
+        '<h3>'+esc(c.name)+'</h3></button>';
+    }).join('');
+  }
+
+  grid.addEventListener('click', function(e){
+    var b = e.target.closest('[data-ci]'); if (!b) return;
+    openCountry(+b.getAttribute('data-ci'));
+  });
+
+  function chanHtml(list){
+    return list.map(function(ch){
+      return '<span class="ch"><span class="ch-d"></span>'+esc(ch.name)+badges(ch.q)+'</span>';
+    }).join('');
+  }
+
+  function openCountry(ci){
+    var c = DATA.countries[ci];
+    grid.hidden = true; results.hidden = true; detail.hidden = false;
+    detail.innerHTML =
+      '<button class="dir-back" type="button">← All countries</button>'+
+      '<div class="dir-ctitle">'+flag(c.cc)+' '+esc(c.name)+
+        ' <span class="dir-ccount">'+fmt(c.total)+' channels</span></div>'+
+      '<div class="dir-genres">'+ c.genres.map(function(g, gi){
+        return '<details class="dir-gen" data-gi="'+gi+'"'+(gi===0?' open':'')+'>'+
+          '<summary>'+esc(g.name)+' <b>'+fmt(g.count)+'</b></summary>'+
+          '<div class="dir-chans"></div></details>';
+      }).join('') +'</div>';
+
+    // lazily fill each genre's channels the first time it opens
+    detail.querySelectorAll('.dir-gen').forEach(function(d){
+      var gi = +d.getAttribute('data-gi');
+      function fill(){
+        var box = d.querySelector('.dir-chans');
+        if (box.getAttribute('data-done')) return;
+        box.innerHTML = chanHtml(c.genres[gi].channels);
+        box.setAttribute('data-done', '1');
+      }
+      if (d.open) fill();
+      d.addEventListener('toggle', function(){ if (d.open) fill(); });
+    });
+    detail.querySelector('.dir-back').addEventListener('click', renderCountries);
+    detail.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function buildFlat(){
+    if (FLAT) return FLAT;
+    FLAT = [];
+    DATA.countries.forEach(function(c){ c.genres.forEach(function(g){ g.channels.forEach(function(ch){
+      FLAT.push({ n:ch.name, k:ch.name.toUpperCase(), q:ch.q, c:c.name, f:c.cc, g:g.name });
+    }); }); });
+    return FLAT;
+  }
+
+  var timer;
+  search.addEventListener('input', function(){ clearTimeout(timer); timer = setTimeout(doSearch, 140); });
+  function doSearch(){
+    if (!DATA) return;
+    var q = search.value.trim().toUpperCase();
+    if (q.length < 2){ renderCountries(); return; }
+    var flat = buildFlat(), hits = [], CAP = 300;
+    for (var i = 0; i < flat.length && hits.length < CAP; i++) if (flat[i].k.indexOf(q) >= 0) hits.push(flat[i]);
+    grid.hidden = true; detail.hidden = true; results.hidden = false;
+    if (!hits.length){ results.innerHTML = '<div class="dir-empty">No channels match “'+esc(search.value)+'”.</div>'; return; }
+    results.innerHTML =
+      '<div class="dir-rcount">'+hits.length+(hits.length>=CAP?'+':'')+' matches</div>'+
+      '<div class="dir-chans">'+ hits.map(function(h){
+        return '<span class="ch"><span class="ch-d"></span>'+esc(h.n)+
+          '<span class="ch-c">'+flag(h.f)+' '+esc(h.c)+' · '+esc(h.g)+'</span>'+badges(h.q)+'</span>';
+      }).join('') +'</div>';
+  }
+})();
+</script>
+
+<div class="seam y2d"></div>
+
+<!-- ───────── COVERAGE ───────── -->
+<section class="pg dark center">
+  <div class="mod center" style="justify-content:center"><b>02</b> — Worldwide coverage <span class="bar"></span><span class="ts">no IP lock</span></div>
+  <h2 class="h xl mt-3" style="color:var(--white)">Channels from 60+ countries.</h2>
+  <p class="sub" style="color:var(--white-2);max-width:560px;margin:16px auto 34px;font-size:15px">
+    Watch local broadcasts from anywhere. A sample of the regions included on every plan:
+  </p>
+  <div class="chip-grid">
+    <span class="chip"><span class="d"></span>United States</span>
+    <span class="chip"><span class="d"></span>United Kingdom</span>
+    <span class="chip"><span class="d"></span>Canada</span>
+    <span class="chip"><span class="d"></span>Germany</span>
+    <span class="chip"><span class="d"></span>France</span>
+    <span class="chip"><span class="d"></span>Spain</span>
+    <span class="chip"><span class="d"></span>Italy</span>
+    <span class="chip"><span class="d"></span>Netherlands</span>
+    <span class="chip"><span class="d"></span>Portugal</span>
+    <span class="chip"><span class="d"></span>Brazil</span>
+    <span class="chip"><span class="d"></span>Arabia</span>
+    <span class="chip"><span class="d"></span>India</span>
+    <span class="chip"><span class="d"></span>Turkey</span>
+    <span class="chip"><span class="d"></span>Australia</span>
+    <span class="chip"><span class="d"></span>Scandinavia</span>
+  </div>
+  <div class="qual-row">
+    <span class="qbadge">HD</span>
+    <span class="qbadge">FHD</span>
+    <span class="qbadge">4K HDR</span>
+    <span class="qbadge">DOLBY ATMOS</span>
+  </div>
+</section>
+
+<div class="seam d2y"></div>
+
+<!-- ───────── CTA ───────── -->
+<section class="pg yellow center" style="border-top:1.5px solid var(--ink);padding-top:72px;padding-bottom:88px">
+  <div class="mod center" style="justify-content:center"><b>03</b> — Get watching <span class="bar" style="max-width:80px"></span></div>
+  <h2 class="h xxl" style="font-size:80px;margin-top:18px">Tune in to<br>everything.</h2>
+  <p class="sub" style="max-width:520px;margin:20px auto 0;font-size:16px">Pick a plan and the full lineup unlocks instantly — no lock-in, cancel anytime.</p>
+  <div class="fl jc-c gap-md" style="margin-top:36px;display:flex;justify-content:center;flex-wrap:wrap">
+    <a href="/#pricing" class="cpb">Browse plans</a>
+    <a href="#" data-wa data-wa-text="Hi! I'd like to ask about a specific channel on ISTREAM4k — is it included?" class="cpb outline"><span>Ask about a channel</span></a>
+  </div>
+</section>
+
+<div class="seam y2d"></div>
+
+<!-- ───────── FOOTER ───────── -->
+<footer class="pg dark center" style="padding-top:60px;padding-bottom:50px">
+  <div class="footer-partners">
+    <span>4K HDR</span><span>Dolby Atmos</span><span>HDR10+</span><span>Rated 18+</span>
+  </div>
+  <div class="footer-links">
+    <a href="resellers.html">Resellers</a>
+    <a href="channels.html">Channels</a>
+    <a href="support.html">Support</a>
+    <a href="/#pricing">Plans</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="refund.html">Refund</a>
+  </div>
+  <div style="margin-top:40px;display:flex;align-items:center;justify-content:center;gap:14px">
+    <div style="font-family:var(--hand);font-weight:700;font-size:28px;letter-spacing:.04em;color:var(--white)">i·<span style="background:var(--cyan);color:var(--dark);padding:2px 8px">STREAM</span>4k</div>
+  </div>
+  <div class="mod center mt-3" style="justify-content:center;color:var(--white-3)">© 2026 ISTREAM4K · All rights reserved</div>
+</footer>
+
+</body>
+</html>

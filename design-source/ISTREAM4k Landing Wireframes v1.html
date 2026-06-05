@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ISTREAM4k — Landing Page Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     ISTREAM4k landing page · lo-fi wireframe exploration
+     "wireframes drawn on a cyberpunk chalkboard"
+     ───────────────────────────────────────────────────────────────── */
+  :root{
+    --bg:#0a0612;
+    --panel:#0e0a18;
+    --ink:rgba(238,232,255,.86);
+    --ink-2:rgba(238,232,255,.5);
+    --ink-3:rgba(238,232,255,.25);
+    --line:rgba(238,232,255,.42);
+    --line-2:rgba(238,232,255,.18);
+    --neon-p:#c879ff;   /* neon purple */
+    --neon-c:#5ff8ff;   /* electric cyan */
+    --neon-m:#ff5fb4;   /* magenta */
+    --hand:'Chakra Petch','Rajdhani',sans-serif;       /* display + body, sharp + slightly condensed */
+    --hand-b:'Chakra Petch','Rajdhani',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --pen:'Caveat',cursive;                              /* handwritten — only for margin annotations */
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:var(--hand-b);font-weight:400;min-height:100%;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(200,121,255,.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(95,248,255,.04), transparent 60%);
+  }
+  /* faint grid */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(rgba(238,232,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(238,232,255,.025) 1px, transparent 1px);
+    background-size:40px 40px;}
+
+  /* ───────── top bar ───────── */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+    padding:10px 22px;background:rgba(10,6,18,.78);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-2);font-family:var(--mono);font-size:11px;
+    letter-spacing:.05em;color:var(--ink-2)}
+  .topbar .brand{color:var(--ink);font-weight:600}
+  .topbar .brand b{color:var(--neon-p);font-weight:600}
+  .topbar .spacer{flex:1}
+  .tabs{display:flex;gap:6px}
+  .tab{appearance:none;background:transparent;border:1px dashed var(--line);
+    color:var(--ink-2);padding:6px 12px;border-radius:999px;font:inherit;
+    cursor:pointer;letter-spacing:.04em}
+  .tab:hover{color:var(--ink);border-color:var(--ink-2)}
+  .tab.active{color:#0a0612;background:var(--neon-p);border-color:var(--neon-p);
+    box-shadow:0 0 14px rgba(200,121,255,.45)}
+  .legend{font-family:var(--mono);font-size:10px;color:var(--ink-3);
+    letter-spacing:.06em;display:flex;gap:14px}
+  .legend i{font-style:normal;display:inline-flex;align-items:center;gap:6px}
+  .legend i::before{content:"";width:8px;height:8px;border-radius:2px;background:currentColor}
+  .legend .p{color:var(--neon-p)} .legend .c{color:var(--neon-c)} .legend .m{color:var(--neon-m)}
+
+  /* ───────── canvas ───────── */
+  .canvas{position:relative;z-index:1;padding:24px 0 80px;display:flex;justify-content:center}
+  .wire{display:none;width:100%;max-width:1240px;padding:0 24px}
+  .wire.active{display:block}
+
+  /* ───────── primitives ───────── */
+  .b{border:1.4px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.012)}
+  .s{border:1.4px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02)}
+  .b-soft{border:1px dashed var(--line-2);border-radius:12px}
+  .img{position:relative;border:1.4px dashed var(--line);border-radius:14px;
+    background:
+      linear-gradient(to top right, transparent calc(50% - .8px), var(--line) 50%, transparent calc(50% + .8px)),
+      linear-gradient(to top left, transparent calc(50% - .8px), var(--line) 50%, transparent calc(50% + .8px)),
+      repeating-linear-gradient(45deg, rgba(238,232,255,.04) 0 6px, transparent 6px 14px);
+    display:flex;align-items:flex-end;justify-content:flex-start;padding:10px;
+    color:var(--ink-3);font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+    text-transform:uppercase}
+  .img.video{background:
+      linear-gradient(to top right, transparent calc(50% - .8px), var(--neon-p) 50%, transparent calc(50% + .8px)),
+      linear-gradient(to top left, transparent calc(50% - .8px), var(--neon-p) 50%, transparent calc(50% + .8px)),
+      repeating-linear-gradient(45deg, rgba(200,121,255,.07) 0 8px, transparent 8px 18px);
+      border-color:rgba(200,121,255,.6);color:rgba(200,121,255,.7)}
+  .img > .tag{position:absolute;top:10px;left:12px;color:var(--ink-3)}
+  .img > .play{position:absolute;inset:0;display:grid;place-items:center;color:var(--neon-p);
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em}
+  .img > .play span{border:1px solid currentColor;border-radius:999px;padding:7px 16px}
+
+  .l{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--line),var(--line-2));
+    margin:8px 0}
+  .l.short{width:60%} .l.s2{width:74%} .l.s3{width:88%} .l.tiny{width:34%}
+  .l.thin{height:5px;background:linear-gradient(90deg,var(--line-2),transparent)}
+  .lines{display:flex;flex-direction:column;gap:6px}
+
+  h1,h2,h3,h4{margin:0;font-family:var(--hand);font-weight:700;letter-spacing:-.005em;color:var(--ink);
+    text-transform:uppercase}
+  .h{font-family:var(--hand);font-weight:700;line-height:.95;text-transform:uppercase;
+    letter-spacing:-.01em}
+  .h.xxl{font-size:84px;letter-spacing:-.02em}
+  .h.xl{font-size:60px;letter-spacing:-.015em}
+  .h.l{font-size:40px}
+  .h.m{font-size:28px;letter-spacing:.005em}
+  .h.s{font-size:20px;letter-spacing:.02em}
+  .glitch{position:relative;display:inline-block;color:var(--ink);}
+  .glitch::before, .glitch::after{content:attr(data-t);position:absolute;left:0;top:0;pointer-events:none}
+  .glitch::before{color:var(--neon-c);transform:translate(-2px,-1px);mix-blend-mode:screen;opacity:.55}
+  .glitch::after{color:var(--neon-m);transform:translate(2px,1px);mix-blend-mode:screen;opacity:.5}
+
+  .sub{font-family:var(--hand-b);font-weight:400;color:var(--ink-2);font-size:14px;
+    line-height:1.55;letter-spacing:.005em}
+  .label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .label.p{color:var(--neon-p)} .label.c{color:var(--neon-c)}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
+    border:1.4px dashed var(--line);font-family:var(--hand-b);font-weight:600;color:var(--ink);
+    background:rgba(255,255,255,.02);font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase}
+  .btn.solid{background:var(--neon-p);color:#0a0612;border:1.4px solid var(--neon-p);
+    box-shadow:0 0 18px rgba(200,121,255,.35)}
+  .btn.ghost{color:var(--ink-2)}
+  .btn.cyan{border-color:var(--neon-c);color:var(--neon-c)}
+  .btn .arrow{font-family:var(--mono)}
+
+  /* margin annotation in handwritten red — the ONLY handwritten element on the page */
+  .note{font-family:var(--pen);color:var(--neon-m);font-size:18px;line-height:1.1;
+    display:inline-flex;align-items:center;gap:6px}
+  .note::before{content:"↳ "}
+  .note.up::before{content:"↑ "}
+  .note.r::before{content:"→ "}
+
+  /* section scaffolding */
+  .sec{padding:36px 0;border-top:1px dashed var(--line-2);position:relative}
+  .sec:first-child{border-top:0}
+  .sec-no{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-3);
+    margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .sec-no::after{content:"";flex:1;height:1px;background:var(--line-2)}
+
+  .row{display:flex;gap:18px}
+  .col{display:flex;flex-direction:column;gap:14px}
+
+  /* device shapes */
+  .dev-phone{aspect-ratio:9/19;border-radius:32px}
+  .dev-tab{aspect-ratio:4/5;border-radius:18px}
+  .dev-tv{aspect-ratio:16/9;border-radius:10px}
+
+  /* HUD frame for variant C */
+  .hud{position:relative;padding:22px}
+  .hud::before, .hud::after,
+  .hud > .ct, .hud > .cb{content:"";position:absolute;width:18px;height:18px;
+    border-color:var(--neon-c)}
+  .hud::before{top:0;left:0;border-left:1.4px solid;border-top:1.4px solid}
+  .hud::after{top:0;right:0;border-right:1.4px solid;border-top:1.4px solid}
+  .hud > .cb{bottom:0;right:0;border-right:1.4px solid;border-bottom:1.4px solid;
+    width:18px;height:18px}
+  .hud > .ct{bottom:0;left:0;border-left:1.4px solid;border-bottom:1.4px solid;
+    width:18px;height:18px}
+  .hud-rail{font-family:var(--mono);font-size:10px;color:var(--neon-c);letter-spacing:.2em;
+    display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .hud-rail .bar{flex:1;height:1px;background:linear-gradient(90deg,var(--neon-c),transparent)}
+
+  .ticks{display:flex;gap:3px}
+  .ticks i{display:block;width:3px;height:14px;background:var(--ink-3)}
+  .ticks i.on{background:var(--neon-p)}
+
+  /* navbar shapes shared across variants */
+  .navbar{display:flex;align-items:center;gap:18px;padding:14px 22px;border-radius:999px;
+    border:1.4px dashed var(--line);background:rgba(10,6,18,.6);
+    backdrop-filter:blur(8px)}
+  .navbar .logo{font-family:var(--hand);font-size:20px;color:var(--ink);font-weight:700;
+    letter-spacing:.02em}
+  .navbar .logo b{color:var(--neon-p)}
+  .navbar .links{display:flex;gap:18px;color:var(--ink-2);font-size:14px;flex:1;
+    justify-content:center}
+  .navbar .links span{position:relative}
+  .navbar .links span.on{color:var(--ink)}
+  .navbar .links span.on::after{content:"";position:absolute;left:0;right:0;bottom:-6px;
+    height:1px;background:var(--neon-p)}
+
+  /* utility */
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .pad{padding:22px} .pad-l{padding:30px}
+  .center{text-align:center}
+  .mt-2{margin-top:8px} .mt-3{margin-top:14px} .mt-4{margin-top:22px} .mt-5{margin-top:34px}
+  .mb-2{margin-bottom:8px} .mb-3{margin-bottom:14px} .mb-4{margin-bottom:22px}
+  .gap-sm{gap:8px} .gap-md{gap:14px} .gap-lg{gap:22px}
+  .fl{display:flex} .ai-c{align-items:center} .jc-sb{justify-content:space-between}
+  .jc-c{justify-content:center} .fw-w{flex-wrap:wrap}
+  .w-full{width:100%}
+
+  /* small badges */
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;border-radius:999px;
+    border:1px dashed var(--line);color:var(--ink-2)}
+  .pill.live{color:var(--neon-m);border-color:var(--neon-m)}
+  .pill.live::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor;
+    box-shadow:0 0 8px currentColor}
+  .pill.p{color:var(--neon-p);border-color:var(--neon-p)}
+  .pill.c{color:var(--neon-c);border-color:var(--neon-c)}
+
+  /* floating annotation strokes */
+  .anno{position:absolute;font-family:var(--hand);color:var(--neon-m);font-size:16px;
+    line-height:1.1;pointer-events:none}
+
+  /* big number marker for variant B */
+  .marker{font-family:var(--mono);font-size:11px;color:var(--neon-p);letter-spacing:.2em}
+  .marker b{display:block;font-family:var(--hand);font-size:48px;color:var(--ink);
+    font-weight:700;line-height:.9;margin-top:2px;letter-spacing:-.02em}
+
+  /* accordion rows */
+  .acc{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;
+    border-bottom:1px dashed var(--line-2);font-size:15px;font-family:var(--hand);
+    text-transform:uppercase;letter-spacing:.03em;font-weight:500}
+  .acc .pl{font-family:var(--mono);font-size:14px;color:var(--neon-c)}
+  .acc.open{background:rgba(200,121,255,.05);border-radius:14px;border:1.4px dashed var(--neon-p);
+    flex-direction:column;align-items:stretch;gap:10px}
+  .acc.open .pl{color:var(--neon-p)}
+
+  /* star ratings */
+  .stars{font-family:var(--mono);color:var(--neon-c);letter-spacing:.2em;font-size:14px}
+
+  /* helpers for variant D narrow column */
+  .strip{max-width:680px;margin:0 auto}
+  .full-bleed{margin:0 -24px}
+
+  /* end-of-section caption */
+  .caption{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-3);
+    text-transform:uppercase;text-align:center;margin-top:30px;opacity:.7}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><b>ISTREAM4k</b> · landing page wireframes</div>
+  <div class="legend">
+    <i class="p">neon = primary CTA</i>
+    <i class="c">cyan = HUD / signal</i>
+    <i class="m">magenta = annotation</i>
+  </div>
+  <div class="spacer"></div>
+  <div class="tabs">
+    <button class="tab active" data-tab="A">A · Cinematic Stack</button>
+    <button class="tab" data-tab="B">B · Editorial Asymmetric</button>
+    <button class="tab" data-tab="C">C · HUD Console</button>
+    <button class="tab" data-tab="D">D · Zine Strip</button>
+  </div>
+</div>
+
+<div class="canvas">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     VARIANT A — CINEMATIC STACK
+     symmetric, centered, the "default" interpretation
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="wire active" data-wire="A">
+
+  <!-- 01 STICKY HEADER -->
+  <div class="sec">
+    <div class="sec-no">01 / sticky header · floating navbar</div>
+    <div class="navbar">
+      <div class="logo">i·<b>STREAM</b>4k</div>
+      <div class="links"><span class="on">Experience</span><span>Live</span><span>Pricing</span><span>FAQ</span></div>
+      <button class="btn solid">Get Access →</button>
+    </div>
+    <div class="note mt-2">transparent blur · floats 20px from top · shrinks on scroll</div>
+  </div>
+
+  <!-- 02 FULLSCREEN HERO -->
+  <div class="sec">
+    <div class="sec-no">02 / fullscreen cinematic hero</div>
+    <div class="img video" style="height:560px;border-radius:18px;position:relative">
+      <span class="tag">▶ bg video · autoplay · muted · 12s loop</span>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+                  justify-content:center;text-align:center;padding:40px">
+        <div class="pill p mb-4">◢ NOW STREAMING · 4K · DOLBY ATMOS</div>
+        <div class="h xxl" style="max-width:900px"><span class="glitch" data-t="THE FUTURE">THE FUTURE</span><br>OF ENTERTAINMENT.</div>
+        <div class="sub mt-3" style="max-width:560px">live concerts · cinematic originals · zero ads · everywhere.</div>
+        <div class="fl gap-md mt-4">
+          <button class="btn solid">Get Instant Access ⚡</button>
+          <button class="btn cyan">Explore Experience →</button>
+        </div>
+      </div>
+      <!-- floating UI elements -->
+      <div class="pill live" style="position:absolute;top:24px;left:24px">LIVE · 8.2K WATCHING</div>
+      <div class="pill c" style="position:absolute;top:24px;right:24px">SIGNAL ▮▮▮▮▯</div>
+      <div class="pill" style="position:absolute;bottom:24px;left:24px">⌛ 00:04:21 / NEXT DROP</div>
+      <div class="pill p" style="position:absolute;bottom:24px;right:24px">▼ SCROLL TO BEGIN</div>
+    </div>
+    <div class="note mt-2">animated headline (typewriter or glitch reveal) · glow on CTAs · ambient particles overlay</div>
+  </div>
+
+  <!-- 03 FEATURED HIGHLIGHTS -->
+  <div class="sec">
+    <div class="sec-no">03 / featured highlights · wide editorial cards</div>
+    <div class="label p mb-3">◢ THIS WEEK'S DROPS</div>
+    <div class="h l mb-4">Cinematic that hits different.</div>
+    <div class="col gap-md">
+      <div class="b row pad" style="align-items:stretch">
+        <div class="img" style="flex:1.2;min-height:200px">FEATURE FILM · STILL 01</div>
+        <div class="col" style="flex:1;padding-left:22px;justify-content:center">
+          <div class="label c">EP 01 · ORIGINAL SERIES</div>
+          <div class="h m mt-2">NEON DELIRIUM</div>
+          <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          <button class="btn ghost mt-3" style="align-self:flex-start">Watch trailer →</button>
+        </div>
+      </div>
+      <div class="b row pad" style="align-items:stretch">
+        <div class="col" style="flex:1;padding-right:22px;justify-content:center">
+          <div class="label c">DOC · 47 MIN</div>
+          <div class="h m mt-2">CHROME CITIES</div>
+          <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          <button class="btn ghost mt-3" style="align-self:flex-start">Watch trailer →</button>
+        </div>
+        <div class="img" style="flex:1.2;min-height:200px">DOC STILL · 02</div>
+      </div>
+    </div>
+    <div class="note mt-3">hover: card glows soft purple · play-icon fade-in on image · 20px elevate</div>
+  </div>
+
+  <!-- 04 BENEFITS -->
+  <div class="sec">
+    <div class="sec-no">04 / benefits · glassmorphism 4-up</div>
+    <div class="center mb-4">
+      <div class="label p">◢ WHY ISTREAM4K</div>
+      <div class="h l mt-2">Built for the next signal.</div>
+    </div>
+    <div class="grid g4">
+      <div class="b pad"><div class="s" style="width:44px;height:44px;border-radius:12px;display:grid;
+        place-items:center;color:var(--neon-p)">◆</div>
+        <div class="h s mt-3">4K · ATMOS</div>
+        <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div></div></div>
+      <div class="b pad"><div class="s" style="width:44px;height:44px;border-radius:12px;display:grid;
+        place-items:center;color:var(--neon-c)">◇</div>
+        <div class="h s mt-3">ZERO ADS</div>
+        <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div></div></div>
+      <div class="b pad"><div class="s" style="width:44px;height:44px;border-radius:12px;display:grid;
+        place-items:center;color:var(--neon-p)">◈</div>
+        <div class="h s mt-3">OFFLINE MODE</div>
+        <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div></div></div>
+      <div class="b pad"><div class="s" style="width:44px;height:44px;border-radius:12px;display:grid;
+        place-items:center;color:var(--neon-c)">◉</div>
+        <div class="h s mt-3">ANY SCREEN</div>
+        <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div></div></div>
+    </div>
+    <div class="note mt-3">icons pulse softly · cards lift on hover w/ neon edge bloom</div>
+  </div>
+
+  <!-- 05 LIVE EXPERIENCE -->
+  <div class="sec">
+    <div class="sec-no">05 / live experience · floating stats around scene</div>
+    <div class="img video" style="height:480px;position:relative">
+      <span class="tag">LIVE STAGE · STADIUM FOOTAGE</span>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                  flex-direction:column;text-align:center;padding:40px">
+        <div class="pill live mb-3">● LIVE NOW · GLOBAL</div>
+        <div class="h xl">TONIGHT · 21:00 UTC</div>
+        <div class="sub mt-3" style="max-width:520px">drop into front-row, anywhere on earth.</div>
+      </div>
+      <!-- stat widgets -->
+      <div class="b pad" style="position:absolute;top:30px;left:30px;background:rgba(10,6,18,.7);min-width:140px">
+        <div class="label c">CONCURRENT</div>
+        <div class="h m mt-2" style="color:var(--neon-c)">412,908</div>
+      </div>
+      <div class="b pad" style="position:absolute;top:30px;right:30px;background:rgba(10,6,18,.7);min-width:140px">
+        <div class="label p">BITRATE</div>
+        <div class="h m mt-2" style="color:var(--neon-p)">25 MB/s</div>
+      </div>
+      <div class="b pad" style="position:absolute;bottom:30px;left:30px;background:rgba(10,6,18,.7);min-width:160px">
+        <div class="label">REGION · TKY-03</div>
+        <div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div>
+      </div>
+      <div class="b pad" style="position:absolute;bottom:30px;right:30px;background:rgba(10,6,18,.7);min-width:160px">
+        <div class="label c">UP NEXT · 02:14</div>
+        <div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 DEVICE EXPERIENCE -->
+  <div class="sec">
+    <div class="sec-no">06 / device experience · 3 floating mockups</div>
+    <div class="center mb-4">
+      <div class="label c">◢ ON EVERY SCREEN</div>
+      <div class="h l mt-2">One signal. Anywhere you watch.</div>
+    </div>
+    <div class="row" style="align-items:flex-end;justify-content:center;gap:34px">
+      <div class="img dev-phone" style="width:160px">PHONE</div>
+      <div class="img dev-tv" style="width:520px">TV · 4K</div>
+      <div class="img dev-tab" style="width:200px">TABLET</div>
+    </div>
+    <div class="note mt-3">devices float w/ neon glow halo · screens loop content trailer · subtle parallax on scroll</div>
+  </div>
+
+  <!-- 07 PRICING -->
+  <div class="sec">
+    <div class="sec-no">07 / pricing · 3 tiers · middle highlighted</div>
+    <div class="center mb-4">
+      <div class="label p">◢ ACCESS TIERS</div>
+      <div class="h l mt-2">Pick your signal.</div>
+    </div>
+    <div class="grid g3">
+      <div class="b pad-l">
+        <div class="label">SIGNAL</div>
+        <div class="h l mt-2">$9<span style="font-size:18px;color:var(--ink-3)">/mo</span></div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+        <button class="btn mt-4 w-full" style="justify-content:center">Start</button>
+      </div>
+      <div class="pad-l" style="border:1.4px solid var(--neon-p);border-radius:14px;
+        box-shadow:0 0 30px rgba(200,121,255,.25);background:rgba(200,121,255,.04);position:relative">
+        <div class="pill p" style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+          background:var(--bg)">MOST POPULAR</div>
+        <div class="label p">PULSE</div>
+        <div class="h l mt-2" style="color:var(--neon-p)">$19<span style="font-size:18px;color:var(--ink-3)">/mo</span></div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+        <button class="btn solid mt-4 w-full" style="justify-content:center">Get Pulse →</button>
+      </div>
+      <div class="b pad-l">
+        <div class="label">FLUX</div>
+        <div class="h l mt-2">$39<span style="font-size:18px;color:var(--ink-3)">/mo</span></div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+        <button class="btn mt-4 w-full" style="justify-content:center">Go Flux</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 SOCIAL PROOF -->
+  <div class="sec">
+    <div class="sec-no">08 / social proof · testimonial cards</div>
+    <div class="center mb-4">
+      <div class="label c">◢ FROM THE GRID</div>
+      <div class="h l mt-2">94% never go back.</div>
+    </div>
+    <div class="grid g3">
+      <div class="b pad">
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+        <div class="fl ai-c gap-md mt-3"><div class="s" style="width:32px;height:32px;border-radius:99px"></div><div class="lines" style="flex:1"><div class="l tiny"></div><div class="l thin short"></div></div></div>
+      </div>
+      <div class="b pad">
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+        <div class="fl ai-c gap-md mt-3"><div class="s" style="width:32px;height:32px;border-radius:99px"></div><div class="lines" style="flex:1"><div class="l tiny"></div><div class="l thin short"></div></div></div>
+      </div>
+      <div class="b pad">
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+        <div class="fl ai-c gap-md mt-3"><div class="s" style="width:32px;height:32px;border-radius:99px"></div><div class="lines" style="flex:1"><div class="l tiny"></div><div class="l thin short"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 FAQ -->
+  <div class="sec">
+    <div class="sec-no">09 / faq · accordion</div>
+    <div class="h l mb-4 center">Asked. Answered.</div>
+    <div class="b" style="overflow:hidden">
+      <div class="acc open">
+        <div class="fl jc-sb w-full" style="align-items:center"><span>What's included in Pulse?</span><span class="pl">[ − ]</span></div>
+        <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+      </div>
+      <div class="acc"><span>Can I cancel anytime?</span><span class="pl">[ + ]</span></div>
+      <div class="acc"><span>How many devices?</span><span class="pl">[ + ]</span></div>
+      <div class="acc"><span>Do you offer student pricing?</span><span class="pl">[ + ]</span></div>
+      <div class="acc" style="border-bottom:0"><span>Where is live content available?</span><span class="pl">[ + ]</span></div>
+    </div>
+  </div>
+
+  <!-- 10 FINAL CTA -->
+  <div class="sec">
+    <div class="sec-no">10 / final cta · cinematic close</div>
+    <div class="img video" style="height:360px;position:relative">
+      <span class="tag">PARTICLES + LIGHT STREAKS LOOP</span>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                  flex-direction:column;text-align:center;padding:40px;gap:18px">
+        <div class="h xl">Step in. The signal is open.</div>
+        <div class="sub" style="max-width:480px">First 7 days on us. No card if you bounce.</div>
+        <div class="fl gap-sm" style="background:rgba(10,6,18,.7);border:1.4px dashed var(--line);
+          border-radius:999px;padding:6px 6px 6px 22px;min-width:520px">
+          <div class="sub" style="flex:1;text-align:left;color:var(--ink-3)">you@signal.net</div>
+          <button class="btn solid">Get Instant Access ⚡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 FOOTER -->
+  <div class="sec">
+    <div class="sec-no">11 / footer</div>
+    <div class="b pad-l grid g4">
+      <div><div class="logo" style="font-family:var(--hand);font-size:24px;color:var(--ink);font-weight:700">i·<span style="color:var(--neon-p)">STREAM</span>4k</div>
+        <div class="lines mt-3"><div class="l s2"></div><div class="l short"></div></div></div>
+      <div><div class="label p mb-2">EXPLORE</div><div class="lines"><div class="l s2"></div><div class="l short"></div><div class="l s2"></div><div class="l short"></div></div></div>
+      <div><div class="label p mb-2">COMPANY</div><div class="lines"><div class="l s2"></div><div class="l short"></div><div class="l s2"></div><div class="l short"></div></div></div>
+      <div><div class="label p mb-2">LEGAL</div><div class="lines"><div class="l s2"></div><div class="l short"></div><div class="l s2"></div></div></div>
+    </div>
+    <div class="fl jc-sb mt-3" style="font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.16em">
+      <span>© 2026 ISTREAM4K · BUILT FOR THE GRID</span><span>EN · USD · ◑</span>
+    </div>
+  </div>
+
+  <div class="caption">— end variant a · cinematic stack —</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     VARIANT B — EDITORIAL ASYMMETRIC
+     numbered markers, alternating L/R, magazine-feel
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="wire" data-wire="B">
+
+  <!-- 01 HEADER -->
+  <div class="sec">
+    <div class="sec-no">01 / sticky header · edge-anchored navbar</div>
+    <div class="fl ai-c jc-sb">
+      <div class="navbar" style="border-radius:0;border:0;border-bottom:1.4px dashed var(--line);
+        background:transparent;backdrop-filter:none;padding:14px 0;flex:1">
+        <div class="logo">i·<b>STREAM</b>4k</div>
+        <div class="links" style="justify-content:flex-start;padding-left:40px">
+          <span>/01 Experience</span><span>/02 Live</span><span>/03 Pricing</span><span>/04 FAQ</span>
+        </div>
+        <button class="btn solid">Get Access ⚡</button>
+      </div>
+    </div>
+    <div class="note mt-2">no pill — full-bleed nav, sections numbered like chapters</div>
+  </div>
+
+  <!-- 02 HERO -->
+  <div class="sec">
+    <div class="row" style="align-items:stretch;gap:0">
+      <div style="width:120px;padding-top:40px">
+        <div class="marker">CHAPTER<b>/01</b></div>
+      </div>
+      <div style="flex:1">
+        <div class="img video" style="height:640px;position:relative">
+          <span class="tag">▶ background film · 4k loop</span>
+          <!-- headline pinned bottom-left -->
+          <div style="position:absolute;left:36px;bottom:40px;right:36px">
+            <div class="pill p mb-3">◢ TRANSMISSION 001</div>
+            <div class="h" style="font-size:120px;line-height:.9;max-width:1000px">
+              <span class="glitch" data-t="WATCH">WATCH</span><br>
+              <span style="color:var(--neon-p)">EVERYTHING.</span><br>
+              MISS NOTHING.
+            </div>
+            <div class="sub mt-3" style="max-width:440px">live · originals · cinema · concerts. one subscription. one signal.</div>
+            <div class="fl gap-md mt-4">
+              <button class="btn solid">Get Instant Access</button>
+              <button class="btn cyan">Explore Experience →</button>
+            </div>
+          </div>
+          <!-- top-right plate -->
+          <div class="b pad" style="position:absolute;top:30px;right:30px;background:rgba(10,6,18,.7);
+            min-width:200px">
+            <div class="label c">NOW PLAYING</div>
+            <div class="h s mt-2">NEON DELIRIUM</div>
+            <div class="label mt-2">▮▮▮▮▮▯▯▯  04:21 / 12:00</div>
+          </div>
+          <!-- side ticks -->
+          <div style="position:absolute;left:30px;top:30px" class="ticks"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 FEATURED -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">FEATURED<b>/02</b></div></div>
+      <div style="flex:1">
+        <div class="h xl mb-4" style="max-width:700px">Drops the algorithm <em style="font-style:italic;color:var(--neon-p)">can't predict.</em></div>
+
+        <!-- 70/30 -->
+        <div class="grid" style="grid-template-columns:1.6fr 1fr;align-items:end;margin-bottom:22px">
+          <div class="img" style="height:300px">FEATURE FILM · KEY ART</div>
+          <div style="padding-left:22px">
+            <div class="label c">EP 01 · ORIGINAL</div>
+            <div class="h m mt-2">NEON DELIRIUM</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <button class="btn ghost mt-3">▶ Trailer</button>
+          </div>
+        </div>
+        <!-- 30/70 -->
+        <div class="grid" style="grid-template-columns:1fr 1.6fr;align-items:end;margin-bottom:22px">
+          <div style="padding-right:22px">
+            <div class="label c">DOC · 47 MIN</div>
+            <div class="h m mt-2">CHROME CITIES</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <button class="btn ghost mt-3">▶ Trailer</button>
+          </div>
+          <div class="img" style="height:300px">DOC · STILL</div>
+        </div>
+        <!-- 70/30 again -->
+        <div class="grid" style="grid-template-columns:1.6fr 1fr;align-items:end">
+          <div class="img" style="height:260px">CONCERT · STAGE STILL</div>
+          <div style="padding-left:22px">
+            <div class="label c">LIVE · NOV 09</div>
+            <div class="h m mt-2">STADIUM PROTOCOL</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l short"></div></div>
+            <button class="btn ghost mt-3">▶ Trailer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note mt-3">alternating sides creates editorial rhythm · captions sit beside large key art</div>
+  </div>
+
+  <!-- 04 BENEFITS -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">SYSTEM<b>/03</b></div></div>
+      <div style="flex:1">
+        <div class="h xl mb-4" style="max-width:700px">Engineered for the signal.</div>
+        <!-- irregular grid -->
+        <div class="grid" style="grid-template-columns:1.4fr 1fr;grid-template-rows:auto auto;gap:18px">
+          <div class="b pad-l" style="min-height:200px">
+            <div class="label p">FIDELITY</div>
+            <div class="h l mt-2">4K · ATMOS · HDR</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="b pad-l">
+            <div class="label c">SIGNAL</div>
+            <div class="h m mt-2">ZERO ADS</div>
+            <div class="lines mt-3"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="b pad-l">
+            <div class="label c">CACHE</div>
+            <div class="h m mt-2">OFFLINE MODE</div>
+            <div class="lines mt-3"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="b pad-l">
+            <div class="label p">REACH</div>
+            <div class="h m mt-2">ANY SCREEN</div>
+            <div class="lines mt-3"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 LIVE -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">LIVE<b>/04</b></div></div>
+      <div style="flex:1;position:relative">
+        <div class="h" style="font-size:160px;line-height:.85;color:var(--ink);max-width:900px">
+          <span style="color:var(--neon-m)">LIVE</span><br>TONIGHT.
+        </div>
+        <div class="sub mt-3" style="max-width:480px">stadium · 21:00 utc · front-row, anywhere you stand.</div>
+        <!-- floating widgets overlapping the type -->
+        <div class="b pad" style="position:absolute;top:20px;right:0;background:rgba(10,6,18,.7);min-width:220px">
+          <div class="pill live mb-2">● LIVE</div>
+          <div class="label">CONCURRENT VIEWERS</div>
+          <div class="h l mt-2" style="color:var(--neon-c)">412K</div>
+        </div>
+        <div class="b pad" style="position:absolute;top:200px;right:40px;background:rgba(10,6,18,.7);min-width:200px">
+          <div class="label p">UP NEXT · 02:14</div>
+          <div class="h s mt-2">PROTOCOL II</div>
+          <div class="label mt-2">▮▮▮▮▯▯▯▯</div>
+        </div>
+        <div class="b pad mt-4" style="display:inline-block;min-width:340px">
+          <div class="label c">REGION SIGNAL</div>
+          <div class="fl gap-md mt-2"><span class="pill c">TKY-03</span><span class="pill c">LDN-01</span><span class="pill c">NYC-02</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 DEVICES -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">DEVICES<b>/05</b></div></div>
+      <div style="flex:1">
+        <div class="row" style="align-items:center;gap:40px">
+          <div style="flex:1">
+            <div class="h xl">One signal.<br>Five screens.</div>
+            <div class="lines mt-3" style="max-width:380px"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+            <div class="fl gap-sm fw-w mt-3">
+              <span class="pill">▭ TV</span><span class="pill">▢ TABLET</span><span class="pill">▯ PHONE</span><span class="pill">◫ LAPTOP</span><span class="pill">◯ VR</span>
+            </div>
+          </div>
+          <div class="img dev-tv" style="flex:1.2;min-height:340px">TV · 4K UI MOCK · HOLOGRAPHIC OVERLAY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 PRICING -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">PRICING<b>/06</b></div></div>
+      <div style="flex:1">
+        <div class="fl ai-c jc-sb mb-4">
+          <div class="h xl">Three access<br>protocols.</div>
+          <div class="lines" style="max-width:300px;color:var(--ink-2)">
+            <div class="sub">Switch any time. Cancel any time. No locks.</div>
+          </div>
+        </div>
+        <!-- horizontal strip -->
+        <div class="grid g3">
+          <div class="b pad-l" style="display:flex;flex-direction:column;gap:14px">
+            <div class="fl jc-sb ai-c"><div class="label">SIGNAL</div><div class="label">/01</div></div>
+            <div class="h l">$9<span style="font-size:18px;color:var(--ink-3)">/mo</span></div>
+            <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <button class="btn">Start signal</button>
+          </div>
+          <div class="pad-l" style="border:1.4px solid var(--neon-p);border-radius:14px;
+            box-shadow:0 0 28px rgba(200,121,255,.22);transform:translateY(-12px);
+            display:flex;flex-direction:column;gap:14px;background:rgba(200,121,255,.04)">
+            <div class="fl jc-sb ai-c"><div class="label p">PULSE · MOST POPULAR</div><div class="label p">/02</div></div>
+            <div class="h l" style="color:var(--neon-p)">$19<span style="font-size:18px;color:var(--ink-3)">/mo</span></div>
+            <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+            <button class="btn solid">Get Pulse →</button>
+          </div>
+          <div class="b pad-l" style="display:flex;flex-direction:column;gap:14px">
+            <div class="fl jc-sb ai-c"><div class="label">FLUX</div><div class="label">/03</div></div>
+            <div class="h l">$39<span style="font-size:18px;color:var(--ink-3)">/mo</span></div>
+            <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <button class="btn">Go flux</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 SOCIAL PROOF -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">SIGNAL<b>/07</b></div></div>
+      <div style="flex:1">
+        <div class="b pad-l" style="margin-bottom:18px">
+          <div class="stars mb-3">★ ★ ★ ★ ★</div>
+          <div class="h l" style="line-height:1.15">"It's not streaming. <span style="color:var(--neon-p)">It's transmission.</span> Once you tune in you don't leave."</div>
+          <div class="fl ai-c gap-md mt-4">
+            <div class="s" style="width:44px;height:44px;border-radius:99px"></div>
+            <div><div class="sub" style="color:var(--ink)">— A. Voss</div><div class="label">CRITIC · CHROME WEEKLY</div></div>
+          </div>
+        </div>
+        <div class="grid g2">
+          <div class="b pad">
+            <div class="stars mb-2">★ ★ ★ ★ ★</div>
+            <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <div class="fl ai-c gap-md mt-3"><div class="s" style="width:32px;height:32px;border-radius:99px"></div><div class="label">— M. KAEDE</div></div>
+          </div>
+          <div class="b pad">
+            <div class="stars mb-2">★ ★ ★ ★ ★</div>
+            <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <div class="fl ai-c gap-md mt-3"><div class="s" style="width:32px;height:32px;border-radius:99px"></div><div class="label">— D. ORTIZ</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 FAQ -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">QUERY<b>/08</b></div></div>
+      <div style="flex:1">
+        <div class="h xl mb-4">Frequently<br>transmitted.</div>
+        <div class="grid g2" style="align-items:start;gap:14px">
+          <div class="b-soft pad"><div class="fl jc-sb ai-c"><span class="h s">What's in Pulse?</span><span class="pl" style="color:var(--neon-c);font-family:var(--mono)">[ + ]</span></div></div>
+          <div class="b-soft pad"><div class="fl jc-sb ai-c"><span class="h s">Cancel anytime?</span><span class="pl" style="color:var(--neon-c);font-family:var(--mono)">[ + ]</span></div></div>
+          <div class="pad" style="border:1.4px dashed var(--neon-p);border-radius:12px;
+            background:rgba(200,121,255,.04)">
+            <div class="fl jc-sb ai-c"><span class="h s">How many devices?</span><span class="pl" style="color:var(--neon-p);font-family:var(--mono)">[ − ]</span></div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="b-soft pad"><div class="fl jc-sb ai-c"><span class="h s">Live regions?</span><span class="pl" style="color:var(--neon-c);font-family:var(--mono)">[ + ]</span></div></div>
+          <div class="b-soft pad"><div class="fl jc-sb ai-c"><span class="h s">Student pricing?</span><span class="pl" style="color:var(--neon-c);font-family:var(--mono)">[ + ]</span></div></div>
+          <div class="b-soft pad"><div class="fl jc-sb ai-c"><span class="h s">4K on every device?</span><span class="pl" style="color:var(--neon-c);font-family:var(--mono)">[ + ]</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 FINAL CTA -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:120px;padding-top:20px"><div class="marker">SIGN-ON<b>/09</b></div></div>
+      <div style="flex:1">
+        <div class="row" style="align-items:end;gap:40px">
+          <div style="flex:1">
+            <div class="h xxl">Tune in.<br><span style="color:var(--neon-p)">Now.</span></div>
+            <div class="sub mt-3" style="max-width:380px">first 7 days free · no card if you cancel</div>
+          </div>
+          <div style="flex:1">
+            <div class="b pad-l">
+              <div class="label p mb-2">SIGNAL ADDRESS</div>
+              <div class="lines"><div class="l s3"></div></div>
+              <button class="btn solid mt-3 w-full" style="justify-content:center">Get Instant Access ⚡</button>
+              <div class="label mt-3" style="color:var(--ink-3)">▮▮▮▮▮▯▯  no spam · unsubscribe in 1 click</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 FOOTER -->
+  <div class="sec">
+    <div class="fl jc-sb ai-c fw-w gap-md" style="border-top:1px dashed var(--line-2);padding-top:30px">
+      <div class="logo" style="font-family:var(--hand);font-size:32px;color:var(--ink);font-weight:700">i·<span style="color:var(--neon-p)">STREAM</span>4k</div>
+      <div class="fl gap-lg" style="color:var(--ink-2);font-size:14px">
+        <span>Experience</span><span>Live</span><span>Pricing</span><span>FAQ</span><span>Press</span><span>Careers</span>
+      </div>
+      <div class="label">© 2026 · ALL SIGNALS RESERVED</div>
+    </div>
+  </div>
+
+  <div class="caption">— end variant b · editorial asymmetric —</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     VARIANT C — HUD CONSOLE
+     corner brackets, side rail with section index, in-world cyberpunk
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="wire" data-wire="C">
+
+  <!-- 01 HEADER -->
+  <div class="sec">
+    <div class="sec-no">01 / sticky header · console bar w/ live status</div>
+    <div class="hud" style="border-radius:0">
+      <span class="ct"></span><span class="cb"></span>
+      <div class="hud-rail"><span>iSTREAM4K://</span><span>NODE.TKY-03</span><div class="bar"></div><span>UP 99.99%</span><span>21:08:42 UTC</span></div>
+      <div class="fl ai-c gap-md">
+        <div class="logo" style="font-family:var(--hand);font-size:24px;color:var(--ink);font-weight:700">i·<span style="color:var(--neon-c)">STREAM</span>4k</div>
+        <div class="fl gap-md" style="flex:1;justify-content:center;color:var(--ink-2);font-family:var(--mono);font-size:12px;letter-spacing:.1em">
+          <span>EXPERIENCE.01</span><span>LIVE.02</span><span>PRICING.03</span><span>FAQ.04</span>
+        </div>
+        <button class="btn solid">[◢] REQUEST_ACCESS</button>
+      </div>
+    </div>
+    <div class="note mt-2">framing brackets, mono labels, status ticker — feels operational not decorative</div>
+  </div>
+
+  <!-- 02 HERO -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <!-- side rail -->
+      <div style="width:60px;display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:30px">
+        <div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">SECTION 02 / 11 · HERO</div>
+        <div style="flex:1;width:1px;background:linear-gradient(var(--neon-c),transparent)"></div>
+      </div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ TRANSMISSION INIT</span><div class="bar"></div><span>FRAME 0001/9999</span></div>
+        <div class="img video" style="height:560px;border-radius:0;border-style:solid;position:relative">
+          <span class="tag">▶ HOLOGRAPHIC BG FILM</span>
+          <!-- centered HUD reticle frames the CTAs -->
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                      flex-direction:column;text-align:center;padding:40px">
+            <div class="pill c mb-3">◢ SIGNAL ACQUIRED</div>
+            <div class="h xxl" style="max-width:1000px">ENTER<br><span class="glitch" data-t="THE STREAM" style="color:var(--neon-c)">THE STREAM</span></div>
+            <div class="sub mt-3" style="max-width:480px">// premium 4k entertainment, live + on-demand, zero ads</div>
+            <!-- targeted CTA group with reticle markers -->
+            <div style="position:relative;margin-top:28px;padding:18px 30px">
+              <span style="position:absolute;top:0;left:0;width:14px;height:14px;border-left:1.5px solid var(--neon-c);border-top:1.5px solid var(--neon-c)"></span>
+              <span style="position:absolute;top:0;right:0;width:14px;height:14px;border-right:1.5px solid var(--neon-c);border-top:1.5px solid var(--neon-c)"></span>
+              <span style="position:absolute;bottom:0;left:0;width:14px;height:14px;border-left:1.5px solid var(--neon-c);border-bottom:1.5px solid var(--neon-c)"></span>
+              <span style="position:absolute;bottom:0;right:0;width:14px;height:14px;border-right:1.5px solid var(--neon-c);border-bottom:1.5px solid var(--neon-c)"></span>
+              <div class="fl gap-md">
+                <button class="btn solid">[ ▶ ] GET INSTANT ACCESS</button>
+                <button class="btn cyan">[ ◢ ] EXPLORE EXPERIENCE</button>
+              </div>
+            </div>
+          </div>
+          <!-- corner data plates -->
+          <div class="b pad" style="position:absolute;top:20px;left:20px;background:rgba(10,6,18,.7)">
+            <div class="label c">◑ NODE</div>
+            <div class="label" style="color:var(--ink)">TKY-03 / SHIBUYA</div>
+          </div>
+          <div class="b pad" style="position:absolute;top:20px;right:20px;background:rgba(10,6,18,.7)">
+            <div class="label c">◑ BITRATE</div>
+            <div class="label" style="color:var(--ink)">25.4 MB/s · STABLE</div>
+          </div>
+        </div>
+        <div class="hud-rail mt-3"><span>FPS 60.00</span><span>LATENCY 12ms</span><div class="bar"></div><span>SCROLL ▼ FOR INDEX</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 FEATURED -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">03 / 11 · INDEX</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ CATALOG.INDEX</span><div class="bar"></div><span>03 ENTRIES</span></div>
+        <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:14px">
+          <div class="hud" style="padding:14px">
+            <span class="ct" style="border-color:var(--neon-p)"></span><span class="cb" style="border-color:var(--neon-p)"></span>
+            <div class="img" style="height:200px;border-radius:0">FILM · KEY ART</div>
+            <div class="label c mt-3">◤ ENTRY 001 · ORIGINAL</div>
+            <div class="h s mt-2">NEON DELIRIUM</div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div>
+            <button class="btn cyan mt-3" style="font-size:12px">[▶] PREVIEW</button>
+          </div>
+          <div class="hud" style="padding:14px">
+            <span class="ct" style="border-color:var(--neon-p)"></span><span class="cb" style="border-color:var(--neon-p)"></span>
+            <div class="img" style="height:200px;border-radius:0">DOC · STILL</div>
+            <div class="label c mt-3">◤ ENTRY 002 · DOC</div>
+            <div class="h s mt-2">CHROME CITIES</div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div>
+            <button class="btn cyan mt-3" style="font-size:12px">[▶] PREVIEW</button>
+          </div>
+          <div class="hud" style="padding:14px">
+            <span class="ct" style="border-color:var(--neon-p)"></span><span class="cb" style="border-color:var(--neon-p)"></span>
+            <div class="img" style="height:200px;border-radius:0">CONCERT</div>
+            <div class="label c mt-3">◤ ENTRY 003 · LIVE</div>
+            <div class="h s mt-2">STADIUM PROTOCOL</div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div>
+            <button class="btn cyan mt-3" style="font-size:12px">[▶] PREVIEW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 BENEFITS -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">04 / 11 · MODULES</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ SYSTEM.MODULES</span><div class="bar"></div><span>04 ACTIVE</span></div>
+        <div class="h l mb-3">// runtime stack</div>
+        <div class="grid g4">
+          <div class="hud" style="padding:14px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">MOD.01</div>
+            <div class="s" style="width:36px;height:36px;display:grid;place-items:center;color:var(--neon-p);margin-top:6px">◆</div>
+            <div class="h s mt-2">4K · ATMOS</div>
+            <div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="hud" style="padding:14px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">MOD.02</div>
+            <div class="s" style="width:36px;height:36px;display:grid;place-items:center;color:var(--neon-c);margin-top:6px">◇</div>
+            <div class="h s mt-2">NO ADS</div>
+            <div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="hud" style="padding:14px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">MOD.03</div>
+            <div class="s" style="width:36px;height:36px;display:grid;place-items:center;color:var(--neon-p);margin-top:6px">◈</div>
+            <div class="h s mt-2">OFFLINE</div>
+            <div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="hud" style="padding:14px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">MOD.04</div>
+            <div class="s" style="width:36px;height:36px;display:grid;place-items:center;color:var(--neon-c);margin-top:6px">◉</div>
+            <div class="h s mt-2">ANY SCREEN</div>
+            <div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 LIVE -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">05 / 11 · LIVE.OPS</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct" style="border-color:var(--neon-m)"></span><span class="cb" style="border-color:var(--neon-m)"></span>
+        <div class="hud-rail" style="color:var(--neon-m)"><span class="pill live">● LIVE</span><div class="bar" style="background:linear-gradient(90deg,var(--neon-m),transparent)"></div><span>OPS.DASH ACTIVE</span></div>
+        <div class="grid" style="grid-template-columns:1.4fr 1fr;gap:18px">
+          <div class="img video" style="height:380px">STAGE · CAM_01</div>
+          <div class="col gap-md">
+            <div class="hud" style="padding:14px">
+              <span class="ct" style="border-color:var(--neon-m)"></span><span class="cb" style="border-color:var(--neon-m)"></span>
+              <div class="label" style="color:var(--neon-m)">CONCURRENT</div>
+              <div class="h l mt-2" style="color:var(--neon-m)">412,908</div>
+              <div class="label mt-2">▲ +18% / 5MIN</div>
+            </div>
+            <div class="hud" style="padding:14px">
+              <span class="ct"></span><span class="cb"></span>
+              <div class="label c">UPLINK · 8 CAMS</div>
+              <div class="fl gap-sm fw-w mt-2">
+                <span class="pill c">01 ON</span><span class="pill c">02 ON</span><span class="pill">03</span><span class="pill c">04 ON</span><span class="pill">05</span><span class="pill">06</span><span class="pill c">07 ON</span><span class="pill">08</span>
+              </div>
+            </div>
+            <div class="hud" style="padding:14px">
+              <span class="ct"></span><span class="cb"></span>
+              <div class="label c">REGIONS</div>
+              <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="hud-rail mt-3"><span>// EVENT_ID = STADIUM_PROTOCOL_2026_11_09</span><div class="bar"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 DEVICES -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">06 / 11 · NODES</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ ENDPOINT.NODES</span><div class="bar"></div><span>5 ACTIVE</span></div>
+        <div class="row" style="align-items:flex-end;justify-content:space-around;gap:24px;padding:30px 0">
+          <div class="hud" style="padding:10px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="img dev-phone" style="width:120px;border-radius:18px">PHONE</div>
+            <div class="label c mt-2 center">▮ PHONE.OK</div>
+          </div>
+          <div class="hud" style="padding:10px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="img dev-tv" style="width:440px;border-radius:6px">TV · 4K</div>
+            <div class="label c mt-2 center">▮ DISPLAY.OK · 4K</div>
+          </div>
+          <div class="hud" style="padding:10px">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="img dev-tab" style="width:160px;border-radius:10px">TABLET</div>
+            <div class="label c mt-2 center">▮ TABLET.OK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 PRICING -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">07 / 11 · TIERS</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ ACCESS.PROTOCOLS</span><div class="bar"></div><span>3 OPTIONS</span></div>
+        <div class="grid g3">
+          <div class="hud pad-l">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">PROTOCOL.01</div>
+            <div class="h m mt-2">SIGNAL</div>
+            <div class="h l mt-2">$9</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <button class="btn mt-3 w-full" style="justify-content:center">[ INIT ]</button>
+          </div>
+          <div class="hud pad-l" style="background:rgba(200,121,255,.06)">
+            <span class="ct" style="border-color:var(--neon-p)"></span><span class="cb" style="border-color:var(--neon-p)"></span>
+            <span style="position:absolute;top:0;right:0;width:14px;height:14px;border-right:1.4px solid var(--neon-p);border-top:1.4px solid var(--neon-p)"></span>
+            <span style="position:absolute;bottom:0;left:0;width:14px;height:14px;border-left:1.4px solid var(--neon-p);border-bottom:1.4px solid var(--neon-p)"></span>
+            <div class="label p">PROTOCOL.02 · RECOMMENDED</div>
+            <div class="h m mt-2" style="color:var(--neon-p)">PULSE</div>
+            <div class="h l mt-2" style="color:var(--neon-p)">$19</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+            <button class="btn solid mt-3 w-full" style="justify-content:center">[ ENGAGE ▶ ]</button>
+          </div>
+          <div class="hud pad-l">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">PROTOCOL.03</div>
+            <div class="h m mt-2">FLUX</div>
+            <div class="h l mt-2">$39</div>
+            <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+            <button class="btn mt-3 w-full" style="justify-content:center">[ INIT ]</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 SOCIAL PROOF -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">08 / 11 · FEED</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ USER.FEED · LIVE</span><div class="bar"></div><span>STREAMING</span></div>
+        <div class="grid g3">
+          <div class="hud pad">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">USR_4821</div>
+            <div class="stars mt-1">★ ★ ★ ★ ★</div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="hud pad">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">USR_2099</div>
+            <div class="stars mt-1">★ ★ ★ ★ ★</div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l s3"></div><div class="l short"></div></div>
+          </div>
+          <div class="hud pad">
+            <span class="ct"></span><span class="cb"></span>
+            <div class="label c">USR_7714</div>
+            <div class="stars mt-1">★ ★ ★ ★ ★</div>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 FAQ -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">09 / 11 · QUERIES</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct"></span><span class="cb"></span>
+        <div class="hud-rail"><span>◢ QUERY.LOG</span><div class="bar"></div><span>05 ENTRIES</span></div>
+        <div class="col gap-sm">
+          <div class="b-soft pad" style="font-family:var(--mono);font-size:13px"><span style="color:var(--neon-c)">&gt; Q.01</span>  WHAT IS INCLUDED IN PULSE_?  <span style="color:var(--ink-3);float:right">[ EXPAND ]</span></div>
+          <div class="pad" style="border:1.4px dashed var(--neon-p);border-radius:12px;background:rgba(200,121,255,.04);font-family:var(--mono);font-size:13px">
+            <span style="color:var(--neon-p)">&gt; Q.02</span>  CAN I CANCEL ANYTIME_?  <span style="color:var(--neon-p);float:right">[ COLLAPSE ]</span>
+            <div class="lines mt-2"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+          </div>
+          <div class="b-soft pad" style="font-family:var(--mono);font-size:13px"><span style="color:var(--neon-c)">&gt; Q.03</span>  HOW MANY DEVICES_?  <span style="color:var(--ink-3);float:right">[ EXPAND ]</span></div>
+          <div class="b-soft pad" style="font-family:var(--mono);font-size:13px"><span style="color:var(--neon-c)">&gt; Q.04</span>  STUDENT TIER_?  <span style="color:var(--ink-3);float:right">[ EXPAND ]</span></div>
+          <div class="b-soft pad" style="font-family:var(--mono);font-size:13px"><span style="color:var(--neon-c)">&gt; Q.05</span>  LIVE REGIONS_?  <span style="color:var(--ink-3);float:right">[ EXPAND ]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 FINAL CTA -->
+  <div class="sec">
+    <div class="row" style="gap:0">
+      <div style="width:60px;padding-top:30px"><div class="label c" style="writing-mode:vertical-rl;transform:rotate(180deg)">10 / 11 · INIT</div></div>
+      <div style="flex:1" class="hud">
+        <span class="ct" style="border-color:var(--neon-p)"></span><span class="cb" style="border-color:var(--neon-p)"></span>
+        <div class="hud-rail" style="color:var(--neon-p)"><span>◢ SIGN-ON.INIT</span><div class="bar" style="background:linear-gradient(90deg,var(--neon-p),transparent)"></div><span>HANDSHAKE READY</span></div>
+        <div class="img video" style="height:340px;position:relative">
+          <span class="tag">PARTICLES · LIGHT-STREAK LOOP</span>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                      flex-direction:column;text-align:center;padding:30px">
+            <div class="h xl">◢ INITIATE SIGNAL</div>
+            <div class="sub mt-2" style="max-width:440px">// 7-day trial · zero commit · cancel via single command</div>
+            <div class="fl mt-4" style="background:rgba(10,6,18,.7);border:1.4px solid var(--neon-p);
+              border-radius:0;padding:8px 8px 8px 18px;min-width:560px;align-items:center">
+              <span style="color:var(--neon-p);font-family:var(--mono)">&gt;</span>
+              <div class="sub" style="flex:1;text-align:left;color:var(--ink-3);padding:0 10px;font-family:var(--mono);font-size:13px">enter_signal_address_</div>
+              <button class="btn solid">[ ▶ TRANSMIT ]</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 FOOTER -->
+  <div class="sec">
+    <div class="hud" style="padding:18px">
+      <span class="ct"></span><span class="cb"></span>
+      <div class="hud-rail"><span>◢ EOF · ISTREAM4K.SYS</span><div class="bar"></div><span>BUILD 2026.05</span></div>
+      <div class="fl jc-sb fw-w" style="font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.1em;gap:18px">
+        <span>EXPERIENCE.01</span><span>LIVE.02</span><span>PRICING.03</span><span>FAQ.04</span><span>PRESS.05</span><span>CAREERS.06</span><span>LEGAL.07</span>
+        <span style="color:var(--ink-3);margin-left:auto">© 2026 / ALL SIGNALS RESERVED</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption">— end variant c · hud console —</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     VARIANT D — ZINE STRIP
+     narrow centered column · full-bleed image bands between
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="wire" data-wire="D">
+
+  <!-- 01 HEADER -->
+  <div class="sec strip">
+    <div class="sec-no">01 / sticky header · minimal centered</div>
+    <div class="fl ai-c jc-sb" style="padding:12px 0;border-bottom:1px dashed var(--line-2)">
+      <div class="logo" style="font-family:var(--hand);font-size:22px;font-weight:700">i·<span style="color:var(--neon-p)">STREAM</span>4k</div>
+      <div class="fl gap-md" style="color:var(--ink-2);font-size:13px"><span>Watch</span><span>Live</span><span>Pricing</span></div>
+      <button class="btn solid" style="padding:6px 14px;font-size:12px">Access ⚡</button>
+    </div>
+    <div class="note mt-2">a single 680px column on a dark stage · feels like a zine, not a saas</div>
+  </div>
+
+  <!-- 02 HERO -->
+  <div class="full-bleed">
+    <div class="img video" style="height:680px;border-radius:0;border-left:0;border-right:0;position:relative">
+      <span class="tag">▶ full-bleed bg film · cinematic</span>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                  flex-direction:column;text-align:center;padding:40px">
+        <div class="pill p mb-3">◢ ISSUE 001 · TRANSMISSION</div>
+        <div class="h xxl" style="max-width:760px;font-size:110px">
+          <span class="glitch" data-t="ELSEWHERE">ELSEWHERE</span><br>
+          <em style="color:var(--neon-p);font-style:italic">begins</em> here.
+        </div>
+        <div class="sub mt-3" style="max-width:440px">a streaming service that feels like an event.</div>
+        <div class="fl gap-md mt-4">
+          <button class="btn solid">Get Instant Access</button>
+          <button class="btn cyan">Explore</button>
+        </div>
+        <div class="label mt-4" style="color:var(--ink-3)">▼ scroll to issue</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 FEATURED — each as a full bleed band -->
+  <div class="sec strip">
+    <div class="sec-no">03 / featured · stacked editorial bands</div>
+    <div class="label p center">◢ TRANSMISSIONS THIS WEEK</div>
+    <div class="h l center mt-2 mb-4">Three drops worth your night.</div>
+  </div>
+  <div class="full-bleed">
+    <div class="img" style="height:380px;border-radius:0;border-left:0;border-right:0;position:relative">
+      <span class="tag">DROP 01 · KEY ART</span>
+      <div style="position:absolute;left:40px;bottom:30px">
+        <div class="label c">DROP 01 · ORIGINAL FILM</div>
+        <div class="h xl mt-2">NEON DELIRIUM</div>
+        <button class="btn ghost mt-3">▶ trailer</button>
+      </div>
+    </div>
+  </div>
+  <div class="full-bleed">
+    <div class="img" style="height:380px;border-radius:0;border-left:0;border-right:0;position:relative;
+      border-top:0">
+      <span class="tag">DROP 02 · STILL</span>
+      <div style="position:absolute;right:40px;bottom:30px;text-align:right">
+        <div class="label c">DROP 02 · DOC · 47 MIN</div>
+        <div class="h xl mt-2">CHROME CITIES</div>
+        <button class="btn ghost mt-3">▶ trailer</button>
+      </div>
+    </div>
+  </div>
+  <div class="full-bleed">
+    <div class="img" style="height:380px;border-radius:0;border-left:0;border-right:0;position:relative;
+      border-top:0">
+      <span class="tag">DROP 03 · STAGE</span>
+      <div style="position:absolute;left:40px;bottom:30px">
+        <div class="label c">DROP 03 · LIVE · NOV 09</div>
+        <div class="h xl mt-2">STADIUM PROTOCOL</div>
+        <button class="btn ghost mt-3">▶ trailer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 BENEFITS -->
+  <div class="sec strip">
+    <div class="sec-no">04 / benefits · 2x2 in the column</div>
+    <div class="label p center">◢ WHY</div>
+    <div class="h l center mt-2 mb-4">Made for the long stare.</div>
+    <div class="grid g2">
+      <div class="b pad"><div class="label p">/01</div><div class="h s mt-2">4K · ATMOS</div><div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div></div>
+      <div class="b pad"><div class="label c">/02</div><div class="h s mt-2">ZERO ADS</div><div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div></div>
+      <div class="b pad"><div class="label p">/03</div><div class="h s mt-2">OFFLINE</div><div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div></div>
+      <div class="b pad"><div class="label c">/04</div><div class="h s mt-2">ANY SCREEN</div><div class="lines mt-2"><div class="l s2"></div><div class="l short"></div></div></div>
+    </div>
+  </div>
+
+  <!-- 05 LIVE -->
+  <div class="full-bleed">
+    <div class="img video" style="height:520px;border-radius:0;border-left:0;border-right:0;position:relative;border-top:0">
+      <span class="tag">STADIUM · LIVE FEED</span>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                  flex-direction:column;text-align:center;padding:40px">
+        <div class="pill live mb-3">● LIVE TONIGHT · 21:00 UTC</div>
+        <div class="h xxl" style="font-size:120px">FRONT ROW.<br><span style="color:var(--neon-p)">ANYWHERE.</span></div>
+        <div class="b pad mt-4" style="background:rgba(10,6,18,.7);min-width:420px">
+          <div class="fl jc-sb">
+            <div><div class="label c">VIEWERS</div><div class="h m" style="color:var(--neon-c)">412K</div></div>
+            <div><div class="label c">BITRATE</div><div class="h m" style="color:var(--neon-c)">25 MB/s</div></div>
+            <div><div class="label c">REGIONS</div><div class="h m" style="color:var(--neon-c)">38</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 DEVICES — stacked vertical -->
+  <div class="sec strip">
+    <div class="sec-no">06 / devices · stacked rather than side-by-side</div>
+    <div class="label p center">◢ EVERY SCREEN</div>
+    <div class="h l center mt-2 mb-4">It travels with you.</div>
+    <div class="col gap-lg">
+      <div class="fl ai-c gap-md">
+        <div class="img dev-tv" style="flex:1;min-height:200px">TV · 4K</div>
+      </div>
+      <div class="fl ai-c gap-md jc-c">
+        <div class="img dev-phone" style="width:140px">PHONE</div>
+        <div class="img dev-tab" style="width:220px">TABLET</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 PRICING — stacked vertical -->
+  <div class="sec strip">
+    <div class="sec-no">07 / pricing · stacked in column (mobile-first feel)</div>
+    <div class="label p center">◢ TIERS</div>
+    <div class="h l center mt-2 mb-4">Pick your signal.</div>
+    <div class="col gap-md">
+      <div class="b pad-l">
+        <div class="fl jc-sb ai-c"><div class="label">/01 SIGNAL</div><div class="h m">$9<span style="font-size:14px;color:var(--ink-3)">/mo</span></div></div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+        <button class="btn mt-3 w-full" style="justify-content:center">Start signal</button>
+      </div>
+      <div class="pad-l" style="border:1.4px solid var(--neon-p);border-radius:14px;
+        box-shadow:0 0 30px rgba(200,121,255,.25);background:rgba(200,121,255,.04);position:relative">
+        <div class="pill p" style="position:absolute;top:-12px;right:18px;background:var(--bg)">RECOMMENDED</div>
+        <div class="fl jc-sb ai-c"><div class="label p">/02 PULSE</div><div class="h m" style="color:var(--neon-p)">$19<span style="font-size:14px;color:var(--ink-3)">/mo</span></div></div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l s3"></div><div class="l short"></div></div>
+        <button class="btn solid mt-3 w-full" style="justify-content:center">Get Pulse →</button>
+      </div>
+      <div class="b pad-l">
+        <div class="fl jc-sb ai-c"><div class="label">/03 FLUX</div><div class="h m">$39<span style="font-size:14px;color:var(--ink-3)">/mo</span></div></div>
+        <div class="lines mt-3"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+        <button class="btn mt-3 w-full" style="justify-content:center">Go flux</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 SOCIAL PROOF -->
+  <div class="sec strip">
+    <div class="sec-no">08 / social proof · single big pull quote then 2 small</div>
+    <div class="b pad-l center">
+      <div class="stars mb-3">★ ★ ★ ★ ★</div>
+      <div class="h l" style="line-height:1.15">"It's not streaming.<br><span style="color:var(--neon-p);font-style:italic">It's transmission.</span>"</div>
+      <div class="label mt-3" style="color:var(--ink-3)">— CHROME WEEKLY</div>
+    </div>
+    <div class="grid g2 mt-3">
+      <div class="b pad"><div class="stars">★★★★★</div><div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div><div class="label mt-2">— M. KAEDE</div></div>
+      <div class="b pad"><div class="stars">★★★★★</div><div class="lines mt-2"><div class="l s3"></div><div class="l short"></div></div><div class="label mt-2">— D. ORTIZ</div></div>
+    </div>
+  </div>
+
+  <!-- 09 FAQ -->
+  <div class="sec strip">
+    <div class="sec-no">09 / faq · clean accordion</div>
+    <div class="h l center mb-4">Asked.</div>
+    <div class="col" style="gap:0">
+      <div class="acc"><span>What's included in Pulse?</span><span class="pl">+</span></div>
+      <div class="acc open">
+        <div class="fl jc-sb w-full"><span>Can I cancel anytime?</span><span class="pl">−</span></div>
+        <div class="lines"><div class="l s3"></div><div class="l s2"></div><div class="l short"></div></div>
+      </div>
+      <div class="acc"><span>Devices?</span><span class="pl">+</span></div>
+      <div class="acc"><span>Student tier?</span><span class="pl">+</span></div>
+      <div class="acc" style="border-bottom:0"><span>Live regions?</span><span class="pl">+</span></div>
+    </div>
+  </div>
+
+  <!-- 10 FINAL CTA -->
+  <div class="full-bleed">
+    <div class="img video" style="height:420px;border-radius:0;border-left:0;border-right:0;border-top:0;position:relative">
+      <span class="tag">PARTICLES · LIGHT STREAKS</span>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                  flex-direction:column;text-align:center;padding:40px">
+        <div class="h xxl" style="font-size:96px">step inside.</div>
+        <div class="sub mt-2">7 days free · no card</div>
+        <div class="fl gap-sm mt-4" style="background:rgba(10,6,18,.7);border:1.4px dashed var(--line);
+          border-radius:999px;padding:6px 6px 6px 22px;min-width:480px">
+          <div class="sub" style="flex:1;text-align:left;color:var(--ink-3)">you@signal.net</div>
+          <button class="btn solid">Access ⚡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 FOOTER -->
+  <div class="sec strip center">
+    <div class="logo" style="font-family:var(--hand);font-size:36px;color:var(--ink);font-weight:700">i·<span style="color:var(--neon-p)">STREAM</span>4k</div>
+    <div class="fl gap-md jc-c mt-3" style="color:var(--ink-2);font-size:13px;flex-wrap:wrap">
+      <span>Watch</span><span>·</span><span>Live</span><span>·</span><span>Pricing</span><span>·</span><span>FAQ</span><span>·</span><span>Press</span><span>·</span><span>Careers</span>
+    </div>
+    <div class="label mt-3" style="color:var(--ink-3)">© 2026 ISTREAM4K · transmission complete</div>
+  </div>
+
+  <div class="caption">— end variant d · zine strip —</div>
+</section>
+
+</div>
+
+<script>
+  // tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const wires = document.querySelectorAll('.wire');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      const id = t.dataset.tab;
+      tabs.forEach(x => x.classList.toggle('active', x === t));
+      wires.forEach(w => w.classList.toggle('active', w.dataset.wire === id));
+      window.scrollTo({top:0, behavior:'instant'});
+    });
+  });
+</script>
+
+</body>
+</html>

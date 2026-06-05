@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ISTREAM4k — Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+<style>
+  .nav{position:fixed}
+  .nav .links a.active::after{transform:scaleX(1)}
+  .subhero{position:relative;padding:150px 80px 76px;background:linear-gradient(180deg,rgba(8,8,12,.74),rgba(8,8,12,.88)),url('/assets/hero.png') center/cover no-repeat,var(--dark);color:var(--white);
+    overflow:hidden;border-bottom:2px solid var(--ink);text-align:center}
+  .subhero::before{content:"";position:absolute;inset:0;z-index:0;opacity:.5;
+    background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--cyan) 38%,transparent),transparent 58%),
+      radial-gradient(ellipse at 80% 100%,color-mix(in srgb,var(--magenta) 30%,transparent),transparent 55%)}
+  .subhero > *{position:relative;z-index:1}
+  .subhero .mod{color:var(--white-2);justify-content:center} .subhero .mod b{color:var(--cyan)}
+  .subhero .mod .bar{background:var(--white-3)} .subhero .mod .ts{color:var(--white-3)}
+  .subhero h1{color:var(--white)}
+  /* search bar */
+  .help-search{display:flex;max-width:620px;margin:30px auto 0;align-items:stretch}
+  .help-search input{flex:1;border:2px solid var(--cyan);border-right:0;background:rgba(0,0,0,.3);
+    color:var(--white);font-family:var(--hand);font-weight:500;font-size:15px;padding:16px 20px;outline:none}
+  .help-search input::placeholder{color:var(--white-3)}
+  .help-search .cpb{flex-shrink:0}
+  .help-quick{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--white-3);
+    margin-top:16px;text-transform:uppercase}
+  .help-quick a{color:var(--cyan);text-decoration:none;margin:0 6px}
+  @media (max-width:1100px){.subhero{padding:130px 40px 60px}}
+  @media (max-width:680px){.subhero{padding:112px 22px 48px}
+    .help-search{flex-direction:column;gap:10px}.help-search input{border-right:2px solid var(--cyan)}
+    .help-search .cpb{width:100%}}
+
+  /* quick category cards */
+  .hcat{position:relative;padding:28px 24px;border:2px solid var(--ink);background:rgba(0,0,0,.025);
+    transition:background .15s ease,transform .15s ease;text-decoration:none;color:inherit;display:block}
+  .hcat:hover{background:rgba(0,0,0,.06);transform:translate(-1px,-1px)}
+  .hcat .ico{font-size:22px}
+  .hcat h3{font-family:var(--hand);font-weight:700;text-transform:uppercase;letter-spacing:.01em;
+    font-size:18px;margin:14px 0 8px}
+  .hcat p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+  .hcat .go{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink);
+    text-transform:uppercase;margin-top:14px;display:inline-block}
+
+  /* contact cards */
+  .contact{position:relative;padding:30px 26px;border:2px solid var(--ink);background:rgba(0,0,0,.25);
+    display:flex;flex-direction:column;transition:transform .15s ease,background .15s ease}
+  .contact:hover{transform:translate(-1px,-1px);background:rgba(0,0,0,.4)}
+  .contact .lab{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:700;color:var(--cyan)}
+  .contact h3{font-family:var(--hand);font-weight:700;font-size:24px;text-transform:uppercase;
+    letter-spacing:.01em;margin:12px 0 8px;color:var(--white)}
+  .contact p{margin:0 0 20px;font-size:14px;color:var(--white-2);line-height:1.5}
+  .contact .cpb{margin-top:auto;align-self:flex-start}
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:99px;background:#19e08a;
+    margin-right:7px;box-shadow:0 0 8px #19e08a;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <a href="/" class="logo">i·<b>STREAM</b>4k</a>
+  <div class="links">
+    <a href="/#sports">Sports</a>
+    <a href="/#movies">Movies</a>
+    <a href="/#pricing">Plans</a>
+    <a href="resellers.html">Resellers</a>
+    <a href="channels.html">Channels</a>
+    <a href="support.html" class="active">Support</a>
+    <div class="lang-switch" data-lang-switch aria-label="Language"></div>
+  </div>
+  <a href="#" data-wa data-wa-text="Hi! I'd like to chat with ISTREAM4k support — I need some help." class="cpb">Contact us</a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ───────── SUBHERO ───────── -->
+<header class="subhero">
+  <div class="mod"><b>—</b> Help center <span class="bar"></span><span class="ts">24/7</span></div>
+  <h1 class="h xxl mt-3" style="margin-top:18px">How can we help?</h1>
+</header>
+
+<!-- ───────── CONTACT ───────── -->
+<section class="pg dark" id="contact">
+  <div class="mod"><b>01</b> — Talk to a human <span class="bar"></span><span class="ts">real people, fast</span></div>
+  <h2 class="h xl mt-3" style="color:var(--white)">Reach us anytime.</h2>
+  <div class="grid g3 mt-5" style="align-items:stretch">
+    <div class="contact brk"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="lab"><span class="live-dot"></span>Online now</div>
+      <h3>Live chat</h3>
+      <p>The fastest way to get an answer. Average wait under 2 minutes, any hour of the day.</p>
+      <a href="#" data-wa data-wa-text="Hi! I'd like to chat with ISTREAM4k support — I need some help." class="cpb">Start chat</a></div>
+    <div class="contact brk"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="lab">Replies in ~2h</div>
+      <h3>Email</h3>
+      <p>Send us the details and screenshots. We'll get back within a couple of hours, around the clock.</p>
+      <a href="mailto:help@istream4k.tv" data-email class="cpb outline"><span data-email-text>help@istream4k.tv</span></a></div>
+    <div class="contact brk"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="lab">Mobile</div>
+      <h3>WhatsApp</h3>
+      <p>Prefer your phone? Message our support team directly and pick up the thread anytime.</p>
+      <a href="#" data-wa data-wa-text="Hi! I need help with ISTREAM4k." class="cpb outline"><span>Open WhatsApp</span></a></div>
+  </div>
+</section>
+
+<div class="seam d2y"></div>
+
+<!-- ───────── FAQ ───────── -->
+<section class="pg yellow tight" id="faq" style="border-top:1.5px solid var(--ink)">
+  <div class="mod"><b>02</b> — FAQ <span class="bar"></span><span class="ts">quick answers</span></div>
+  <h2 class="h xl mt-3 center">Asked. Answered.</h2>
+  <div class="faq brk mt-5" data-faq="auto" style="max-width:880px;margin:34px auto 0">
+    <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+  </div>
+</section>
+
+<!-- ───────── CTA ───────── -->
+<section class="pg yellow center" style="border-top:1.5px solid var(--ink);padding-top:64px;padding-bottom:84px">
+  <h2 class="h xxl" style="font-size:74px">We've got you.</h2>
+  <p class="sub" style="max-width:500px;margin:18px auto 0;font-size:16px">Can't find an answer? Our team is one message away, 24 hours a day.</p>
+  <div class="fl jc-c gap-md" style="margin-top:34px;display:flex;justify-content:center;flex-wrap:wrap">
+    <a href="#contact" class="cpb">Contact support</a>
+    <a href="/#pricing" class="cpb outline"><span>Back to plans</span></a>
+  </div>
+</section>
+
+<div class="seam y2d"></div>
+
+<!-- ───────── FOOTER ───────── -->
+<footer class="pg dark center" style="padding-top:60px;padding-bottom:50px">
+  <div class="footer-partners">
+    <span>4K HDR</span><span>Dolby Atmos</span><span>HDR10+</span><span>Rated 18+</span>
+  </div>
+  <div class="footer-links">
+    <a href="resellers.html">Resellers</a>
+    <a href="channels.html">Channels</a>
+    <a href="support.html">Support</a>
+    <a href="/#pricing">Plans</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="refund.html">Refund</a>
+  </div>
+  <div style="margin-top:40px;display:flex;align-items:center;justify-content:center;gap:14px">
+    <div style="font-family:var(--hand);font-weight:700;font-size:28px;letter-spacing:.04em;color:var(--white)">i·<span style="background:var(--cyan);color:var(--dark);padding:2px 8px">STREAM</span>4k</div>
+  </div>
+  <div class="mod center mt-3" style="justify-content:center;color:var(--white-3)">© 2026 ISTREAM4K · All rights reserved</div>
+</footer>
+
+<!-- FAQ + contact links are built/wired from CMS content by the injected runtime (vite.config.js). -->
+
+</body>
+</html>

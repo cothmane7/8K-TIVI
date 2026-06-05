@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ISTREAM4k — Thank you</title>
+<meta name="page-name" content="Thank you" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+<style>
+  body{background:var(--dark);color:var(--white);font-family:var(--hand);margin:0}
+  .co-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+    padding:16px 40px;background:rgba(12,12,18,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--white-4)}
+  .co-nav .logo{font-weight:700;font-size:22px;letter-spacing:.04em;color:var(--white);text-decoration:none}
+  .co-nav .logo b{background:var(--yellow);color:var(--ink);padding:2px 8px}
+  .co-nav .right{margin-left:auto;display:flex;align-items:center;gap:18px}
+  .ty-wrap{max-width:660px;margin:0 auto;padding:60px 24px 80px;text-align:center}
+  .ty-check{width:72px;height:72px;border-radius:99px;margin:0 auto 22px;display:grid;place-items:center;
+    background:color-mix(in srgb,var(--cyan) 16%,transparent);border:2px solid var(--cyan);color:var(--cyan);font-size:34px}
+  .ty-mod{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+  h1.ty-h{font-family:var(--hand);font-weight:700;font-size:42px;letter-spacing:-.01em;margin:10px 0 8px}
+  .ty-sub{color:var(--white-2);font-size:15px;margin:0 auto 30px;max-width:480px}
+  .ty-card{position:relative;text-align:left;border:2px solid var(--white-4);background:rgba(255,255,255,.02);
+    padding:26px 24px;margin:0 auto}
+  .ty-card .mod{color:var(--white-2);margin-bottom:16px}
+  .ty-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--white-4);
+    font-size:14px;color:var(--white-2)}
+  .ty-row:last-child{border-bottom:0}
+  .ty-row b{color:var(--white);font-weight:600;text-align:right}
+  .ty-row.total b{color:var(--cyan);font-size:20px}
+  .ty-wa{margin-top:26px}
+  .ty-wa .cpb{width:100%;justify-content:center;background:#25D366;color:#06281a}
+  .ty-note{color:var(--white-3);font-family:var(--mono);font-size:11px;letter-spacing:.05em;margin-top:14px}
+  .ty-links{margin-top:26px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .ty-links a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--white-2);text-decoration:none}
+  .ty-links a:hover{color:var(--cyan)}
+  @media (max-width:560px){ .co-nav{padding:14px 22px} h1.ty-h{font-size:32px} }
+</style>
+</head>
+<body>
+
+<nav class="co-nav">
+  <a href="/" class="logo">i·<b>STREAM</b>4k</a>
+  <div class="right">
+    <div class="lang-switch" data-lang-switch aria-label="Language"></div>
+  </div>
+</nav>
+
+<main class="ty-wrap">
+  <div class="ty-check">✓</div>
+  <div class="ty-mod">Order received</div>
+  <h1 class="ty-h">Thank you!</h1>
+  <p class="ty-sub" id="ty-sub">Your order is in. Tap the button below to follow up on WhatsApp — that's where we finalise payment and activate your line, usually within minutes.</p>
+
+  <div class="ty-card" id="ty-card">
+    <div class="mod"><b>—</b> Order summary <span class="bar"></span><span class="ts" id="ty-ref">—</span></div>
+    <div class="ty-row"><span>Plan</span><b id="ty-plan">—</b></div>
+    <div class="ty-row"><span>Details</span><b id="ty-detail">—</b></div>
+    <div class="ty-row"><span>Email</span><b id="ty-email">—</b></div>
+    <div class="ty-row" id="ty-wa-row" style="display:none"><span>WhatsApp</span><b id="ty-wanum">—</b></div>
+    <div class="ty-row"><span>Payment</span><b id="ty-pay">—</b></div>
+    <div class="ty-row" id="ty-fee-row" style="display:none"><span>Payment fee</span><b id="ty-fee">—</b></div>
+    <div class="ty-row total"><span>Total</span><b id="ty-total">—</b></div>
+  </div>
+
+  <div class="ty-wa">
+    <a href="#" class="cpb" id="ty-wa-btn" target="_blank" rel="noopener">Follow up on WhatsApp</a>
+    <div class="ty-note" id="ty-note">We'll confirm your order details and complete activation.</div>
+  </div>
+
+  <div class="ty-links">
+    <a href="/#pricing">Back to plans</a>
+    <a href="/support.html">Need help?</a>
+  </div>
+</main>
+
+<script>
+  (function(){
+    var C = window.__CONTENT__ || {};
+    var id = C.identity || {};
+    var I18N = window.__I18N__ || {};
+    var LANG = (function(){
+      try { var s = localStorage.getItem('lang'); if (s && ['en','de','fr','es','ar'].indexOf(s) >= 0) return s; } catch (e) {}
+      var navs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
+      for (var i = 0; i < navs.length; i++) { var c = String(navs[i] || '').toLowerCase().slice(0, 2); if (['de','fr','es','ar'].indexOf(c) >= 0) return c; }
+      return 'en';
+    })();
+    function T(s){ var d = LANG !== 'en' && I18N[LANG]; return (d && d[s] != null) ? d[s] : s; }
+    var order = null;
+    try { order = JSON.parse(sessionStorage.getItem('istream_order') || 'null'); } catch (e) {}
+
+    if (!order) {
+      document.getElementById('ty-sub').textContent = "We couldn't find a recent order in this session. Browse our plans to get started.";
+      document.getElementById('ty-card').style.display = 'none';
+      var btn0 = document.getElementById('ty-wa-btn');
+      btn0.textContent = 'Browse plans';
+      btn0.style.background = 'var(--cyan)'; btn0.style.color = 'var(--dark)';
+      btn0.href = '/#pricing'; btn0.target = '_self';
+      document.getElementById('ty-note').style.display = 'none';
+      return;
+    }
+
+    function set(id2, txt){ var el = document.getElementById(id2); if (el) el.textContent = txt; }
+    set('ty-ref', order.ref || '');
+    set('ty-plan', order.name || '—');
+    set('ty-detail', order.detail || '—');
+    set('ty-email', order.email || '—');
+    if (order.whatsapp) { document.getElementById('ty-wa-row').style.display = ''; set('ty-wanum', order.whatsapp); }
+    set('ty-pay', order.payLabel || order.pay || '—');
+    if (order.fee) { document.getElementById('ty-fee-row').style.display = ''; set('ty-fee', '€' + order.fee); }
+    set('ty-total', '€' + (order.amount != null ? order.amount : '—'));
+
+    // WhatsApp follow-up to the business number, pre-filled with the order.
+    var num = String(id.whatsapp || '').replace(/\D/g, '');
+    var btn = document.getElementById('ty-wa-btn');
+    var msg =
+      T("Hi! I just placed an order on ISTREAM4k and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
+      T("Order ref") + ': ' + (order.ref || '') + '\n' +
+      T("Plan") + ': ' + (order.name || '') + ' (' + (order.detail || '') + ')\n' +
+      T("Total") + ': €' + (order.amount != null ? order.amount : '') + '\n' +
+      T("Payment method") + ': ' + (order.payLabel || order.pay || '') + '\n' +
+      T("Email") + ': ' + (order.email || '') +
+      (order.whatsapp ? '\n' + T("WhatsApp") + ': ' + order.whatsapp : '');
+    if (num) {
+      btn.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg);
+    } else {
+      btn.href = '/support.html';
+      document.getElementById('ty-note').textContent = 'Our team will reach out to finalise your order.';
+    }
+  })();
+</script>
+</body>
+</html>

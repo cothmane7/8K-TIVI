@@ -1,0 +1,158 @@
+# ─────────────────────────────────────────────────────────────────────────
+# ISTREAM4k content admin (Sveltia CMS / Decap-compatible config)
+#
+# BEFORE THIS WORKS you must replace the two placeholders below:
+#   __GITHUB_REPO__  ->  your GitHub repo, e.g.  yourname/istream4k
+#   __SITE_URL__     ->  your live site origin, e.g.  https://istream4k.vercel.app
+# See SETUP-CMS.md for the full one-time setup (GitHub OAuth app + Vercel env vars).
+# ─────────────────────────────────────────────────────────────────────────
+
+backend:
+  name: github
+  repo: saaddev96/istream4k-cyber
+  branch: main
+  base_url: https://istream4k-cyber.vercel.app
+  auth_endpoint: api/auth
+  commit_messages:
+    create: 'content: create {{collection}} "{{slug}}"'
+    update: 'content: update {{collection}} "{{slug}}"'
+    delete: 'content: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'content: upload "{{path}}"'
+    deleteMedia: 'content: delete "{{path}}"'
+
+# Default media library (used for the favicon and anything without its own folder)
+media_folder: public/assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  # ── Website identity & contact ──────────────────────────────────────────
+  - name: identity
+    label: Site identity
+    delete: false
+    files:
+      - name: identity
+        label: Identity & contact
+        file: src/content/identity.json
+        fields:
+          - { name: siteName, label: Website name, widget: string }
+          - { name: landingTagline, label: Landing page tagline, widget: string }
+          - { name: favicon, label: Favicon (square PNG or ICO), widget: image, required: false }
+          - {
+              name: whatsapp,
+              label: 'WhatsApp number — digits only, with country code (e.g. 15551234567)',
+              widget: string,
+              required: false,
+              pattern: ['^[0-9]*$', 'Digits only, no + or spaces'],
+            }
+          - { name: email, label: Support email, widget: string, required: false }
+
+  # ── Movie posters ───────────────────────────────────────────────────────
+  - name: movies
+    label: Movie posters
+    delete: false
+    files:
+      - name: movies
+        label: Movies
+        file: src/content/movies.json
+        media_folder: /public/assets/posters
+        public_folder: /assets/posters
+        fields:
+          - name: items
+            label: Posters
+            label_singular: Movie
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: image, label: Poster image, widget: image }
+              - { name: title, label: Title, widget: string }
+              - {
+                  name: rating,
+                  label: 'Rating (0–5)',
+                  widget: number,
+                  value_type: float,
+                  min: 0,
+                  max: 5,
+                  step: 0.1,
+                  required: false,
+                }
+              - { name: quality, label: Quality badge, widget: string, required: false, default: '4K HDR' }
+
+  # ── Sports posters ──────────────────────────────────────────────────────
+  - name: sports
+    label: Sports posters
+    delete: false
+    files:
+      - name: sports
+        label: Sports
+        file: src/content/sports.json
+        media_folder: /public/assets/sports
+        public_folder: /assets/sports
+        fields:
+          - name: items
+            label: Posters
+            label_singular: Sport
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: image, label: Poster image, widget: image }
+              - { name: title, label: Title, widget: string }
+
+  # ── Plans & pricing (5 device counts × 4 durations = 20 prices) ──────────
+  - name: plans
+    label: Plans & pricing
+    delete: false
+    files:
+      - name: plans
+        label: Prices
+        file: src/content/plans.json
+        fields:
+          - name: features
+            label: Plan features (shown on the checkout page)
+            widget: list
+            field: { name: feature, widget: string }
+          - name: durations
+            label: Durations (labels only)
+            widget: list
+            min: 4
+            max: 4
+            summary: '{{fields.months}} months'
+            fields:
+              - { name: months, label: Months, widget: number, value_type: int }
+              - { name: free, label: 'Free-months text (optional, e.g. "1 month free")', widget: string, required: false }
+          - name: prices
+            label: 'Price table — FULL price ($) for each plan (shown per-month on the site)'
+            widget: list
+            min: 5
+            max: 5
+            summary: '{{fields.devices}} device(s)'
+            fields:
+              - { name: devices, label: Devices, widget: number, value_type: int, min: 1, max: 5 }
+              - { name: m3, label: '3 months — full price ($)', widget: number, value_type: float, min: 0 }
+              - { name: m6, label: '6 months — full price ($)', widget: number, value_type: float, min: 0 }
+              - { name: m12, label: '12 months — full price ($)', widget: number, value_type: float, min: 0 }
+              - { name: m24, label: '24 months — full price ($)', widget: number, value_type: float, min: 0 }
+
+  # ── Reseller credit packages ────────────────────────────────────────────
+  - name: resellers
+    label: Reseller packages
+    delete: false
+    files:
+      - name: resellers
+        label: Credit packages
+        file: src/content/resellers.json
+        fields:
+          - name: packages
+            label: Packages
+            label_singular: Package
+            widget: list
+            summary: '{{fields.name}} — {{fields.credits}} credits'
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: credits, label: Credits, widget: number, value_type: int, min: 1 }
+              - { name: perCredit, label: 'Price per credit ($)', widget: number, value_type: float, min: 0 }
+              - { name: popular, label: 'Highlight as the "most chosen" plan', widget: boolean, default: false, required: false }
+              - { name: tag, label: 'Highlight label (e.g. "Most chosen")', widget: string, required: false }
+              - name: features
+                label: Features
+                widget: list
+                field: { name: feature, widget: string }
