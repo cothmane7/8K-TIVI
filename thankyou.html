@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FLIX4KTV — Thank you</title>
+<title>FLIXTV4K — Thank you</title>
 <meta name="page-name" content="Thank you" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
 <body>
 
 <nav class="co-nav">
-  <a href="/" class="logo">FLIX<b>4KTV</b></a>
+  <a href="/" class="logo">FLIX<b>TV4K</b></a>
   <div class="right">
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
   </div>
@@ -72,8 +72,8 @@
   </div>
 
   <div class="ty-links">
-    <a href="plans.html#pricing">Back to plans</a>
-    <a href="/support.html">Need help?</a>
+    <a href="plans#pricing">Back to plans</a>
+    <a href="/support">Need help?</a>
   </div>
 </main>
 
@@ -98,7 +98,7 @@
       var btn0 = document.getElementById('ty-wa-btn');
       btn0.textContent = 'Browse plans';
       btn0.style.background = 'var(--cyan)'; btn0.style.color = 'var(--dark)';
-      btn0.href = 'plans.html'; btn0.target = '_self';
+      btn0.href = 'plans'; btn0.target = '_self';
       document.getElementById('ty-note').style.display = 'none';
       return;
     }
@@ -117,7 +117,7 @@
     var num = String(id.whatsapp || '').replace(/\D/g, '');
     var btn = document.getElementById('ty-wa-btn');
     var msg =
-      T("Hi! I just placed an order on FLIX4KTV and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
+      T("Hi! I just placed an order on FLIXTV4K and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
       T("Order ref") + ': ' + (order.ref || '') + '\n' +
       T("Plan") + ': ' + (order.name || '') + ' (' + (order.detail || '') + ')\n' +
       T("Total") + ': €' + (order.amount != null ? order.amount : '') + '\n' +
@@ -127,7 +127,7 @@
     if (num) {
       btn.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg);
     } else {
-      btn.href = '/support.html';
+      btn.href = '/support';
       document.getElementById('ty-note').textContent = 'Our team will reach out to finalise your order.';
     }
   })();

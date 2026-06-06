@@ -1,5 +1,27 @@
 import { defineConfig } from 'vite'
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
+
+// Dev-only: mirror Vercel's cleanUrls so extensionless links (e.g. /checkout)
+// resolve to the matching .html file during `npm run dev`. Production handles
+// this via "cleanUrls": true in vercel.json.
+function cleanUrlsDev() {
+  return {
+    name: 'clean-urls-dev',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const i = req.url.indexOf('?')
+        const path = i === -1 ? req.url : req.url.slice(0, i)
+        const query = i === -1 ? '' : req.url.slice(i)
+        if (path !== '/' && !/\.[a-z0-9]+$/i.test(path)) {
+          const file = path.replace(/^\/+/, '').replace(/\/+$/, '') + '.html'
+          if (existsSync(file)) req.url = '/' + file + query
+        }
+        next()
+      })
+    },
+  }
+}
 
 // ─────────────────────────────────────────────────────────────────────────
 // Content injection
@@ -221,7 +243,7 @@ function contentInjection() {
 
 export default defineConfig({
   appType: 'mpa',
-  plugins: [contentInjection()],
+  plugins: [cleanUrlsDev(), contentInjection()],
   build: {
     outDir: 'dist',
     rollupOptions: {

@@ -30,10 +30,10 @@ Project → **Settings → Environment Variables** (Production + Preview):
 | `SMTP_HOST` | optional | `smtp.zoho.com` (default). Use `smtp.zoho.eu` if your Zoho account is on the EU data centre |
 | `SMTP_PORT` | optional | `465` (default, SSL) |
 | `SMTP_FROM_EMAIL` | optional | From address (default = `SMTP_USER`) |
-| `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `FLIX4KTV`) |
+| `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `FLIXTV4K`) |
 | `ORDER_NOTIFY_EMAIL` | optional | inbox for new-order alerts (default = `SMTP_USER`) |
 | `BUSINESS_WHATSAPP` | optional | WhatsApp number, digits only (no default — WhatsApp button is omitted if unset) |
-| `SITE_NAME` | optional | default `FLIX4KTV` |
+| `SITE_NAME` | optional | default `FLIXTV4K` |
 
 > ⚠️ Zoho requires the **From** address to be a verified address on your account,
 > so keep `SMTP_FROM_EMAIL` / `SMTP_USER` as `contact@istream4ktv.com`.

@@ -1,4 +1,4 @@
-# FLIX4KTV
+# FLIXTV4K
 
 Static streaming landing site, wrapped in [Vite](https://vitejs.dev) as a multi-page
 build so it deploys cleanly on Vercel.

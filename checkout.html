@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FLIX4KTV — Checkout</title>
+<title>FLIXTV4K — Checkout</title>
 <meta name="page-name" content="Checkout" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -96,9 +96,9 @@
 <body>
 
 <nav class="co-nav">
-  <a href="/" class="logo">FLIX<b>4KTV</b></a>
+  <a href="/" class="logo">FLIX<b>TV4K</b></a>
   <div class="right">
-    <a href="plans.html#pricing" class="co-back">← Plans</a>
+    <a href="plans#pricing" class="co-back">← Plans</a>
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
   </div>
 </nav>
@@ -172,7 +172,7 @@
   </div>
 </main>
 
-<div class="co-foot">© 2026 FLIX4KTV · Secure order — finalised on WhatsApp</div>
+<div class="co-foot">© 2026 FLIXTV4K · Secure order — finalised on WhatsApp</div>
 
 <script>
   (function(){
@@ -273,7 +273,7 @@
       var confirmBtn = document.getElementById('co-confirm');
       if (confirmBtn) { confirmBtn.disabled = true; confirmBtn.textContent = 'Placing order…'; }
       var navigated = false;
-      function go(){ if (navigated) return; navigated = true; location.href = '/thankyou.html'; }
+      function go(){ if (navigated) return; navigated = true; location.href = '/thankyou'; }
       setTimeout(go, 4500);
       fetch('/api/order', {
         method: 'POST',

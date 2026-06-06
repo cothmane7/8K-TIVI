@@ -1,4 +1,4 @@
-# FLIX4KTV — CMS Content Management Design
+# FLIXTV4K — CMS Content Management Design
 
 **Date:** 2026-06-03
 **Status:** Approved, implementing

@@ -1,4 +1,4 @@
-/* FLIX4KTV i18n engine
+/* FLIXTV4K i18n engine
    - Translations baked into window.__I18N__ (see vite.config.js) keyed by the
      ENGLISH source text, so the HTML needs no per-string markup.
    - Detects language: saved choice -> browser language -> English.

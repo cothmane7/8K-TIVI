@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "FLIX4KTV streaming landing site",
+  "description": "FLIXTV4K streaming landing site",
   "scripts": {
     "dev": "vite",
     "channels": "node scripts/build-channels.mjs",

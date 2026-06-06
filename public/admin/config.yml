@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────
-# FLIX4KTV content admin (Sveltia CMS / Decap-compatible config)
+# FLIXTV4K content admin (Sveltia CMS / Decap-compatible config)
 #
 # BEFORE THIS WORKS you must replace the two placeholders below:
 #   __GITHUB_REPO__  ->  your GitHub repo, e.g.  yourname/flix4ktv
