@@ -31,8 +31,8 @@ Project → **Settings → Environment Variables** (Production + Preview):
 | `SMTP_PORT` | optional | `465` (default, SSL) |
 | `SMTP_FROM_EMAIL` | optional | From address (default = `SMTP_USER`) |
 | `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `ISTREAM4k`) |
-| `ORDER_NOTIFY_EMAIL` | optional | inbox for new-order alerts (default `contact@istream4ktv.com`) |
-| `BUSINESS_WHATSAPP` | optional | WhatsApp number, digits only (default `447877680956`) |
+| `ORDER_NOTIFY_EMAIL` | optional | inbox for new-order alerts (default = `SMTP_USER`) |
+| `BUSINESS_WHATSAPP` | optional | WhatsApp number, digits only (no default — WhatsApp button is omitted if unset) |
 | `SITE_NAME` | optional | default `ISTREAM4k` |
 
 > ⚠️ Zoho requires the **From** address to be a verified address on your account,

@@ -3,15 +3,15 @@
 // "Confirm order". No payment is taken here — payment is finalised on WhatsApp.
 //
 // Required Vercel env vars:
-//   SMTP_USER   Zoho mailbox login        e.g. contact@istream4ktv.com
+//   SMTP_USER   Zoho mailbox login        e.g. you@yourdomain.com
 //   SMTP_PASS   Zoho app-specific password (NOT the account password)
 // Optional env vars (sensible defaults):
 //   SMTP_HOST           default smtp.zoho.com   (use smtp.zoho.eu for EU data centre)
 //   SMTP_PORT           default 465 (SSL)
 //   SMTP_FROM_EMAIL     From address (default = SMTP_USER). Must be verified in Zoho.
 //   SMTP_FROM_NAME      From display name (default = SITE_NAME)
-//   ORDER_NOTIFY_EMAIL  default contact@istream4ktv.com  (where new orders land)
-//   BUSINESS_WHATSAPP   default 447877680956
+//   ORDER_NOTIFY_EMAIL  default = SMTP_USER  (where new orders land)
+//   BUSINESS_WHATSAPP   no default (WhatsApp button omitted if unset)
 //   SITE_NAME           default ISTREAM4k
 import nodemailer from 'nodemailer'
 
@@ -39,11 +39,11 @@ export default async function handler(req, res) {
   }
 
   const SITE = process.env.SITE_NAME || 'ISTREAM4k'
-  const NOTIFY = process.env.ORDER_NOTIFY_EMAIL || 'contact@istream4ktv.com'
+  const NOTIFY = process.env.ORDER_NOTIFY_EMAIL || process.env.SMTP_USER
   const FROM_EMAIL = process.env.SMTP_FROM_EMAIL || process.env.ORDER_FROM || process.env.SMTP_USER
   const FROM_NAME = (process.env.SMTP_FROM_NAME || SITE).replace(/["\r\n]/g, '')
   const FROM = `"${FROM_NAME}" <${FROM_EMAIL}>`
-  const WA = (process.env.BUSINESS_WHATSAPP || '447877680956').replace(/\D/g, '')
+  const WA = (process.env.BUSINESS_WHATSAPP || '').replace(/\D/g, '')
 
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
     res.statusCode = 500
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
   const waText =
     `Hi! I just placed an order on ${SITE} (ref ${order.ref}) and I'd like to follow up and complete the payment to activate my subscription.\n\n` +
     `Order ref: ${order.ref}\nPlan: ${order.name}${order.detail ? ' (' + order.detail + ')' : ''}\nTotal: ${money(order.amount)}\nPayment: ${order.pay}`
-  const waLink = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waText)
+  const waLink = WA ? 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waText) : ''
 
   const rows = [
     ['Order ref', order.ref],
@@ -134,12 +134,14 @@ export default async function handler(req, res) {
     to: NOTIFY,
     replyTo: order.email,
     subject: `🆕 New order ${order.ref} — ${order.name} (${money(order.amount)})`,
-    text: `New order received.\n\n${rowsText}\n\nFollow up on WhatsApp: ${waLink}`,
+    text: `New order received.\n\n${rowsText}` + (waLink ? `\n\nFollow up on WhatsApp: ${waLink}` : ''),
     html: shell(
       'New order received',
       `A new order just came in via the website. Reply to this email to reach the customer directly.`,
       featList +
-        `<p style="margin:18px 0 0"><a href="${waLink}" style="font:600 13px Arial;color:#0c0c12;background:#19d3da;padding:11px 18px;text-decoration:none;display:inline-block">Message customer on WhatsApp</a></p>`
+        (waLink
+          ? `<p style="margin:18px 0 0"><a href="${waLink}" style="font:600 13px Arial;color:#0c0c12;background:#19d3da;padding:11px 18px;text-decoration:none;display:inline-block">Message customer on WhatsApp</a></p>`
+          : '')
     ),
   }
 
@@ -151,13 +153,16 @@ export default async function handler(req, res) {
     text:
       `Thanks for your order with ${SITE}!\n\n${rowsText}\n\n` +
       `No payment has been taken yet — we finalise payment and activate your subscription on WhatsApp, usually within minutes.\n\n` +
-      `Follow up on WhatsApp: ${waLink}\n\n© 2026 ${SITE}`,
+      (waLink ? `Follow up on WhatsApp: ${waLink}\n\n` : '') +
+      `© 2026 ${SITE}`,
     html: shell(
       'Thanks for your order!',
       `We've received your order. <b>No payment has been taken yet</b> — tap the button below to follow up on WhatsApp, where we finalise payment and activate your subscription (usually within minutes).`,
       featList +
-        `<p style="margin:20px 0 4px"><a href="${waLink}" style="font:600 14px Arial;color:#0c0c12;background:#19d3da;padding:13px 22px;text-decoration:none;display:inline-block">Follow up on WhatsApp →</a></p>` +
-        `<p style="margin:10px 0 0;font:12px Arial;color:#999">Or message us at +${WA}</p>`
+        (waLink
+          ? `<p style="margin:20px 0 4px"><a href="${waLink}" style="font:600 14px Arial;color:#0c0c12;background:#19d3da;padding:13px 22px;text-decoration:none;display:inline-block">Follow up on WhatsApp →</a></p>` +
+            `<p style="margin:10px 0 0;font:12px Arial;color:#999">Or message us at +${WA}</p>`
+          : '')
     ),
   }
 
