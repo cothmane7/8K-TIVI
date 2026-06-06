@@ -1,22 +1,112 @@
 {
   "items": [
-    { "image": "/assets/posters/wednesday.png",     "title": "WEDNESDAY",            "rating": 4.7, "quality": "4K HDR" },
-    { "image": "/assets/posters/avatar.png",         "title": "AVATAR: FIRE AND ASH", "rating": 4.8, "quality": "4K HDR" },
-    { "image": "/assets/posters/got.jpg",            "title": "GAME OF THRONES",      "rating": 4.9, "quality": "4K HDR" },
-    { "image": "/assets/posters/queensgambit.png",   "title": "THE QUEEN'S GAMBIT",   "rating": 4.8, "quality": "4K HDR" },
-    { "image": "/assets/posters/apes.png",           "title": "KINGDOM OF THE APES",  "rating": 4.5, "quality": "4K HDR" },
-    { "image": "/assets/posters/zootopia2.png",      "title": "ZOOTOPIA 2",           "rating": 4.4, "quality": "4K HDR" },
-    { "image": "/assets/posters/nowyouseeme.png",    "title": "NOW YOU SEE ME",       "rating": 4.2, "quality": "4K" },
-    { "image": "/assets/posters/sevenkings.png",     "title": "SEVEN KINGS MUST DIE", "rating": 4.3, "quality": "4K HDR" },
-    { "image": "/assets/posters/housemaid.png",      "title": "THE HOUSEMAID",        "rating": 4.1, "quality": "4K" },
-    { "image": "/assets/posters/martysupreme.png",   "title": "MARTY SUPREME",        "rating": 4.6, "quality": "4K HDR" },
-    { "image": "/assets/posters/primate.png",        "title": "PRIMATE",              "rating": 4.0, "quality": "4K" },
-    { "image": "/assets/posters/songsungblue.png",   "title": "SONG SUNG BLUE",       "rating": 4.3, "quality": "4K HDR" },
-    { "image": "/assets/posters/greenland2.png",     "title": "GREENLAND 2",          "rating": 4.2, "quality": "4K" },
-    { "image": "/assets/posters/steve.png",          "title": "STEVE",                "rating": 4.5, "quality": "4K HDR" },
-    { "image": "/assets/posters/the100.png",         "title": "THE 100",              "rating": 4.4, "quality": "HD" },
-    { "image": "/assets/posters/spongebob.png",      "title": "SPONGEBOB",            "rating": 4.3, "quality": "4K HDR" },
-    { "image": "/assets/posters/david.png",          "title": "DAVID",                "rating": 4.1, "quality": "4K" },
-    { "image": "/assets/posters/lastseenalive.png",  "title": "LAST SEEN ALIVE",      "rating": 3.9, "quality": "HD" }
+    {
+      "image": "/assets/posters/fantastic beast 3.jpg",
+      "title": "Fantastic Beasts",
+      "rating": 4.7,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/avatar.png",
+      "title": "AVATAR: FIRE AND ASH",
+      "rating": 4.8,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/one battle.jpg",
+      "title": "One Battle After Another",
+      "rating": 4.9,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/queensgambit.png",
+      "title": "THE QUEEN'S GAMBIT",
+      "rating": 4.8,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/the imortel man.jpg",
+      "title": "Peaky Blinders: The Immortal Man",
+      "rating": 4.8,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/zootopia2.png",
+      "title": "ZOOTOPIA 2",
+      "rating": 4.4,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/nowyouseeme.png",
+      "title": "NOW YOU SEE ME",
+      "rating": 4.2,
+      "quality": "4K"
+    },
+    {
+      "image": "/assets/posters/sevenkings.png",
+      "title": "SEVEN KINGS MUST DIE",
+      "rating": 4.3,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/housemaid.png",
+      "title": "THE HOUSEMAID",
+      "rating": 4.1,
+      "quality": "4K"
+    },
+    {
+      "image": "/assets/posters/martysupreme.png",
+      "title": "MARTY SUPREME",
+      "rating": 4.6,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/primate.png",
+      "title": "PRIMATE",
+      "rating": 4,
+      "quality": "4K"
+    },
+    {
+      "image": "/assets/posters/songsungblue.png",
+      "title": "SONG SUNG BLUE",
+      "rating": 4.3,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/greenland2.png",
+      "title": "GREENLAND 2",
+      "rating": 4.2,
+      "quality": "4K"
+    },
+    {
+      "image": "/assets/posters/steve.png",
+      "title": "STEVE",
+      "rating": 4.5,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/the100.png",
+      "title": "THE 100",
+      "rating": 4.4,
+      "quality": "HD"
+    },
+    {
+      "image": "/assets/posters/spongebob.png",
+      "title": "SPONGEBOB",
+      "rating": 4.3,
+      "quality": "4K HDR"
+    },
+    {
+      "image": "/assets/posters/david.png",
+      "title": "DAVID",
+      "rating": 4.1,
+      "quality": "4K"
+    },
+    {
+      "image": "/assets/posters/lastseenalive.png",
+      "title": "LAST SEEN ALIVE",
+      "rating": 3.9,
+      "quality": "HD"
+    }
   ]
 }
