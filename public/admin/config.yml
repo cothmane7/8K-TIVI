@@ -11,7 +11,7 @@ backend:
   name: github
   repo: kopase/Flix4ktv
   branch: main
-  base_url: https://flix4ktv.vercel.app/
+  base_url: https://flixtv4k.com
   auth_endpoint: api/auth
   commit_messages:
     create: 'content: create {{collection}} "{{slug}}"'
