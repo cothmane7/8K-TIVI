@@ -14,8 +14,8 @@
     },
     {
       "name": "Growth",
-      "credits": 25,
-      "perCredit": 9.2,
+      "credits": 240,
+      "perCredit": 2.3,
       "popular": false,
       "tag": "",
       "features": [
@@ -26,8 +26,8 @@
     },
     {
       "name": "Pro",
-      "credits": 50,
-      "perCredit": 7.6,
+      "credits": 360,
+      "perCredit": 2.1,
       "popular": true,
       "tag": "Most chosen",
       "features": [
@@ -38,8 +38,8 @@
     },
     {
       "name": "Elite",
-      "credits": 100,
-      "perCredit": 6.1,
+      "credits": 480,
+      "perCredit": 2,
       "popular": false,
       "tag": "",
       "features": [
