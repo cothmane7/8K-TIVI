@@ -2,35 +2,51 @@
   "packages": [
     {
       "name": "Starter",
-      "credits": 10,
-      "perCredit": 11.00,
+      "credits": 120,
+      "perCredit": 2.5,
       "popular": false,
       "tag": "",
-      "features": ["White-label reseller panel", "Instant line activation", "Standard partner support"]
+      "features": [
+        "White-label reseller panel",
+        "Instant line activation",
+        "Standard partner support"
+      ]
     },
     {
       "name": "Growth",
-      "credits": 25,
-      "perCredit": 9.20,
+      "credits": 240,
+      "perCredit": 2.3,
       "popular": false,
       "tag": "",
-      "features": ["Everything in Starter", "Custom branding + domain", "Sub-reseller accounts (×3)"]
+      "features": [
+        "Everything in Starter",
+        "Custom branding + domain",
+        "Sub-reseller accounts (×3)"
+      ]
     },
     {
       "name": "Pro",
-      "credits": 50,
-      "perCredit": 7.60,
+      "credits": 360,
+      "perCredit": 2.1,
       "popular": true,
       "tag": "Most chosen",
-      "features": ["Everything in Growth", "Priority 24/7 partner line", "Sub-reseller accounts (×10)"]
+      "features": [
+        "Everything in Growth",
+        "Priority 24/7 partner line",
+        "Sub-reseller accounts (×10)"
+      ]
     },
     {
       "name": "Elite",
-      "credits": 100,
-      "perCredit": 6.10,
+      "credits": 480,
+      "perCredit": 2,
       "popular": false,
       "tag": "",
-      "features": ["Everything in Pro", "Dedicated account manager", "Unlimited sub-resellers"]
+      "features": [
+        "Everything in Pro",
+        "Dedicated account manager",
+        "Unlimited sub-resellers"
+      ]
     }
   ]
 }
