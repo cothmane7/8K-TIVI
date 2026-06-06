@@ -1,9 +1,9 @@
 # ─────────────────────────────────────────────────────────────────────────
-# ISTREAM4k content admin (Sveltia CMS / Decap-compatible config)
+# FLIX4KTV content admin (Sveltia CMS / Decap-compatible config)
 #
 # BEFORE THIS WORKS you must replace the two placeholders below:
-#   __GITHUB_REPO__  ->  your GitHub repo, e.g.  yourname/istream4k
-#   __SITE_URL__     ->  your live site origin, e.g.  https://istream4k.vercel.app
+#   __GITHUB_REPO__  ->  your GitHub repo, e.g.  yourname/flix4ktv
+#   __SITE_URL__     ->  your live site origin, e.g.  https://flix4ktv.vercel.app
 # See SETUP-CMS.md for the full one-time setup (GitHub OAuth app + Vercel env vars).
 # ─────────────────────────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-# ISTREAM4k — CMS setup (one-time)
+# FLIX4KTV — CMS setup (one-time)
 
 Your site now has a content admin at **`/admin`**. You log in with GitHub, edit
 content, hit save — your changes commit to GitHub and Vercel automatically rebuilds
@@ -26,11 +26,11 @@ You only do the setup below **once**. After that, editing is just: go to
 
 ## Step 1 — Put the project on GitHub
 
-1. Create a new repository at <https://github.com/new> (private is fine). Name it e.g. `istream4k`. **Do not** add a README/license (the project already has files).
+1. Create a new repository at <https://github.com/new> (private is fine). Name it e.g. `flix4ktv`. **Do not** add a README/license (the project already has files).
 2. From this project folder, push it:
 
    ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/istream4k.git
+   git remote add origin https://github.com/YOUR_USERNAME/flix4ktv.git
    git branch -M main
    git push -u origin main
    ```
@@ -41,17 +41,17 @@ You only do the setup below **once**. After that, editing is just: go to
 
 1. Go to <https://vercel.com/new> and **import** the GitHub repo.
 2. Vercel auto-detects **Vite** — keep defaults, click **Deploy**.
-3. Note your live URL, e.g. `https://istream4k.vercel.app`. Every future push
+3. Note your live URL, e.g. `https://flix4ktv.vercel.app`. Every future push
    (including CMS edits) auto-deploys.
 
 ## Step 3 — Create a GitHub OAuth App (lets you log in to `/admin`)
 
 1. Go to <https://github.com/settings/developers> → **OAuth Apps** → **New OAuth App**.
 2. Fill in:
-   - **Application name:** `ISTREAM4k CMS`
-   - **Homepage URL:** your site URL (e.g. `https://istream4k.vercel.app`)
+   - **Application name:** `FLIX4KTV CMS`
+   - **Homepage URL:** your site URL (e.g. `https://flix4ktv.vercel.app`)
    - **Authorization callback URL:** your site URL + `/api/callback`
-     (e.g. `https://istream4k.vercel.app/api/callback`)
+     (e.g. `https://flix4ktv.vercel.app/api/callback`)
 3. Click **Register application**. Copy the **Client ID**.
 4. Click **Generate a new client secret**. Copy the secret (shown once).
 
@@ -73,9 +73,9 @@ Edit **`public/admin/config.yml`** and replace the two placeholders:
 ```yaml
 backend:
   name: github
-  repo: YOUR_USERNAME/istream4k      # <- was __GITHUB_REPO__
+  repo: YOUR_USERNAME/flix4ktv      # <- was __GITHUB_REPO__
   branch: main
-  base_url: https://istream4k.vercel.app   # <- was __SITE_URL__ (your live URL, no trailing slash)
+  base_url: https://flix4ktv.vercel.app   # <- was __SITE_URL__ (your live URL, no trailing slash)
 ```
 
 Commit and push that change (or edit it directly on GitHub and commit).

@@ -1,12 +1,12 @@
 /* ═════════════════════════════════════════════════════════════════════
-     ISTREAM4k · LANDING PAGE · HI-FI
+     FLIX4KTV · LANDING PAGE · HI-FI
      yellow + black brand, cyan/magenta signal accents, chamfered CTAs,
      `///.MODULE.NAME` mono labels, glitch-torn seams, cinematic dark
      news strip with cyan-glowed cards.
      ═════════════════════════════════════════════════════════════════════ */
 
   :root{
-    --yellow:#F7E709;
+    --yellow:#9DC209;
     --yellow-d:color-mix(in srgb, var(--yellow) 86%, #000);
     --ink:#0a0a0a;
     --ink-2:rgba(10,10,10,.62);
@@ -20,7 +20,7 @@
     --white-2:rgba(248,248,250,.7);
     --white-3:rgba(248,248,250,.38);
     --white-4:rgba(248,248,250,.16);
-    --cyan:#00e5ff;
+    --cyan:#9DC209;
     --cyan-d:color-mix(in srgb, var(--cyan) 78%, #000);
     --magenta:#ff2e95;
     --hand:'Chakra Petch',sans-serif;
@@ -377,7 +377,8 @@
     transition:background .25s ease,box-shadow .25s ease,padding .25s ease,color .25s ease}
   .nav .logo{font-family:var(--hand);font-weight:700;font-size:22px;color:inherit;
     letter-spacing:.04em;display:flex;align-items:center;text-decoration:none}
-  .nav .logo b{background:var(--yellow);color:var(--ink);padding:2px 8px;font-weight:700;
+  .nav .logo b{background:var(--yellow);color:var(--ink);padding:3px 11px;font-weight:700;
+    clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
     transition:background .25s ease,color .25s ease}
   .nav .links{display:flex;gap:24px;flex:1;justify-content:center;font-family:var(--hand);
     font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:inherit}

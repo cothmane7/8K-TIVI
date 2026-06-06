@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FLIX4KTV — Plans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+<style>
+  .nav{position:fixed}
+  .nav .links a.active::after{transform:scaleX(1)}
+  html{scroll-behavior:smooth}
+  #pricing{scroll-margin-top:84px}
+
+  /* ───────── plans subhero ───────── */
+  .subhero{position:relative;padding:150px 80px 64px;background:linear-gradient(180deg,rgba(8,8,12,.74),rgba(8,8,12,.9)),var(--dark);
+    color:var(--white);overflow:hidden;border-bottom:2px solid var(--ink)}
+  .subhero::before{content:"";position:absolute;inset:0;z-index:0;opacity:.55;
+    background:radial-gradient(ellipse at 80% 15%,color-mix(in srgb,var(--cyan) 40%,transparent),transparent 55%),
+      radial-gradient(ellipse at 12% 95%,color-mix(in srgb,var(--magenta) 30%,transparent),transparent 55%)}
+  .subhero > *{position:relative;z-index:1}
+  .subhero .mod{color:var(--white-2)} .subhero .mod b{color:var(--cyan)}
+  .subhero .mod .bar{background:var(--white-3)} .subhero .mod .ts{color:var(--white-3)}
+  .subhero h1{color:var(--white);max-width:15ch}
+  .subhero p{color:var(--white-2);max-width:560px;margin-top:18px;font-size:16px}
+  @media (max-width:1100px){.subhero{padding:130px 40px 52px}}
+  @media (max-width:680px){.subhero{padding:112px 22px 42px}}
+
+  /* ───────── pricing card (carried from landing) ───────── */
+  .price{padding:30px 24px;border:2px solid var(--cyan);background:color-mix(in srgb, var(--cyan) 3%, transparent);
+    color:var(--white);display:flex;flex-direction:column;gap:0;position:relative;transition:transform .2s ease}
+  .price:hover{transform:translateY(-4px)}
+  .price.recommended{background:color-mix(in srgb, var(--cyan) 8%, transparent);
+    box-shadow:0 0 0 1px var(--cyan),0 0 40px color-mix(in srgb, var(--cyan) 34%, transparent);padding-top:54px}
+  .price .tag{position:absolute;top:-12px;left:24px;background:var(--cyan);color:var(--dark);
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;padding:4px 10px;font-weight:700;text-transform:uppercase}
+  .price .tag.save{background:var(--magenta);color:var(--white)}
+  .price.save-tier{border-color:var(--magenta);background:color-mix(in srgb, var(--magenta) 6%, transparent);
+    box-shadow:0 0 0 1px var(--magenta),0 0 32px color-mix(in srgb, var(--magenta) 26%, transparent)}
+  .price.save-tier .label,.price.save-tier .name,.price.save-tier .amt{color:var(--magenta)}
+  .price.save-tier ul li::before{color:var(--magenta)}
+  .price .label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--cyan);font-weight:700;text-transform:uppercase}
+  .price .name{font-family:var(--hand);font-weight:700;text-transform:uppercase;font-size:28px;letter-spacing:.005em;margin-top:8px}
+  .price .amt{font-family:var(--hand);font-weight:700;font-size:52px;letter-spacing:-.02em;line-height:1;margin-top:16px}
+  .price .amt small{font-size:13px;color:var(--white-3);letter-spacing:.1em;font-weight:500}
+  .price .amt .save-note{display:inline-block;vertical-align:middle;margin-left:12px;font-family:var(--mono);
+    font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);
+    border:1px solid var(--cyan);padding:3px 8px;line-height:1}
+  .price .save-note[hidden]{display:none}
+  .price.save-tier .amt .save-note{color:var(--magenta);border-color:var(--magenta)}
+  .price .freebie{display:inline-flex;align-items:center;gap:6px;margin-top:14px;align-self:flex-start;
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:700;color:var(--cyan);border:1.5px solid var(--cyan);padding:5px 10px}
+  .price .freebie::before{content:"+";font-size:13px}
+  .price.save-tier .freebie{color:var(--magenta);border-color:var(--magenta)}
+  .price .freebie.placeholder{visibility:hidden}
+  .price ul{list-style:none;padding:0;margin:14px 0 24px;display:flex;flex-direction:column;gap:9px;
+    flex:1;font-family:var(--hand);font-weight:500;font-size:13.5px;color:var(--white-2)}
+  .price ul li{display:flex;gap:9px;align-items:flex-start}
+  .price ul li::before{content:"\2713";color:var(--cyan);font-size:12px;margin-top:1px;flex-shrink:0;font-weight:700;font-family:var(--mono)}
+  .price.recommended .name,.price.recommended .amt{color:var(--cyan)}
+  .price .feat-head{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--cyan);margin-top:18px}
+  .price.save-tier .feat-head{color:var(--magenta)}
+  .price ul li.strike span{text-decoration:line-through;opacity:.85}
+  .price ul li.off{opacity:.5}
+  .price ul li.off span{text-decoration:line-through}
+  .price ul li.off::before{color:var(--white-3)}
+  @media (max-width:680px){.price.recommended{transform:none;padding-top:30px} .price.recommended:hover{transform:translateY(-4px)}}
+
+  /* ───────── device selector ───────── */
+  .dev-select{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .dev-select .dev-label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--cyan)}
+  .dev-opts{display:inline-flex;border:1.5px solid var(--cyan);
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+  .dev-opts button{appearance:none;background:transparent;border:0;border-right:1.5px solid color-mix(in srgb,var(--cyan) 40%,transparent);
+    color:var(--white);font-family:var(--hand);font-weight:700;font-size:15px;width:46px;height:42px;cursor:pointer;transition:background .15s,color .15s;letter-spacing:.02em}
+  .dev-opts button:last-child{border-right:0}
+  .dev-opts button:hover{background:color-mix(in srgb,var(--cyan) 14%,transparent)}
+  .dev-opts button.on{background:var(--cyan);color:var(--dark)}
+
+  /* ───────── trust / guarantee strip ───────── */
+  .trust-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:36px;border:2px solid var(--ink)}
+  .trust{padding:28px 20px;text-align:center;border-right:2px solid var(--ink)}
+  .trust:last-child{border-right:0}
+  .trust .ico{font-size:24px;line-height:1}
+  .trust .tt{font-family:var(--hand);font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:15px;margin-top:12px}
+  .trust .ts{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-2);margin-top:6px;line-height:1.5}
+  @media (max-width:900px){.trust-grid{grid-template-columns:repeat(2,1fr)}
+    .trust{border-bottom:2px solid var(--ink)} .trust:nth-child(2n){border-right:0}
+    .trust:last-child{grid-column:1 / -1}}
+  @media (max-width:480px){.trust-grid{grid-template-columns:1fr}.trust{border-right:0}}
+
+  /* ───────── comparison table ───────── */
+  .cmp-hint{display:none;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--cyan);margin-top:26px}
+  .cmp-wrap{margin-top:34px;overflow-x:auto;-webkit-overflow-scrolling:touch;border:2px solid var(--ink)}
+  table.cmp{width:100%;border-collapse:collapse;min-width:680px;color:var(--white);font-family:var(--hand)}
+  table.cmp th,table.cmp td{padding:14px 18px;text-align:center;border-bottom:1px solid var(--white-4);font-size:13.5px}
+  table.cmp thead th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--cyan);border-bottom:2px solid var(--cyan);background:#11111a;font-weight:700}
+  table.cmp thead th.best{color:var(--dark);background:var(--cyan)}
+  table.cmp tbody th{text-align:left;font-weight:600;color:var(--white-2);font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.04em;text-transform:uppercase}
+  /* freeze the feature-name column so labels stay put while the plan columns scroll */
+  table.cmp thead th:first-child,table.cmp tbody th{position:sticky;left:0;z-index:2;
+    background:#0c0c12;border-right:1px solid var(--white-4)}
+  table.cmp thead th:first-child{z-index:3;background:#11111a}
+  table.cmp td.best{background:color-mix(in srgb,var(--cyan) 8%,transparent);color:var(--white);font-weight:600}
+  table.cmp .yes{color:var(--cyan);font-weight:700} table.cmp .no{color:var(--white-3)}
+  table.cmp tr:last-child td,table.cmp tr:last-child th{border-bottom:0}
+  @media (max-width:680px){
+    .cmp-hint{display:block}
+    .cmp-wrap{margin-top:14px}
+    table.cmp{min-width:0;width:auto}
+    table.cmp th,table.cmp td{padding:11px 12px;font-size:12.5px}
+    table.cmp thead th{font-size:10px;padding:10px 12px}
+    table.cmp tbody th{font-size:10.5px;max-width:128px;white-space:normal;line-height:1.35}
+    table.cmp thead th:not(:first-child),table.cmp tbody td{min-width:92px}
+  }
+
+  /* ───────── reviews ───────── */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+  .rev{position:relative;padding:26px 24px;border:2px solid var(--ink);background:rgba(0,0,0,.02)}
+  .rev .stars{color:var(--cyan);letter-spacing:2px;font-size:15px}
+  .rev .q{font-family:var(--hand);font-weight:500;font-size:15px;line-height:1.55;margin:14px 0 18px;color:var(--ink)}
+  .rev .who{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+  .rev .who b{color:var(--ink);font-weight:700}
+  @media (max-width:900px){.rev-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <a href="/" class="logo">FLIX<b>4KTV</b></a>
+  <div class="links">
+    <a href="/#sports">Sports</a>
+    <a href="/#movies">Movies</a>
+    <a href="plans.html#pricing" class="active">Plans</a>
+    <a href="resellers.html">Resellers</a>
+    <a href="channels.html">Channels</a>
+    <a href="support.html">Support</a>
+    <div class="lang-switch" data-lang-switch aria-label="Language"></div>
+  </div>
+  <a href="#" data-wa data-wa-text="Hi! I'd like to start my free trial of FLIX4KTV." class="cpb">Start free trial</a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ───────── SUBHERO ───────── -->
+<header class="subhero">
+  <div class="mod"><b>—</b> Plans &amp; pricing <span class="bar"></span><span class="ts">cancel anytime</span></div>
+  <h1 class="h xxl mt-3" style="margin-top:18px">Pick your plan.<br>Keep what you save.</h1>
+  <p>Every plan unlocks the full library — 30,000+ channels and 175,000+ titles in up to 4K HDR. The longer you commit, the lower your per-month price and the more free months you bank.</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PRICING TABLES
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="pg dark" id="pricing">
+  <div class="mod"><b>01</b> — Plans <span class="bar"></span><span class="ts">four plans</span></div>
+  <div class="row jc-sb ai-c mt-3 fw-w gap-md">
+    <h2 class="h xl" style="color:var(--white);margin:0">Choose your term.</h2>
+    <p class="sub" style="color:var(--white-2);max-width:340px;margin:0">
+      Pick how many devices stream at once — prices update instantly. Activation is immediate after checkout.
+    </p>
+  </div>
+
+  <div class="dev-select" id="dev-select">
+    <span class="dev-label">Devices</span>
+    <div class="dev-opts">
+      <button data-dev="1" class="on">1</button>
+      <button data-dev="2">2</button>
+      <button data-dev="3">3</button>
+      <button data-dev="4">4</button>
+      <button data-dev="5">5</button>
+    </div>
+  </div>
+
+  <div class="grid g4 mt-5" style="padding-top:14px">
+    <div class="price brk" data-base="9" data-months="3" data-period="billed quarterly">
+      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="label">Signal</div>
+      <div class="name">3 MONTHS</div>
+      <div class="amt">€<span class="amt-val">12</span><small> / mo</small></div>
+      <span class="freebie placeholder">no free months</span>
+      <div class="feat-head">Instant activation</div>
+      <ul>
+        <li class="off"><span>Cap Player (1 year)</span></li>
+        <li><span>Anti-Freeze Technology</span></li>
+        <li><span>30,000+ Live Channels</span></li>
+        <li><span>175,000+ Movies &amp; Series</span></li>
+        <li><span>HD I FHD I 4K Quality</span></li>
+        <li><span>Fast and Stable Servers</span></li>
+        <li><span>Premium Movies, Series &amp; Live TV</span></li>
+        <li><span>PPV / EPG Available</span></li>
+        <li><span>Advanced Parental Control</span></li>
+        <li><span>Standard Customer Support</span></li>
+        <li><span>Worldwide Access (No IP Lock)</span></li>
+        <li><span>Regular Updates</span></li>
+      </ul>
+      <a href="/checkout.html?type=plan&months=3&devices=1" class="cpb outline w-full"><span style="flex:1;justify-content:center">Choose 3 mo</span></a>
+    </div>
+
+    <div class="price brk" data-base="7" data-months="6" data-period="billed every 6 mo">
+      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="label">Pulse</div>
+      <div class="name">6 MONTHS</div>
+      <div class="amt">€<span class="amt-val">10</span><small> / mo</small></div>
+      <span class="freebie placeholder">no free months</span>
+      <div class="feat-head">Instant activation</div>
+      <ul>
+        <li class="strike"><span>Cap Player (1 year)</span></li>
+        <li><span>Anti-Freeze Technology</span></li>
+        <li><span>30,000+ Live Channels</span></li>
+        <li><span>175,000+ Movies &amp; Series</span></li>
+        <li><span>HD I FHD I 4K Quality</span></li>
+        <li><span>Fast and Stable Servers</span></li>
+        <li><span>Premium Movies, Series &amp; Live TV</span></li>
+        <li><span>PPV / EPG Available</span></li>
+        <li><span>Advanced Parental Control</span></li>
+        <li><span>Standard Customer Support</span></li>
+        <li><span>Worldwide Access (No IP Lock)</span></li>
+        <li><span>Regular Updates</span></li>
+      </ul>
+      <a href="/checkout.html?type=plan&months=6&devices=1" class="cpb outline w-full"><span style="flex:1;justify-content:center">Choose 6 mo</span></a>
+    </div>
+
+    <div class="price recommended brk" data-base="5" data-months="12" data-period="billed yearly">
+      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="tag">Most popular</div>
+      <div class="label">Flux</div>
+      <div class="name">12 MONTHS</div>
+      <div class="amt">€<span class="amt-val">8</span><small> / mo</small></div>
+      <span class="freebie">1 month free</span>
+      <div class="feat-head">Instant activation</div>
+      <ul>
+        <li><span>Cap Player (1 year)</span></li>
+        <li><span>Anti-Freeze Technology</span></li>
+        <li><span>30,000+ Live Channels</span></li>
+        <li><span>175,000+ Movies &amp; Series</span></li>
+        <li><span>HD I FHD I 4K Quality</span></li>
+        <li><span>Fast and Stable Servers</span></li>
+        <li><span>Premium Movies, Series &amp; Live TV</span></li>
+        <li><span>PPV / EPG Available</span></li>
+        <li><span>Advanced Parental Control</span></li>
+        <li><span>Priority Customer Support</span></li>
+        <li><span>Worldwide Access (No IP Lock)</span></li>
+        <li><span>Regular Updates</span></li>
+      </ul>
+      <a href="/checkout.html?type=plan&months=12&devices=1" class="cpb w-full">Choose 12 mo</a>
+    </div>
+
+    <div class="price save-tier brk" data-base="3" data-months="24" data-period="billed every 24 mo">
+      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="tag save">Biggest save</div>
+      <div class="label">Surge</div>
+      <div class="name">24 MONTHS</div>
+      <div class="amt">€<span class="amt-val">6</span><small> / mo</small></div>
+      <span class="freebie">2 months free</span>
+      <div class="feat-head">Instant activation</div>
+      <ul>
+        <li><span>Cap Player (Lifetime)</span></li>
+        <li><span>Anti-Freeze Technology</span></li>
+        <li><span>30,000+ Live Channels</span></li>
+        <li><span>175,000+ Movies &amp; Series</span></li>
+        <li><span>HD I FHD I 4K Quality</span></li>
+        <li><span>Fast and Stable Servers</span></li>
+        <li><span>Premium Movies, Series &amp; Live TV</span></li>
+        <li><span>PPV / EPG Available</span></li>
+        <li><span>Advanced Parental Control</span></li>
+        <li><span>VIP Customer Support</span></li>
+        <li><span>Worldwide Access (No IP Lock)</span></li>
+        <li><span>Regular Updates</span></li>
+      </ul>
+      <a href="/checkout.html?type=plan&months=24&devices=1" class="cpb w-full" style="background:var(--magenta);color:var(--white)">Choose 24 mo</a>
+    </div>
+  </div>
+</section>
+
+<div class="seam d2y"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     TRUST / GUARANTEE
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="pg yellow">
+  <div class="mod"><b>02</b> — Why it's safe <span class="bar"></span><span class="ts">every plan, included</span></div>
+  <h2 class="h xl mt-3">No risk. No lock-in.</h2>
+  <div class="trust-grid">
+    <div class="trust"><div class="ico">⚡</div><div class="tt">Instant activation</div><div class="ts">Live within minutes of checkout</div></div>
+    <div class="trust"><div class="ico">↺</div><div class="tt">Money-back</div><div class="ts">Not working? We refund — see policy</div></div>
+    <div class="trust"><div class="ico">🔒</div><div class="tt">Secure checkout</div><div class="ts">Payment finalised on WhatsApp</div></div>
+    <div class="trust"><div class="ico">🌐</div><div class="tt">No IP lock</div><div class="ts">Stream anywhere in the world</div></div>
+    <div class="trust"><div class="ico">💬</div><div class="tt">24/7 support</div><div class="ts">Real humans, around the clock</div></div>
+  </div>
+</section>
+
+<div class="seam y2d"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     FEATURE COMPARISON
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="pg dark">
+  <div class="mod"><b>03</b> — Compare <span class="bar"></span><span class="ts">side by side</span></div>
+  <h2 class="h xl mt-3" style="color:var(--white)">Every plan, line by line.</h2>
+  <div class="cmp-hint">← Swipe to compare all plans →</div>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th></th>
+          <th>3 Months<br><small>Signal</small></th>
+          <th>6 Months<br><small>Pulse</small></th>
+          <th class="best">12 Months<br><small>Flux ★</small></th>
+          <th>24 Months<br><small>Surge</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>From / month</th><td>€12</td><td>€10</td><td class="best">€8</td><td>€6</td></tr>
+        <tr><th>Free months</th><td class="no">—</td><td class="no">—</td><td class="best">1 month</td><td>2 months</td></tr>
+        <tr><th>Live channels</th><td>30,000+</td><td>30,000+</td><td class="best">30,000+</td><td>30,000+</td></tr>
+        <tr><th>Movies &amp; series</th><td>175,000+</td><td>175,000+</td><td class="best">175,000+</td><td>175,000+</td></tr>
+        <tr><th>Max quality</th><td>4K HDR</td><td>4K HDR</td><td class="best">4K HDR</td><td>4K HDR</td></tr>
+        <tr><th>Anti-freeze tech</th><td class="yes">✓</td><td class="yes">✓</td><td class="best yes">✓</td><td class="yes">✓</td></tr>
+        <tr><th>PPV / EPG</th><td class="yes">✓</td><td class="yes">✓</td><td class="best yes">✓</td><td class="yes">✓</td></tr>
+        <tr><th>Parental control</th><td class="yes">✓</td><td class="yes">✓</td><td class="best yes">✓</td><td class="yes">✓</td></tr>
+        <tr><th>Worldwide (no IP lock)</th><td class="yes">✓</td><td class="yes">✓</td><td class="best yes">✓</td><td class="yes">✓</td></tr>
+        <tr><th>Cap Player</th><td class="no">—</td><td>1 year</td><td class="best">1 year</td><td>Lifetime</td></tr>
+        <tr><th>Customer support</th><td>Standard</td><td>Standard</td><td class="best">Priority</td><td>VIP</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="center" style="margin-top:30px">
+    <a href="#pricing" class="cpb">Choose a plan</a>
+  </div>
+</section>
+
+<div class="seam d2y"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     REVIEWS
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="pg yellow">
+  <div class="mod"><b>04</b> — Reviews <span class="bar"></span><span class="ts">real subscribers</span></div>
+  <h2 class="h xl mt-3">Loved by cord-cutters.</h2>
+  <div class="rev-grid">
+    <div class="rev brk"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="stars">★★★★★</div>
+      <p class="q">"Switched from cable and never looked back. 4K streams never buffer, even on match day."</p>
+      <div class="who"><b>Marcus T.</b> · 12-month plan</div>
+    </div>
+    <div class="rev brk"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="stars">★★★★★</div>
+      <p class="q">"Setup took two minutes over WhatsApp. Every channel I wanted was already included."</p>
+      <div class="who"><b>Sofia R.</b> · 6-month plan</div>
+    </div>
+    <div class="rev brk"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="stars">★★★★★</div>
+      <p class="q">"The 24-month plan is unreal value, and lifetime Cap Player sealed the deal for me."</p>
+      <div class="who"><b>Daniel K.</b> · 24-month plan</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FOOTER ───────── -->
+<footer class="pg dark center" style="padding-top:60px;padding-bottom:50px">
+  <div class="footer-partners">
+    <span>4K HDR</span><span>Dolby Atmos</span><span>HDR10+</span><span>Rated 18+</span>
+  </div>
+  <div class="footer-links">
+    <a href="resellers.html">Resellers</a>
+    <a href="channels.html">Channels</a>
+    <a href="support.html">Support</a>
+    <a href="plans.html#pricing">Plans</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="refund.html">Refund</a>
+  </div>
+  <div style="margin-top:40px;display:flex;align-items:center;justify-content:center;gap:14px">
+    <div style="font-family:var(--hand);font-weight:700;font-size:28px;letter-spacing:.04em;color:var(--white)">FLIX<span style="background:var(--cyan);color:var(--dark);padding:3px 11px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)">4KTV</span></div>
+  </div>
+  <div class="mod center mt-3" style="justify-content:center;color:var(--white-3)">© 2026 FLIX4KTV · All rights reserved</div>
+</footer>
+
+<script>
+  // ───────── Plans: device-count selector drives per-month + billed totals ─────────
+  (function(){
+    const sel = document.getElementById('dev-select');
+    if (!sel) return;
+    const STEP = 3;                 // € added per extra device, per month (legacy fallback)
+    let devices = 1;
+    const cards = Array.from(document.querySelectorAll('#pricing .price'));
+
+    const PRICES = (window.__CONTENT__ && window.__CONTENT__.plans && window.__CONTENT__.plans.prices) || [];
+    function priceFor(dev, months){
+      const row = PRICES.find(p => +p.devices === dev);
+      const v = row ? row['m' + months] : null;
+      return (v != null && v !== '') ? +v : null;
+    }
+    function fmt(n){ return (Math.round(n * 100) / 100).toString(); }
+    function totalFor(card, months, dev){
+      let total = priceFor(dev, months);
+      if (total == null) total = (+card.dataset.base + (dev - 1) * STEP) * months;
+      return total;
+    }
+    function render(){
+      const baseCard = cards.find(c => +c.dataset.months === 3) || cards[0];
+      const baseMonths = baseCard ? +baseCard.dataset.months : 3;
+      const baseMonthly = baseCard ? totalFor(baseCard, baseMonths, 1) / baseMonths : 0;
+      cards.forEach(card => {
+        const months = +card.dataset.months;
+        const monthly = totalFor(card, months, devices) / months;
+        const valEl = card.querySelector('.amt-val');
+        if (valEl) valEl.textContent = fmt(monthly);
+        let saveEl = card.querySelector('.save-note');
+        if (!saveEl) {
+          saveEl = document.createElement('span');
+          saveEl.className = 'save-note';
+          const amtEl = card.querySelector('.amt');
+          if (amtEl) amtEl.appendChild(saveEl);
+        }
+        const perDevice = totalFor(card, months, devices) / months / devices;
+        const pct = baseMonthly ? Math.round((1 - perDevice / baseMonthly) * 100) : 0;
+        if (pct > 0) { saveEl.textContent = 'Save ' + pct + '%'; saveEl.hidden = false; }
+        else { saveEl.textContent = ''; saveEl.hidden = true; }
+        const cta = card.querySelector('a.cpb');
+        if (cta) cta.setAttribute('href', '/checkout.html?type=plan&months=' + months + '&devices=' + devices);
+      });
+    }
+    sel.querySelectorAll('button[data-dev]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        devices = +btn.dataset.dev;
+        sel.querySelectorAll('button[data-dev]').forEach(b => b.classList.toggle('on', b === btn));
+        render();
+      });
+    });
+    render();
+  })();
+</script>
+
+</body>
+</html>

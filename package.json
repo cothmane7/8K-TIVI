@@ -1,9 +1,9 @@
 {
-  "name": "istream4k",
+  "name": "flix4ktv",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "ISTREAM4k streaming landing site",
+  "description": "FLIX4KTV streaming landing site",
   "scripts": {
     "dev": "vite",
     "channels": "node scripts/build-channels.mjs",

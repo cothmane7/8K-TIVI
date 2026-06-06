@@ -12,7 +12,7 @@
 //   SMTP_FROM_NAME      From display name (default = SITE_NAME)
 //   ORDER_NOTIFY_EMAIL  default = SMTP_USER  (where new orders land)
 //   BUSINESS_WHATSAPP   no default (WhatsApp button omitted if unset)
-//   SITE_NAME           default ISTREAM4k
+//   SITE_NAME           default FLIX4KTV
 import nodemailer from 'nodemailer'
 
 const str = (v, max = 300) => String(v == null ? '' : v).slice(0, max)
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     return
   }
 
-  const SITE = process.env.SITE_NAME || 'ISTREAM4k'
+  const SITE = process.env.SITE_NAME || 'FLIX4KTV'
   const NOTIFY = process.env.ORDER_NOTIFY_EMAIL || process.env.SMTP_USER
   const FROM_EMAIL = process.env.SMTP_FROM_EMAIL || process.env.ORDER_FROM || process.env.SMTP_USER
   const FROM_NAME = (process.env.SMTP_FROM_NAME || SITE).replace(/["\r\n]/g, '')
@@ -109,7 +109,7 @@ export default async function handler(req, res) {
   const shell = (heading, intro, extra) => `<!doctype html><html><body style="margin:0;background:#f4f4f6;padding:24px">
   <table role="presentation" width="100%" style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #e5e5e8">
     <tr><td style="background:#0c0c12;padding:20px 24px">
-      <span style="font:700 22px Arial;color:#fff">i·<span style="background:#19d3da;color:#0c0c12;padding:2px 7px">STREAM</span>4k</span>
+      <span style="font:700 22px Arial;color:#fff">FLIX<span style="background:#19d3da;color:#0c0c12;padding:2px 7px">4KTV</span></span>
     </td></tr>
     <tr><td style="padding:26px 24px 6px">
       <h1 style="margin:0 0 8px;font:700 20px Arial;color:#111">${heading}</h1>

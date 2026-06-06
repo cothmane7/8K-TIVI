@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ISTREAM4k — Thank you</title>
+<title>FLIX4KTV — Thank you</title>
 <meta name="page-name" content="Thank you" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
 <body>
 
 <nav class="co-nav">
-  <a href="/" class="logo">i·<b>STREAM</b>4k</a>
+  <a href="/" class="logo">FLIX<b>4KTV</b></a>
   <div class="right">
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
   </div>
@@ -72,7 +72,7 @@
   </div>
 
   <div class="ty-links">
-    <a href="/#pricing">Back to plans</a>
+    <a href="plans.html#pricing">Back to plans</a>
     <a href="/support.html">Need help?</a>
   </div>
 </main>
@@ -90,7 +90,7 @@
     })();
     function T(s){ var d = LANG !== 'en' && I18N[LANG]; return (d && d[s] != null) ? d[s] : s; }
     var order = null;
-    try { order = JSON.parse(sessionStorage.getItem('istream_order') || 'null'); } catch (e) {}
+    try { order = JSON.parse(sessionStorage.getItem('flix4ktv_order') || 'null'); } catch (e) {}
 
     if (!order) {
       document.getElementById('ty-sub').textContent = "We couldn't find a recent order in this session. Browse our plans to get started.";
@@ -98,7 +98,7 @@
       var btn0 = document.getElementById('ty-wa-btn');
       btn0.textContent = 'Browse plans';
       btn0.style.background = 'var(--cyan)'; btn0.style.color = 'var(--dark)';
-      btn0.href = '/#pricing'; btn0.target = '_self';
+      btn0.href = 'plans.html'; btn0.target = '_self';
       document.getElementById('ty-note').style.display = 'none';
       return;
     }
@@ -117,7 +117,7 @@
     var num = String(id.whatsapp || '').replace(/\D/g, '');
     var btn = document.getElementById('ty-wa-btn');
     var msg =
-      T("Hi! I just placed an order on ISTREAM4k and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
+      T("Hi! I just placed an order on FLIX4KTV and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
       T("Order ref") + ': ' + (order.ref || '') + '\n' +
       T("Plan") + ': ' + (order.name || '') + ' (' + (order.detail || '') + ')\n' +
       T("Total") + ': €' + (order.amount != null ? order.amount : '') + '\n' +

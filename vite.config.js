@@ -167,14 +167,15 @@ const RUNTIME = `<script>(function(){
 
 function contentInjection() {
   return {
-    name: 'istream4k-content-injection',
+    name: 'flix4ktv-content-injection',
     transformIndexHtml(html, ctx) {
       const c = readContent()
       const id = c.identity
       const path = (ctx && ctx.path) || ''
 
       let title
-      if (path.includes('channels')) title = id.siteName + ' — Channels'
+      if (path.includes('plans')) title = id.siteName + ' — Plans'
+      else if (path.includes('channels')) title = id.siteName + ' — Channels'
       else if (path.includes('resellers')) title = id.siteName + ' — Resellers'
       else if (path.includes('support')) title = id.siteName + ' — Support'
       else if (path.includes('checkout')) title = id.siteName + ' — Checkout'
@@ -213,6 +214,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        plans: 'plans.html',
         channels: 'channels.html',
         resellers: 'resellers.html',
         support: 'support.html',

@@ -95,7 +95,7 @@ export default async function handler(req, res) {
       const userRes = await fetch('https://api.github.com/user', {
         headers: {
           Authorization: `Bearer ${data.access_token}`,
-          'User-Agent': 'istream4k-cms',
+          'User-Agent': 'flix4ktv-cms',
           Accept: 'application/vnd.github+json',
         },
       })

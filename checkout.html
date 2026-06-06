@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ISTREAM4k — Checkout</title>
+<title>FLIX4KTV — Checkout</title>
 <meta name="page-name" content="Checkout" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -96,9 +96,9 @@
 <body>
 
 <nav class="co-nav">
-  <a href="/" class="logo">i·<b>STREAM</b>4k</a>
+  <a href="/" class="logo">FLIX<b>4KTV</b></a>
   <div class="right">
-    <a href="/#pricing" class="co-back">← Plans</a>
+    <a href="plans.html#pricing" class="co-back">← Plans</a>
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
   </div>
 </nav>
@@ -172,7 +172,7 @@
   </div>
 </main>
 
-<div class="co-foot">© 2026 ISTREAM4K · Secure order — finalised on WhatsApp</div>
+<div class="co-foot">© 2026 FLIX4KTV · Secure order — finalised on WhatsApp</div>
 
 <script>
   (function(){
@@ -266,7 +266,7 @@
         email: email, whatsapp: wa, pay: selected, payLabel: btn ? btn.getAttribute('data-label') : selected,
         lang: lang
       };
-      try { sessionStorage.setItem('istream_order', JSON.stringify(full)); } catch (e2) {}
+      try { sessionStorage.setItem('flix4ktv_order', JSON.stringify(full)); } catch (e2) {}
 
       // Email the order (business alert + customer confirmation), then continue to
       // the thank-you page regardless of email success so the customer is never blocked.

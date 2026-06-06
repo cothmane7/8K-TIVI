@@ -1,4 +1,4 @@
-# ISTREAM4k — CMS Content Management Design
+# FLIX4KTV — CMS Content Management Design
 
 **Date:** 2026-06-03
 **Status:** Approved, implementing

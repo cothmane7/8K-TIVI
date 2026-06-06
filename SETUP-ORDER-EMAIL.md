@@ -16,7 +16,7 @@ No payment is processed on the site — this only sends emails.
 
 1. Sign in to Zoho Mail for **contact@istream4ktv.com**.
 2. Go to **My Account → Security → App Passwords** (enable 2FA first if needed).
-3. Generate an app password named e.g. `istream4k-site`. Copy it.
+3. Generate an app password named e.g. `flix4ktv-site`. Copy it.
    - Use the **app password**, not your normal login password.
 
 ## 2. Set environment variables in Vercel
@@ -30,10 +30,10 @@ Project → **Settings → Environment Variables** (Production + Preview):
 | `SMTP_HOST` | optional | `smtp.zoho.com` (default). Use `smtp.zoho.eu` if your Zoho account is on the EU data centre |
 | `SMTP_PORT` | optional | `465` (default, SSL) |
 | `SMTP_FROM_EMAIL` | optional | From address (default = `SMTP_USER`) |
-| `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `ISTREAM4k`) |
+| `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `FLIX4KTV`) |
 | `ORDER_NOTIFY_EMAIL` | optional | inbox for new-order alerts (default = `SMTP_USER`) |
 | `BUSINESS_WHATSAPP` | optional | WhatsApp number, digits only (no default — WhatsApp button is omitted if unset) |
-| `SITE_NAME` | optional | default `ISTREAM4k` |
+| `SITE_NAME` | optional | default `FLIX4KTV` |
 
 > ⚠️ Zoho requires the **From** address to be a verified address on your account,
 > so keep `SMTP_FROM_EMAIL` / `SMTP_USER` as `contact@istream4ktv.com`.
