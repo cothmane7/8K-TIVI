@@ -12,6 +12,8 @@
   /* sub-page shell: nav sits solid from the top (no video hero behind it) */
   .nav{position:fixed}
   .nav .links a.active::after{transform:scaleX(1)}
+  html{scroll-behavior:smooth}
+  #packages{scroll-margin-top:84px}
   .subhero{position:relative;padding:150px 80px 70px;background:linear-gradient(180deg,rgba(8,8,12,.74),rgba(8,8,12,.88)),url('/assets/hero.png') center/cover no-repeat,var(--dark);color:var(--white);
     overflow:hidden;border-bottom:2px solid var(--ink)}
   .subhero::before{content:"";position:absolute;inset:0;z-index:0;opacity:.5;
@@ -64,7 +66,7 @@
     <a href="/#sports">Sports</a>
     <a href="/#movies">Movies</a>
     <a href="plans#pricing">Plans</a>
-    <a href="resellers" class="active">Resellers</a>
+    <a href="resellers#packages" class="active">Resellers</a>
     <a href="channels">Channels</a>
     <a href="support">Support</a>
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
@@ -124,7 +126,7 @@
   <h2 class="h xl mt-3 center" style="color:var(--white)">Buy in bulk. Pay less per line.</h2>
   <div class="grid g4 mt-5" data-packages style="align-items:stretch"></div>
   <div class="mod center mt-5" style="justify-content:center;color:var(--white-3);margin-top:34px">
-    Need more than 100? <a href="support" style="color:var(--cyan);text-decoration:none">Talk to us about volume pricing →</a>
+    Need more than 480? <a href="support" style="color:var(--cyan);text-decoration:none">Talk to us about volume pricing →</a>
   </div>
 </section>
 
@@ -172,7 +174,7 @@
     <span>4K HDR</span><span>Dolby Atmos</span><span>HDR10+</span><span>Rated 18+</span>
   </div>
   <div class="footer-links">
-    <a href="resellers">Resellers</a>
+    <a href="resellers#packages">Resellers</a>
     <a href="channels">Channels</a>
     <a href="support">Support</a>
     <a href="plans#pricing">Plans</a>
