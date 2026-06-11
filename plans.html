@@ -182,7 +182,7 @@
       <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
       <div class="label">Signal</div>
       <div class="name">3 MONTHS</div>
-      <div class="amt">€<span class="amt-val">12</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">35.99</span><small> total</small></div>
       <span class="freebie placeholder">no free months</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -206,7 +206,7 @@
       <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
       <div class="label">Pulse</div>
       <div class="name">6 MONTHS</div>
-      <div class="amt">€<span class="amt-val">10</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">49.99</span><small> total</small></div>
       <span class="freebie placeholder">no free months</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -231,7 +231,7 @@
       <div class="tag">Most popular</div>
       <div class="label">Flux</div>
       <div class="name">12 MONTHS</div>
-      <div class="amt">€<span class="amt-val">8</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">79.99</span><small> total</small></div>
       <span class="freebie">1 month free</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -256,7 +256,7 @@
       <div class="tag save">Biggest save</div>
       <div class="label">Surge</div>
       <div class="name">24 MONTHS</div>
-      <div class="amt">€<span class="amt-val">6</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">119.99</span><small> total</small></div>
       <span class="freebie">2 months free</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -316,7 +316,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr><th>From / month</th><td>€12</td><td>€10</td><td class="best">€8</td><td>€6</td></tr>
+        <tr><th>Total price</th><td>€35.99</td><td>€49.99</td><td class="best">€79.99</td><td>€119.99</td></tr>
         <tr><th>Free months</th><td class="no">—</td><td class="no">—</td><td class="best">1 month</td><td>2 months</td></tr>
         <tr><th>Live channels</th><td>30,000+</td><td>30,000+</td><td class="best">30,000+</td><td>30,000+</td></tr>
         <tr><th>Movies &amp; series</th><td>175,000+</td><td>175,000+</td><td class="best">175,000+</td><td>175,000+</td></tr>
@@ -409,9 +409,9 @@
       const baseMonthly = baseCard ? totalFor(baseCard, baseMonths, 1) / baseMonths : 0;
       cards.forEach(card => {
         const months = +card.dataset.months;
-        const monthly = totalFor(card, months, devices) / months;
+        const total = totalFor(card, months, devices);
         const valEl = card.querySelector('.amt-val');
-        if (valEl) valEl.textContent = fmt(monthly);
+        if (valEl) valEl.textContent = fmt(total);
         let saveEl = card.querySelector('.save-note');
         if (!saveEl) {
           saveEl = document.createElement('span');

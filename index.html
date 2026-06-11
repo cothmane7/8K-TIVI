@@ -922,7 +922,7 @@
       <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
       <div class="label">Signal</div>
       <div class="name">3 MONTHS</div>
-      <div class="amt">€<span class="amt-val">12</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">35.99</span><small> total</small></div>
       <span class="freebie placeholder">no free months</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -946,7 +946,7 @@
       <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
       <div class="label">Pulse</div>
       <div class="name">6 MONTHS</div>
-      <div class="amt">€<span class="amt-val">10</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">49.99</span><small> total</small></div>
       <span class="freebie placeholder">no free months</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -971,7 +971,7 @@
       <div class="tag">Most popular</div>
       <div class="label">Flux</div>
       <div class="name">12 MONTHS</div>
-      <div class="amt">€<span class="amt-val">8</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">79.99</span><small> total</small></div>
       <span class="freebie">1 month free</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -996,7 +996,7 @@
       <div class="tag save">Biggest save</div>
       <div class="label">Surge</div>
       <div class="name">24 MONTHS</div>
-      <div class="amt">€<span class="amt-val">6</span><small> / mo</small></div>
+      <div class="amt">€<span class="amt-val">119.99</span><small> total</small></div>
       <span class="freebie">2 months free</span>
       <div class="feat-head">Instant activation</div>
       <ul>
@@ -1436,9 +1436,9 @@
       cards.forEach(card => {
         const months = +card.dataset.months;
         // Displayed per-month price uses the currently selected device count.
-        const monthly = totalFor(card, months, devices) / months;
+        const total = totalFor(card, months, devices);
         const valEl = card.querySelector('.amt-val');
-        if (valEl) valEl.textContent = fmt(monthly);
+        if (valEl) valEl.textContent = fmt(total);
 
         // Savings % compares the PER-DEVICE, per-month price at the selected device count
         // against the 3-month/1-device baseline. Longer terms and more devices both lower

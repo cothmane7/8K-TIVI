@@ -114,10 +114,16 @@ const RUNTIME = `<script>(function(){
         '<div class="pk-per">€' + per + ' / credit</div>' +
         '<div class="pk-total">€' + total + ' total</div>' +
         '<ul class="pk-feat">' + feats + '</ul>' +
-        (p.popular ? '<a href="/checkout.html?type=reseller&pkg=' + i + '" class="cpb w-full">Get started</a>' : '<a href="/checkout.html?type=reseller&pkg=' + i + '" class="cpb outline w-full"><span style="flex:1;justify-content:center">Get started</span></a>') +
+        (p.popular ? '<a href="/checkout?type=reseller&pkg=' + i + '" class="cpb w-full">Get started</a>' : '<a href="/checkout?type=reseller&pkg=' + i + '" class="cpb outline w-full"><span style="flex:1;justify-content:center">Get started</span></a>') +
         '</div>';
     });
     pkGrid.innerHTML = pkHtml;
+    // The cards just gave #packages real height — if we arrived at that anchor,
+    // re-scroll now so it lands correctly in one click (not on a second click).
+    if (location.hash === '#packages') {
+      var pkSec = document.getElementById('packages');
+      if (pkSec) requestAnimationFrame(function(){ pkSec.scrollIntoView(); });
+    }
   }
 
   // Mobile nav: hamburger toggles the slide-down menu.
