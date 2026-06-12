@@ -52,6 +52,13 @@
     color:var(--white);font-family:var(--hand);font-size:15px;padding:13px 14px;border-radius:0;
     outline:none;transition:border-color .15s ease}
   .co-field input:focus{border-color:var(--cyan)}
+  .co-field select{width:100%;box-sizing:border-box;background:rgba(0,0,0,.35);border:1.5px solid var(--white-4);
+    color:var(--white);font-family:var(--hand);font-size:15px;padding:13px 40px 13px 14px;border-radius:0;
+    outline:none;transition:border-color .15s ease;cursor:pointer;-webkit-appearance:none;appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%239DC209' stroke-width='2' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center}
+  .co-field select:focus{border-color:var(--cyan)}
+  .co-field select option{background:var(--dark);color:var(--white)}
   .co-field .opt{color:var(--white-3);text-transform:none;letter-spacing:0;font-family:var(--hand);font-size:11px}
   /* payment methods */
   .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
@@ -85,12 +92,35 @@
   .co-foot{text-align:center;color:var(--white-3);font-family:var(--mono);font-size:11px;letter-spacing:.08em;
     padding:30px 20px;border-top:1px solid var(--white-4)}
   @media (max-width:820px){
-    .co-grid{grid-template-columns:1fr}
-    .co-plan-side{order:-1}
+    .co-grid{grid-template-columns:1fr;gap:18px}
+    /* phone: show the order form first, full plan summary below it */
     .co-nav{padding:14px 22px}
-    .co-wrap{padding:28px 18px 60px}
+    .co-wrap{padding:24px 18px 60px}
   }
-  @media (max-width:480px){ .pay-grid{grid-template-columns:1fr} }
+  /* phone: compact everything so the form is fully visible at a glance */
+  @media (max-width:560px){
+    .co-wrap{padding:16px 13px 50px}
+    .co-steps{margin-bottom:18px}
+    .co-card{padding:18px 16px}
+    h1.co-h{font-size:22px;letter-spacing:0}
+    .co-sub{font-size:12.5px;margin:0 0 14px}
+    .co-card .mod{margin-bottom:12px}
+    .co-field{margin-bottom:12px}
+    .co-field label{margin-bottom:5px}
+    .co-field input{padding:11px 12px;font-size:14px}
+    .pay{padding:12px 13px}
+    .pay .pm-name{font-size:14px}
+    .co-summary{padding:13px 14px;margin:16px 0 12px}
+    .plan-name{font-size:20px}
+    .plan-price{font-size:34px;margin-top:12px}
+    .plan-feat{margin-top:14px;gap:7px}
+    .plan-feat li{font-size:13px}
+    /* pin the CTA to the bottom of the screen so it's never missed on first open */
+    .co-confirm{position:sticky;bottom:10px;z-index:6;
+      box-shadow:0 12px 28px rgba(0,0,0,.6),0 0 0 8px var(--dark)}
+    .co-err{margin-bottom:6px}
+    .co-fine{margin-top:12px}
+  }
 </style>
 </head>
 <body>
@@ -128,24 +158,15 @@
       </div>
 
       <div class="co-field">
-        <label>Payment method</label>
-        <div class="pay-grid" id="pay-grid">
-          <button type="button" class="pay" data-pay="paypal" data-label="PayPal">
-            <span class="pm-check"></span><span class="pm-name">PayPal</span><span class="pm-desc">PayPal balance · +€5 fee</span>
-          </button>
-          <button type="button" class="pay" data-pay="card" data-label="Credit / Debit card">
-            <span class="pm-check"></span><span class="pm-name">Credit / Debit card</span><span class="pm-desc">Visa · Mastercard · +€5 fee</span>
-          </button>
-          <button type="button" class="pay" data-pay="bank" data-label="Bank transfer">
-            <span class="pm-check"></span><span class="pm-name">Bank transfer</span><span class="pm-desc">Direct bank / SEPA transfer</span>
-          </button>
-          <button type="button" class="pay" data-pay="crypto" data-label="Cryptocurrency">
-            <span class="pm-check"></span><span class="pm-name">Cryptocurrency</span><span class="pm-desc">BTC · ETH · USDT</span>
-          </button>
-          <button type="button" class="pay" data-pay="gift" data-label="Gift card">
-            <span class="pm-check"></span><span class="pm-name">Gift card</span><span class="pm-desc">Redeem a gift card code</span>
-          </button>
-        </div>
+        <label for="pay-select">Payment method</label>
+        <select id="pay-select" class="co-select" required>
+          <option value="" disabled selected>Select a payment method…</option>
+          <option value="paypal" data-label="PayPal">PayPal — +€5 fee</option>
+          <option value="card" data-label="Credit / Debit card">Credit / Debit card — +€5 fee</option>
+          <option value="bank" data-label="Bank transfer">Bank transfer · SEPA</option>
+          <option value="crypto" data-label="Cryptocurrency">Cryptocurrency · BTC / ETH / USDT</option>
+          <option value="gift" data-label="Gift card">Gift card</option>
+        </select>
       </div>
 
       <div class="co-summary" id="co-summary">
@@ -236,17 +257,16 @@
       set('sum-total', '€' + fmt(order.amount + fee));
     }
     refreshTotal();
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-pay]'));
-    buttons.forEach(function(b){
-      b.addEventListener('click', function(){
-        buttons.forEach(function(x){ x.classList.remove('on'); });
-        b.classList.add('on');
-        selected = b.getAttribute('data-pay');
-        set('sum-pay', b.getAttribute('data-label'));
+    var paySel = document.getElementById('pay-select');
+    if (paySel) {
+      paySel.addEventListener('change', function(){
+        selected = paySel.value;
+        var opt = paySel.options[paySel.selectedIndex];
+        set('sum-pay', (opt && opt.getAttribute('data-label')) || 'Not selected');
         document.getElementById('co-err').textContent = '';
         refreshTotal();
       });
-    });
+    }
 
     document.getElementById('co-form').addEventListener('submit', function(e){
       e.preventDefault();
@@ -255,7 +275,7 @@
       var wa = document.getElementById('co-wa').value.trim();
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Please enter a valid email address.'; return; }
       if (!selected) { err.textContent = 'Please choose a payment method.'; return; }
-      var btn = document.querySelector('[data-pay].on');
+      var payOpt = paySel ? paySel.options[paySel.selectedIndex] : null;
       var fee = feeFor(selected);
       var lang = 'en';
       try { lang = localStorage.getItem('lang') || 'en'; } catch (eL) {}
@@ -263,7 +283,7 @@
         ref: 'IST-' + (Date.now().toString(36).toUpperCase().slice(-6)),
         name: order.name, detail: order.detail, billing: order.billing || order.billText,
         subtotal: order.amount, fee: fee, amount: order.amount + fee, features: order.features || [],
-        email: email, whatsapp: wa, pay: selected, payLabel: btn ? btn.getAttribute('data-label') : selected,
+        email: email, whatsapp: wa, pay: selected, payLabel: payOpt && payOpt.value ? (payOpt.getAttribute('data-label') || payOpt.textContent) : selected,
         lang: lang
       };
       try { sessionStorage.setItem('flix4ktv_order', JSON.stringify(full)); } catch (e2) {}
