@@ -193,15 +193,15 @@ const RUNTIME = `<script>(function(){
   })();
 })();</script>`
 
-// Google tag (gtag.js) — Google Ads. Injected right after <head> on every page.
+// Google tag (gtag.js). Injected right after <head> on every page.
 const GTAG = `<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18034332799"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=GT-M6JTG5GQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'AW-18034332799');
+  gtag('config', 'GT-M6JTG5GQ');
 </script>`
 
 function contentInjection() {
