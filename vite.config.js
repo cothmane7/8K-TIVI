@@ -193,17 +193,6 @@ const RUNTIME = `<script>(function(){
   })();
 })();</script>`
 
-// Google tag (gtag.js). Injected right after <head> on every page.
-const GTAG = `<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GT-P842K5DH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'GT-P842K5DH');
-</script>`
-
 function contentInjection() {
   return {
     name: 'flix4ktv-content-injection',
@@ -228,9 +217,6 @@ function contentInjection() {
       // (e.g. "$' " in built HTML strings) are NOT treated as $-replacement patterns.
       const titleTag = '<title>' + escapeHtml(title) + '</title>'
       html = html.replace(/<title>[\s\S]*?<\/title>/, () => titleTag)
-
-      // Google tag — placed immediately after <head>, as high as possible.
-      html = html.replace(/<head>/i, () => '<head>\n' + GTAG)
 
       let head = ''
       if (id.favicon) head += '<link rel="icon" href="' + id.favicon + '" />\n'
