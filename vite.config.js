@@ -195,13 +195,13 @@ const RUNTIME = `<script>(function(){
 
 // Google tag (gtag.js). Injected right after <head> on every page.
 const GTAG = `<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18513018524"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18515121661"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'AW-18513018524');
+  gtag('config', 'AW-18515121661');
 </script>`
 
 function contentInjection() {
