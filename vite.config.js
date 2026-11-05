@@ -206,7 +206,7 @@ const GTAG = `<!-- Google tag (gtag.js) -->
 
 function contentInjection() {
   return {
-    name: 'flix4ktv-content-injection',
+    name: '8kprime-content-injection',
     transformIndexHtml(html, ctx) {
       const c = readContent()
       const id = c.identity

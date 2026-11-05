@@ -1,9 +1,9 @@
 {
-  "name": "flix4ktv",
+  "name": "8kprime",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "FLIXTV4K streaming landing site",
+  "description": "8KPRIME streaming landing site",
   "scripts": {
     "dev": "vite",
     "channels": "node scripts/build-channels.mjs",

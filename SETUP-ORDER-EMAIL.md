@@ -3,7 +3,7 @@
 When a customer taps **Confirm order** on `checkout.html`, the site calls the
 serverless function `api/order.js`, which sends **two emails**:
 
-1. **New-order alert** → your inbox (`contact@istream4ktv.com`), with full order
+1. **New-order alert** → your inbox (`infos8kprime@gmail.com`), with full order
    details + a one-tap "Message customer on WhatsApp" button. `Reply-To` is the
    customer, so you can just hit reply.
 2. **Customer confirmation** → the buyer, with their order summary and a
@@ -14,7 +14,7 @@ No payment is processed on the site — this only sends emails.
 
 ## 1. Get a Zoho app password
 
-1. Sign in to Zoho Mail for **contact@istream4ktv.com**.
+1. Sign in to Zoho Mail for **infos8kprime@gmail.com**.
 2. Go to **My Account → Security → App Passwords** (enable 2FA first if needed).
 3. Generate an app password named e.g. `flix4ktv-site`. Copy it.
    - Use the **app password**, not your normal login password.
@@ -25,18 +25,18 @@ Project → **Settings → Environment Variables** (Production + Preview):
 
 | Variable | Required | Value |
 |----------|----------|-------|
-| `SMTP_USER` | ✅ | `contact@istream4ktv.com` |
+| `SMTP_USER` | ✅ | `infos8kprime@gmail.com` |
 | `SMTP_PASS` | ✅ | the Zoho **app password** from step 1 |
-| `SMTP_HOST` | optional | `smtp.zoho.com` (default). Use `smtp.zoho.eu` if your Zoho account is on the EU data centre |
+| `SMTP_HOST` | optional | `smtp.gmail.com` (default). Use `smtp.gmail.com` if your Zoho account is on the EU data centre |
 | `SMTP_PORT` | optional | `465` (default, SSL) |
 | `SMTP_FROM_EMAIL` | optional | From address (default = `SMTP_USER`) |
-| `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `FLIXTV4K`) |
+| `SMTP_FROM_NAME` | optional | From display name shown to recipients (default = `SITE_NAME`, e.g. `8KPRIME`) |
 | `ORDER_NOTIFY_EMAIL` | optional | inbox for new-order alerts (default = `SMTP_USER`) |
 | `BUSINESS_WHATSAPP` | optional | WhatsApp number, digits only (no default — WhatsApp button is omitted if unset) |
-| `SITE_NAME` | optional | default `FLIXTV4K` |
+| `SITE_NAME` | optional | default `8KPRIME` |
 
 > ⚠️ Zoho requires the **From** address to be a verified address on your account,
-> so keep `SMTP_FROM_EMAIL` / `SMTP_USER` as `contact@istream4ktv.com`.
+> so keep `SMTP_FROM_EMAIL` / `SMTP_USER` as `infos8kprime@gmail.com`.
 > The recipient sees: **`SMTP_FROM_NAME <SMTP_FROM_EMAIL>`**.
 
 After saving env vars, **redeploy** for them to take effect.
@@ -48,7 +48,7 @@ After saving env vars, **redeploy** for them to take effect.
    confirmation. Check spam on first send.
 3. If nothing arrives, open Vercel → the deployment → **Functions → /api/order**
    logs. Common causes: wrong app password, wrong `SMTP_HOST` region (try
-   `smtp.zoho.eu`), or From address not verified in Zoho.
+   `smtp.gmail.com`), or From address not verified in Zoho.
 
 ## Notes
 

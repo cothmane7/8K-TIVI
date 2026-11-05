@@ -6,19 +6,19 @@
 //   SMTP_USER   Zoho mailbox login        e.g. you@yourdomain.com
 //   SMTP_PASS   Zoho app-specific password (NOT the account password)
 // Optional env vars (sensible defaults):
-//   SMTP_HOST           default smtp.zoho.com   (use smtp.zoho.eu for EU data centre)
+//   SMTP_HOST           default smtp.gmail.com   (use smtp.gmail.com for EU data centre)
 //   SMTP_PORT           default 465 (SSL)
 //   SMTP_FROM_EMAIL     From address (default = SMTP_USER). Must be verified in Zoho.
 //   SMTP_FROM_NAME      From display name (default = SITE_NAME)
 //   ORDER_NOTIFY_EMAIL  default = SMTP_USER  (where new orders land)
 //   BUSINESS_WHATSAPP   no default (WhatsApp button omitted if unset)
-//   SITE_NAME           default FLIXTV4K
+//   SITE_NAME           default 8KPRIME
 import nodemailer from 'nodemailer'
 
 const str = (v, max = 300) => String(v == null ? '' : v).slice(0, max)
 const esc = (s) =>
   str(s, 2000).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-const money = (n) => '€' + (Math.round((+n || 0) * 100) / 100).toString()
+const money = (n) => '$' + (Math.round((+n || 0) * 100) / 100).toString()
 const isEmail = (s) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s)
 
 async function readBody(req) {
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     return
   }
 
-  const SITE = process.env.SITE_NAME || 'FLIXTV4K'
+  const SITE = process.env.SITE_NAME || '8KPRIME'
   const NOTIFY = process.env.ORDER_NOTIFY_EMAIL || process.env.SMTP_USER
   const FROM_EMAIL = process.env.SMTP_FROM_EMAIL || process.env.ORDER_FROM || process.env.SMTP_USER
   const FROM_NAME = (process.env.SMTP_FROM_NAME || SITE).replace(/["\r\n]/g, '')
@@ -109,7 +109,7 @@ export default async function handler(req, res) {
   const shell = (heading, intro, extra) => `<!doctype html><html><body style="margin:0;background:#f4f4f6;padding:24px">
   <table role="presentation" width="100%" style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #e5e5e8">
     <tr><td style="background:#0c0c12;padding:20px 24px">
-      <span style="font:700 22px Arial;color:#fff">FLIX<span style="background:#19d3da;color:#0c0c12;padding:2px 7px">TV4K</span></span>
+      <span style="font:700 22px Arial;color:#fff">8K<span style="background:#D4AF37;color:#0a0a0a;padding:2px 7px">PRIME</span></span>
     </td></tr>
     <tr><td style="padding:26px 24px 6px">
       <h1 style="margin:0 0 8px;font:700 20px Arial;color:#111">${heading}</h1>
@@ -123,7 +123,7 @@ export default async function handler(req, res) {
   </table></body></html>`
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.zoho.com',
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: +process.env.SMTP_PORT || 465,
     secure: (+process.env.SMTP_PORT || 465) === 465,
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
@@ -140,7 +140,7 @@ export default async function handler(req, res) {
       `A new order just came in via the website. Reply to this email to reach the customer directly.`,
       featList +
         (waLink
-          ? `<p style="margin:18px 0 0"><a href="${waLink}" style="font:600 13px Arial;color:#0c0c12;background:#19d3da;padding:11px 18px;text-decoration:none;display:inline-block">Message customer on WhatsApp</a></p>`
+          ? `<p style="margin:18px 0 0"><a href="${waLink}" style="font:600 13px Arial;color:#0a0a0a;background:#D4AF37;padding:11px 18px;text-decoration:none;display:inline-block">Message customer on WhatsApp</a></p>`
           : '')
     ),
   }
@@ -160,7 +160,7 @@ export default async function handler(req, res) {
       `We've received your order. <b>No payment has been taken yet</b> — tap the button below to follow up on WhatsApp, where we finalise payment and activate your subscription (usually within minutes).`,
       featList +
         (waLink
-          ? `<p style="margin:20px 0 4px"><a href="${waLink}" style="font:600 14px Arial;color:#0c0c12;background:#19d3da;padding:13px 22px;text-decoration:none;display:inline-block">Follow up on WhatsApp →</a></p>` +
+          ? `<p style="margin:20px 0 4px"><a href="${waLink}" style="font:600 14px Arial;color:#0a0a0a;background:#D4AF37;padding:13px 22px;text-decoration:none;display:inline-block">Follow up on WhatsApp →</a></p>` +
             `<p style="margin:10px 0 0;font:12px Arial;color:#999">Or message us at +${WA}</p>`
           : '')
     ),

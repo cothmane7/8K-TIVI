@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FLIXTV4K — Thank you</title>
+<title>8KPRIME — Thank you</title>
 <meta name="page-name" content="Thank you" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
 <body>
 
 <nav class="co-nav">
-  <a href="/" class="logo">FLIX<b>TV4K</b></a>
+  <a href="/" class="logo">8K<b>PRIME</b></a>
   <div class="right">
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
   </div>
@@ -90,7 +90,7 @@
     })();
     function T(s){ var d = LANG !== 'en' && I18N[LANG]; return (d && d[s] != null) ? d[s] : s; }
     var order = null;
-    try { order = JSON.parse(sessionStorage.getItem('flix4ktv_order') || 'null'); } catch (e) {}
+    try { order = JSON.parse(sessionStorage.getItem('8kprime_order') || 'null'); } catch (e) {}
 
     if (!order) {
       document.getElementById('ty-sub').textContent = "We couldn't find a recent order in this session. Browse our plans to get started.";
@@ -110,17 +110,17 @@
     set('ty-email', order.email || '—');
     if (order.whatsapp) { document.getElementById('ty-wa-row').style.display = ''; set('ty-wanum', order.whatsapp); }
     set('ty-pay', order.payLabel || order.pay || '—');
-    if (order.fee) { document.getElementById('ty-fee-row').style.display = ''; set('ty-fee', '€' + order.fee); }
-    set('ty-total', '€' + (order.amount != null ? order.amount : '—'));
+    if (order.fee) { document.getElementById('ty-fee-row').style.display = ''; set('ty-fee', '$' + order.fee); }
+    set('ty-total', '$' + (order.amount != null ? order.amount : '—'));
 
     // WhatsApp follow-up to the business number, pre-filled with the order.
     var num = String(id.whatsapp || '').replace(/\D/g, '');
     var btn = document.getElementById('ty-wa-btn');
     var msg =
-      T("Hi! I just placed an order on FLIXTV4K and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
+      T("Hi! I just placed an order on 8KPRIME and I'd like to follow up and complete the payment to activate my subscription.") + '\n\n' +
       T("Order ref") + ': ' + (order.ref || '') + '\n' +
       T("Plan") + ': ' + (order.name || '') + ' (' + (order.detail || '') + ')\n' +
-      T("Total") + ': €' + (order.amount != null ? order.amount : '') + '\n' +
+      T("Total") + ': $' + (order.amount != null ? order.amount : '') + '\n' +
       T("Payment method") + ': ' + (order.payLabel || order.pay || '') + '\n' +
       T("Email") + ': ' + (order.email || '') +
       (order.whatsapp ? '\n' + T("WhatsApp") + ': ' + order.whatsapp : '');

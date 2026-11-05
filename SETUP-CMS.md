@@ -1,4 +1,4 @@
-# FLIXTV4K — CMS setup (one-time)
+# 8KPRIME — CMS setup (one-time)
 
 Your site now has a content admin at **`/admin`**. You log in with GitHub, edit
 content, hit save — your changes commit to GitHub and Vercel automatically rebuilds
@@ -48,7 +48,7 @@ You only do the setup below **once**. After that, editing is just: go to
 
 1. Go to <https://github.com/settings/developers> → **OAuth Apps** → **New OAuth App**.
 2. Fill in:
-   - **Application name:** `FLIXTV4K CMS`
+   - **Application name:** `8KPRIME CMS`
    - **Homepage URL:** your site URL (e.g. `https://flix4ktv.vercel.app`)
    - **Authorization callback URL:** your site URL + `/api/callback`
      (e.g. `https://flix4ktv.vercel.app/api/callback`)

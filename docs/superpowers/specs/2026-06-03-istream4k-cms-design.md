@@ -1,4 +1,4 @@
-# FLIXTV4K — CMS Content Management Design
+# 8KPRIME — CMS Content Management Design
 
 **Date:** 2026-06-03
 **Status:** Approved, implementing

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FLIXTV4K — Checkout</title>
+<title>8KPRIME — Checkout</title>
 <meta name="page-name" content="Checkout" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,7 +55,7 @@
   .co-field select{width:100%;box-sizing:border-box;background:rgba(0,0,0,.35);border:1.5px solid var(--white-4);
     color:var(--white);font-family:var(--hand);font-size:15px;padding:13px 40px 13px 14px;border-radius:0;
     outline:none;transition:border-color .15s ease;cursor:pointer;-webkit-appearance:none;appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%239DC209' stroke-width='2' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%23D4AF37' stroke-width='2' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
     background-repeat:no-repeat;background-position:right 14px center}
   .co-field select:focus{border-color:var(--cyan)}
   .co-field select option{background:var(--dark);color:var(--white)}
@@ -126,7 +126,7 @@
 <body>
 
 <nav class="co-nav">
-  <a href="/" class="logo">FLIX<b>TV4K</b></a>
+  <a href="/" class="logo">8K<b>PRIME</b></a>
   <div class="right">
     <a href="plans#pricing" class="co-back">← Plans</a>
     <div class="lang-switch" data-lang-switch aria-label="Language"></div>
@@ -161,11 +161,9 @@
         <label for="pay-select">Payment method</label>
         <select id="pay-select" class="co-select" required>
           <option value="" disabled selected>Select a payment method…</option>
-          <option value="paypal" data-label="PayPal">PayPal — +€5 fee</option>
-          <option value="card" data-label="Credit / Debit card">Credit / Debit card — +€5 fee</option>
-          <option value="bank" data-label="Bank transfer">Bank transfer · SEPA</option>
+          <option value="paypal" data-label="PayPal">PayPal — +$5 fee</option>
+          <option value="card" data-label="Credit / Debit card">Credit / Debit card — +$5 fee</option>
           <option value="crypto" data-label="Cryptocurrency">Cryptocurrency · BTC / ETH / USDT</option>
-          <option value="gift" data-label="Gift card">Gift card</option>
         </select>
       </div>
 
@@ -193,7 +191,7 @@
   </div>
 </main>
 
-<div class="co-foot">© 2026 FLIXTV4K · Secure order — finalised on WhatsApp</div>
+<div class="co-foot">© 2026 8KPRIME · Secure order — finalised on WhatsApp</div>
 
 <script>
   (function(){
@@ -212,8 +210,8 @@
       var total = Math.round(credits * per * 100) / 100;
       order = {
         type: 'reseller', name: (p.name || 'Reseller') + ' package',
-        detail: credits + ' credits · €' + per.toFixed(2) + ' / credit',
-        amount: total, priceText: '€' + total, billText: credits + ' credits',
+        detail: credits + ' credits · $' + per.toFixed(2) + ' / credit',
+        amount: total, priceText: '$' + total, billText: credits + ' credits',
         billing: credits + ' credits (one-off)', features: p.features || []
       };
     } else {
@@ -227,8 +225,8 @@
         type: 'plan', months: months, devices: devices,
         name: months + ' Months',
         detail: devices + (devices > 1 ? ' devices' : ' device') + (dur.free ? ' · ' + dur.free : ''),
-        amount: total, priceText: '€' + fmt(monthly), priceUnit: ' / mo',
-        billing: '€' + fmt(total) + ' ' + (dur.period || ('for ' + months + ' months')),
+        amount: total, priceText: '$' + fmt(monthly), priceUnit: ' / mo',
+        billing: '$' + fmt(total) + ' ' + (dur.period || ('for ' + months + ' months')),
         billText: dur.period || ('billed for ' + months + ' months'),
         features: plans.features || []
       };
@@ -243,18 +241,18 @@
     (order.features || []).forEach(function(f){ var li = document.createElement('li'); li.textContent = f; ul.appendChild(li); });
 
     set('sum-plan', order.name + ' — ' + order.detail);
-    set('sum-subtotal', '€' + fmt(order.amount));
+    set('sum-subtotal', '$' + fmt(order.amount));
 
-    // payment selection + fee (€5 for PayPal / card, included in the total)
+    // payment selection + fee ($5 for PayPal / card, included in the total)
     var FEE = 5;
     var selected = '';
     function feeFor(p){ return (p === 'paypal' || p === 'card') ? FEE : 0; }
     function refreshTotal(){
       var fee = feeFor(selected);
       var feeRow = document.getElementById('sum-fee-row');
-      if (fee > 0) { feeRow.style.display = ''; set('sum-fee', '€' + fmt(fee)); }
+      if (fee > 0) { feeRow.style.display = ''; set('sum-fee', '$' + fmt(fee)); }
       else { feeRow.style.display = 'none'; }
-      set('sum-total', '€' + fmt(order.amount + fee));
+      set('sum-total', '$' + fmt(order.amount + fee));
     }
     refreshTotal();
     var paySel = document.getElementById('pay-select');
@@ -286,7 +284,7 @@
         email: email, whatsapp: wa, pay: selected, payLabel: payOpt && payOpt.value ? (payOpt.getAttribute('data-label') || payOpt.textContent) : selected,
         lang: lang
       };
-      try { sessionStorage.setItem('flix4ktv_order', JSON.stringify(full)); } catch (e2) {}
+      try { sessionStorage.setItem('8kprime_order', JSON.stringify(full)); } catch (e2) {}
 
       // Email the order (business alert + customer confirmation), then continue to
       // the thank-you page regardless of email success so the customer is never blocked.

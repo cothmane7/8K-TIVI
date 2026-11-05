@@ -1,12 +1,12 @@
 /* ═════════════════════════════════════════════════════════════════════
-     FLIXTV4K · LANDING PAGE · HI-FI
-     yellow + black brand, cyan/magenta signal accents, chamfered CTAs,
+     8KPRIME · LANDING PAGE · HI-FI
+     gold + black brand, gold/magenta signal accents, chamfered CTAs,
      `///.MODULE.NAME` mono labels, glitch-torn seams, cinematic dark
      news strip with cyan-glowed cards.
      ═════════════════════════════════════════════════════════════════════ */
 
   :root{
-    --yellow:#9DC209;
+    --yellow:#D4AF37;
     --yellow-d:color-mix(in srgb, var(--yellow) 86%, #000);
     --ink:#0a0a0a;
     --ink-2:rgba(10,10,10,.62);
@@ -20,7 +20,7 @@
     --white-2:rgba(248,248,250,.7);
     --white-3:rgba(248,248,250,.38);
     --white-4:rgba(248,248,250,.16);
-    --cyan:#9DC209;
+    --cyan:#D4AF37;
     --cyan-d:color-mix(in srgb, var(--cyan) 78%, #000);
     --magenta:#ff2e95;
     --hand:'Chakra Petch',sans-serif;
@@ -102,7 +102,22 @@
     transition:background .15s ease;
     clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
   .cpb.outline:hover > span{background:var(--yellow-d)}
-  .pg.dark .cpb{background:var(--cyan);color:var(--dark)}
+  /* premium gold shimmer on dark-section CTAs */
+  @keyframes goldShimmer{
+    0%{background-position:200% center}
+    100%{background-position:-200% center}
+  }
+  .pg.dark .cpb{
+    background:linear-gradient(105deg,#b8870b 0%,#D4AF37 30%,#f5e199 50%,#D4AF37 70%,#b8870b 100%);
+    background-size:200% auto;
+    color:var(--dark);
+    animation:goldShimmer 3.5s linear infinite;
+    box-shadow:0 0 18px rgba(212,175,55,.35),0 2px 8px rgba(0,0,0,.4)
+  }
+  .pg.dark .cpb:hover{
+    filter:brightness(1.12);
+    box-shadow:0 0 32px rgba(212,175,55,.55),0 4px 16px rgba(0,0,0,.5)
+  }
   .pg.dark .cpb.outline{background:var(--cyan);color:var(--cyan)}
   .pg.dark .cpb.outline > span{background:var(--dark)}
   .pg.dark .cpb.outline:hover > span{background:var(--dark-2)}
