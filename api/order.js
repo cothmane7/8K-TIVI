@@ -133,7 +133,7 @@ export default async function handler(req, res) {
     from: FROM,
     to: NOTIFY,
     replyTo: order.email,
-    subject: `🆕 New order ${order.ref} — ${order.name} (${money(order.amount)})`,
+    subject: `New order ${order.ref} — ${order.name} (${money(order.amount)})`,
     text: `New order received.\n\n${rowsText}` + (waLink ? `\n\nFollow up on WhatsApp: ${waLink}` : ''),
     html: shell(
       'New order received',
@@ -149,19 +149,24 @@ export default async function handler(req, res) {
     from: FROM,
     to: order.email,
     replyTo: NOTIFY,
-    subject: `Your ${SITE} order ${order.ref}`,
+    headers: {
+      'X-Entity-Ref-ID': order.ref,
+    },
+    subject: `Order Confirmation: ${order.ref} - ${SITE}`,
     text:
-      `Thanks for your order with ${SITE}!\n\n${rowsText}\n\n` +
-      `No payment has been taken yet — we finalise payment and activate your subscription on WhatsApp, usually within minutes.\n\n` +
-      (waLink ? `Follow up on WhatsApp: ${waLink}\n\n` : '') +
-      `© 2026 ${SITE}`,
+      `Hello,\n\nThank you for your order with ${SITE}.\n\n` +
+      `Here is your order summary:\n${rowsText}\n\n` +
+      `Important: No automatic charge has been made. We finalize payment details and activate your subscription directly on WhatsApp.\n\n` +
+      (waLink ? `Connect with us on WhatsApp to activate: ${waLink}\n\n` : '') +
+      `Best regards,\n${SITE} Support Team`,
     html: shell(
-      'Thanks for your order!',
-      `We've received your order. <b>No payment has been taken yet</b> — tap the button below to follow up on WhatsApp, where we finalise payment and activate your subscription (usually within minutes).`,
+      'Order Confirmation',
+      `Thank you for choosing ${esc(SITE)}. We have received your order details.<br><br>` +
+      `<b>Note:</b> No payment has been charged yet. We finalize your payment method and activate your line directly on WhatsApp for instant setup.`,
       featList +
         (waLink
-          ? `<p style="margin:20px 0 4px"><a href="${waLink}" style="font:600 14px Arial;color:#0a0a0a;background:#D4AF37;padding:13px 22px;text-decoration:none;display:inline-block">Follow up on WhatsApp →</a></p>` +
-            `<p style="margin:10px 0 0;font:12px Arial;color:#999">Or message us at +${WA}</p>`
+          ? `<p style="margin:20px 0 6px"><a href="${waLink}" style="font:600 14px Arial;color:#0a0a0a;background:#D4AF37;padding:13px 22px;text-decoration:none;display:inline-block">Activate on WhatsApp →</a></p>` +
+            `<p style="margin:10px 0 0;font:12px Arial;color:#999">Direct WhatsApp: +${WA}</p>`
           : '')
     ),
   }

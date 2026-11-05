@@ -111,8 +111,8 @@ const RUNTIME = `<script>(function(){
         ((p.popular && p.tag) ? '<div class="pk-tag">' + p.tag + '</div>' : '') +
         '<div class="pk-name">' + p.name + '</div>' +
         '<div class="pk-credits">' + p.credits + '<small> credits</small></div>' +
-        '<div class="pk-per">€' + per + ' / credit</div>' +
-        '<div class="pk-total">€' + total + ' total</div>' +
+        '<div class="pk-per">$' + per + ' / credit</div>' +
+        '<div class="pk-total">$' + total + ' total</div>' +
         '<ul class="pk-feat">' + feats + '</ul>' +
         (p.popular ? '<a href="/checkout?type=reseller&pkg=' + i + '" class="cpb w-full">Get started</a>' : '<a href="/checkout?type=reseller&pkg=' + i + '" class="cpb outline w-full"><span style="flex:1;justify-content:center">Get started</span></a>') +
         '</div>';
