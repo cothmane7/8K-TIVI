@@ -3,15 +3,15 @@
 // "Confirm order". No payment is taken here — payment is finalised on WhatsApp.
 //
 // Required Vercel env vars:
-//   SMTP_USER   Zoho mailbox login        e.g. you@yourdomain.com
-//   SMTP_PASS   Zoho app-specific password (NOT the account password)
+//   SMTP_USER   Gmail address             e.g. infos8kprime@gmail.com
+//   SMTP_PASS   Google App Password       (16 characters, NOT normal password)
 // Optional env vars (sensible defaults):
-//   SMTP_HOST           default smtp.gmail.com   (use smtp.gmail.com for EU data centre)
+//   SMTP_HOST           default smtp.gmail.com
 //   SMTP_PORT           default 465 (SSL)
-//   SMTP_FROM_EMAIL     From address (default = SMTP_USER). Must be verified in Zoho.
+//   SMTP_FROM_EMAIL     From address (default = infos8kprime@gmail.com)
 //   SMTP_FROM_NAME      From display name (default = SITE_NAME)
-//   ORDER_NOTIFY_EMAIL  default = SMTP_USER  (where new orders land)
-//   BUSINESS_WHATSAPP   no default (WhatsApp button omitted if unset)
+//   ORDER_NOTIFY_EMAIL  default = infos8kprime@gmail.com (where new orders land)
+//   BUSINESS_WHATSAPP   default 18185656691
 //   SITE_NAME           default 8KPRIME
 import nodemailer from 'nodemailer'
 
@@ -39,11 +39,11 @@ export default async function handler(req, res) {
   }
 
   const SITE = process.env.SITE_NAME || '8KPRIME'
-  const NOTIFY = process.env.ORDER_NOTIFY_EMAIL || process.env.SMTP_USER
-  const FROM_EMAIL = process.env.SMTP_FROM_EMAIL || process.env.ORDER_FROM || process.env.SMTP_USER
+  const NOTIFY = process.env.ORDER_NOTIFY_EMAIL || process.env.SMTP_USER || 'infos8kprime@gmail.com'
+  const FROM_EMAIL = process.env.SMTP_FROM_EMAIL || process.env.ORDER_FROM || process.env.SMTP_USER || 'infos8kprime@gmail.com'
   const FROM_NAME = (process.env.SMTP_FROM_NAME || SITE).replace(/["\r\n]/g, '')
   const FROM = `"${FROM_NAME}" <${FROM_EMAIL}>`
-  const WA = (process.env.BUSINESS_WHATSAPP || '').replace(/\D/g, '')
+  const WA = (process.env.BUSINESS_WHATSAPP || '18185656691').replace(/\D/g, '')
 
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
     res.statusCode = 500
